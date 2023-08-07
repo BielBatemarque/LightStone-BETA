@@ -1,0 +1,1 @@
+Pasta onde conterá o projeto mobile desenvolvido com react Native
