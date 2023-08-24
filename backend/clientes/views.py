@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Ciente
+from .models import Cliente
 from rest_framework import routers, serializers, viewsets
 from .serializers import ClienteSerializer
 from .models import Cliente
