@@ -7,3 +7,5 @@ class Material(models.Model):
     cor_base = models.CharField(max_length=15)
     fornecedor = models.ManyToManyField(Fornecedor)
     
+    def __str__(self):
+        return self.nome
