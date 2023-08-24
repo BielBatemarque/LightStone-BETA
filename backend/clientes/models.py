@@ -9,3 +9,6 @@ class Ciente(models.Model):
     data_nascimento = models.DateField()
     email = models.EmailField(max_length=150)
 
+    def __str__(self):
+        return self.nome
+
