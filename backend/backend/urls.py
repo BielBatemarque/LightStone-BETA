@@ -5,6 +5,7 @@ from usuarios.views import UserViewSet
 from clientes.views import ClienteViewSet
 from colaboradores.views import ColaboradorViewsSets
 from fornecedores.views import FornecedorViewSets
+from Estoque.views import EstoqueViewsSets
 
 
 
@@ -13,6 +14,7 @@ router.register(r'users', UserViewSet)
 router.register(r'clientes', ClienteViewSet)
 router.register(r'colaboradores', ColaboradorViewsSets)
 router.register(r'fornecedores', FornecedorViewSets)
+router.register(r'estoques', EstoqueViewsSets)
 
 
 urlpatterns = [
