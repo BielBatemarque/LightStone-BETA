@@ -1,7 +1,11 @@
+import { Container } from "./styles";
+
 export const LoginScreen = () => {
     return(
         <div className="LoginScreen">
-            <p>Tela de Login</p>
+            <Container>
+                opa
+            </Container>
         </div>
     );
 }

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
-export const FullContainer = styled.div`
-    
+export const Container = styled.div`
+    width: 80%;
+    height: 75%;
+    background-color: red;
 `;
