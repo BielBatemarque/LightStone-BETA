@@ -6,6 +6,7 @@ from clientes.views import ClienteViewSet
 from colaboradores.views import ColaboradorViewsSets
 from fornecedores.views import FornecedorViewSets
 from Estoque.views import EstoqueViewsSets
+from materiais.views import MaterialViewSets
 
 
 
@@ -15,7 +16,7 @@ router.register(r'clientes', ClienteViewSet)
 router.register(r'colaboradores', ColaboradorViewsSets)
 router.register(r'fornecedores', FornecedorViewSets)
 router.register(r'estoques', EstoqueViewsSets)
-
+router.register(r'materiais', MaterialViewSets)
 
 urlpatterns = [
     path('', include(router.urls)),
