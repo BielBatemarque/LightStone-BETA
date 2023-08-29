@@ -23,3 +23,8 @@ export const ImageContainer = styled.div`
     width: 40%;
     margin: 0;
 `;
+
+export const ColumForm = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
