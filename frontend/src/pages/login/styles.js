@@ -29,3 +29,7 @@ export const ColumForm = styled.form`
     display: flex;
     flex-direction: column;
 `;
+
+export const InputStyled = styled.input`
+    width: 25vw;
+`;
