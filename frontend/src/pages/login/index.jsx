@@ -1,10 +1,15 @@
-import { Container } from "./styles";
+import { Container, ImageContainer, SemiContainerInputs } from "./styles";
 
 export const LoginScreen = () => {
     return(
         <div className="LoginScreen">
             <Container>
-                opa
+                <ImageContainer>
+                    opa
+                </ImageContainer>
+                <SemiContainerInputs>
+                    opa
+                </SemiContainerInputs>
             </Container>
         </div>
     );
