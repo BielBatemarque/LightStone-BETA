@@ -9,6 +9,7 @@ export const Container = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
+    box-shadow: 3px 3px 5px black;
 `;
 
 export const SemiContainerInputs = styled.div`

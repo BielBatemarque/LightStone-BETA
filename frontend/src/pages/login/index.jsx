@@ -1,4 +1,4 @@
-import { Container, ImageContainer, SemiContainerInputs } from "./styles";
+import { ColumForm, Container, ImageContainer, SemiContainerInputs } from "./styles";
 
 export const LoginScreen = () => {
     return(
@@ -8,7 +8,9 @@ export const LoginScreen = () => {
                     opa
                 </ImageContainer>
                 <SemiContainerInputs>
-                    opa
+                    <ColumForm>
+                    
+                    </ColumForm>
                 </SemiContainerInputs>
             </Container>
         </div>
