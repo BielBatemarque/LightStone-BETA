@@ -10,11 +10,13 @@ export const Container = styled.div`
     transform: translate(-50%, -50%);
     display: flex;
     box-shadow: 3px 3px 5px black;
+    border-radius: 15px;
 `;
 
 export const SemiContainerInputs = styled.div`
     background-color: white;
     width: 60%;
+    position: relative;
     background-color: blue;
     margin: none;
 `;
@@ -23,6 +25,8 @@ export const ImageContainer = styled.div`
     background-color: green;
     width: 40%;
     margin: 0;
+    position: relative;
+
 `;
 
 export const ColumForm = styled.form`
