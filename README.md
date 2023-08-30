@@ -22,8 +22,8 @@ O LightStone é uma aplicação que combina a eficiência do backend Django Rest
 
 ### Pré-requisitos
 
-- Python (versão X.X)
-- Node.js e npm (versão X.X)
+- Python (versão +3.10 )
+- Node.js e npm (versão +18.0)
 
 ### Backend (Django Rest Framework)
 
