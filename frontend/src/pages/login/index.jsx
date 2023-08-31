@@ -1,4 +1,6 @@
-import { ColumForm, Container, ImageContainer, InputStyled, SemiContainerInputs } from "./styles";
+import './Login.css';
+
+import { ColumForm, Container, ImageContainer, InputStyled, SemiContainerInputs, StyledButton } from "./styles";
 
 export const LoginScreen = () => {
     return(
@@ -11,12 +13,12 @@ export const LoginScreen = () => {
                     <ColumForm>
 
                         <label htmlFor="username">Usuário</label>
-                        <InputStyled type="text" name="username" placeholder="Nome de Usuário" />
+                        <InputStyled type="text" name="username" placeholder="Nome de Usuário" className=','/>
 
                         <label htmlFor="senha">Senha:</label>
                         <InputStyled type='password' placeholder="Senha" />
 
-                        <button type="submit">Entrar</button>
+                        <StyledButton type="submit">Entrar</StyledButton>
                     </ColumForm>
                 </SemiContainerInputs>
             </Container>

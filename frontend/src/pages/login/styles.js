@@ -10,14 +10,12 @@ export const Container = styled.div`
     transform: translate(-50%, -50%);
     display: flex;
     box-shadow: 3px 3px 5px black;
-    border-radius: 15px;
 `;
 
 export const SemiContainerInputs = styled.div`
     background-color: white;
     width: 60%;
     position: relative;
-    background-color: blue;
     margin: none;
 `;
 
@@ -34,6 +32,23 @@ export const ColumForm = styled.form`
     flex-direction: column;
 `;
 
+export const StyledButton = styled.button`
+    background-color: blue;
+    height: 2.5rem;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px black;
+    width:10vw;
+    font-size: 1rem;
+    padding: 5px;
+    cursor: pointer;
+`;
+
+
 export const InputStyled = styled.input`
     width: 25vw;
+    height: 2rem;
+    border: none;
+    border-bottom: solid 1px black
 `;
