@@ -30,6 +30,9 @@ export const ImageContainer = styled.div`
 export const ColumForm = styled.form`
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90%; /* Definir a altura da tela inteira */
 `;
 
 export const StyledButton = styled.button`
@@ -43,6 +46,7 @@ export const StyledButton = styled.button`
     font-size: 1rem;
     padding: 5px;
     cursor: pointer;
+    margin-top: 1rem;
 `;
 
 
