@@ -9,7 +9,7 @@ export const Container = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    box-shadow: 3px 3px 5px black;
+    box-shadow: 3px 3px 5px gray;
 `;
 
 export const SemiContainerInputs = styled.div`
@@ -36,7 +36,7 @@ export const ColumForm = styled.form`
 `;
 
 export const StyledButton = styled.button`
-    background-color: blue;
+    background-color: rgba(0,0,0);
     height: 2.5rem;
     color: white;
     border: none;
