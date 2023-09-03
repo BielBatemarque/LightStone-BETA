@@ -28,7 +28,6 @@ class UserLoginView(APIView):
             login(request, user)
 
             token, created = Token.objects.get_or_create(user=user)
-            print(request.user.is_authenticated)
 
             return Response({'token': token.key, 'status': 'logado com sucesso'}, status=status.HTTP_200_OK)
         else:
@@ -39,9 +38,6 @@ class UserLogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        if request.user.is_authenticated:
-            # Fazer logout do usuário
-            logout(request)
-            return Response({'message': 'Logout bem-sucedido'}, status=status.HTTP_200_OK)
-        else:
-            return Response({'message': 'Nenhum usuário logado'}, status=status.HTTP_400_BAD_REQUEST)
+        # Fazer logout do usuário
+        logout(request)
+        return Response({'message': 'Logout bem-sucedido'}, status=status.HTTP_200_OK)
