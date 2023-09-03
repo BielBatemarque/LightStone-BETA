@@ -9,6 +9,8 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import authentication_classes, permission_classes
+
 
 
 
@@ -16,7 +18,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-
+@authentication_classes([TokenAuthentication])
 class UserLoginView(APIView):
     def post(self, request):
         username = request.data.get('username')
@@ -28,6 +30,7 @@ class UserLoginView(APIView):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
+            print(user.is_authenticated)
             login(request, user)
             token, created = Token.objects.get_or_create(user=user)
             return Response({'token': token.key}, status=status.HTTP_200_OK)
@@ -40,5 +43,5 @@ class UserLogoutView(APIView):
 
     def post(self, request):
         # O usuário autenticado pode fazer logout, invalidando o token.
-        request.auth.delete()
+        logout(request)
         return Response({'message': 'Logout realizado com sucesso.'}, status=status.HTTP_200_OK)
