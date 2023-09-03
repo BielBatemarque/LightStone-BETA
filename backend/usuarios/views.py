@@ -6,6 +6,10 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rest_framework import status
+from rest_framework.authtoken.models import Token
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -22,14 +26,22 @@ class UserLoginView(APIView):
 
         if user is not None:
             login(request, user)
-            return Response({'message': 'Sucesso no login'}, status=status.HTTP_200_OK)
+
+            token, created = Token.objects.get_or_create(user=user)
+            print(request.user.is_authenticated)
+
+            return Response({'token': token.key, 'status': 'logado com sucesso'}, status=status.HTTP_200_OK)
         else:
-            return Response({'message': 'Falha ao logar'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'error': 'Falha ao fazer login'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class UserLogoutView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         if request.user.is_authenticated:
+            # Fazer logout do usuário
             logout(request)
             return Response({'message': 'Logout bem-sucedido'}, status=status.HTTP_200_OK)
         else:
-            return Response({'message': 'Nenhum usuário logado'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'message': 'Nenhum usuário logado'}, status=status.HTTP_400_BAD_REQUEST)
