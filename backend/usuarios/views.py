@@ -22,22 +22,23 @@ class UserLoginView(APIView):
         username = request.data.get('username')
         password = request.data.get('password')
 
+        if not username or not password:
+            return Response({'error': 'Informe o nome de usuário e senha.'}, status=status.HTTP_400_BAD_REQUEST)
+
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
-
             token, created = Token.objects.get_or_create(user=user)
-
-            return Response({'token': token.key, 'status': 'logado com sucesso'}, status=status.HTTP_200_OK)
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
         else:
-            return Response({'error': 'Falha ao fazer login'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'error': 'Credenciais inválidas.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class UserLogoutView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        # Fazer logout do usuário
-        logout(request)
-        return Response({'message': 'Logout bem-sucedido'}, status=status.HTTP_200_OK)
+        # O usuário autenticado pode fazer logout, invalidando o token.
+        request.auth.delete()
+        return Response({'message': 'Logout realizado com sucesso.'}, status=status.HTTP_200_OK)
