@@ -10,15 +10,12 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import authentication_classes, permission_classes
-
-
-
+from rest_framework.decorators import api_view
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-@authentication_classes([TokenAuthentication])
 class UserLoginView(APIView):
     def post(self, request):
         username = request.data.get('username')
@@ -30,18 +27,24 @@ class UserLoginView(APIView):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            print(user.is_authenticated)
             login(request, user)
             token, created = Token.objects.get_or_create(user=user)
             return Response({'token': token.key}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Credenciais inválidas.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-class UserLogoutView(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+
+class LogoutView(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request):
-        # O usuário autenticado pode fazer logout, invalidando o token.
-        logout(request)
-        return Response({'message': 'Logout realizado com sucesso.'}, status=status.HTTP_200_OK)
+        # Obtém o token de autenticação do usuário
+        token = request.auth
+
+        if token:
+            # Invalida o token de autenticação, efetivamente fazendo logout
+            token.delete()
+            return Response({"message": "Logout realizado com sucesso."}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "Você não está autenticado."}, status=status.HTTP_401_UNAUTHORIZED)
