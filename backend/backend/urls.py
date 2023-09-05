@@ -7,7 +7,7 @@ from colaboradores.views import ColaboradorViewsSets
 from fornecedores.views import FornecedorViewSets
 from Estoque.views import EstoqueViewsSets
 from materiais.views import MaterialViewSets
-from usuarios.views import UserLoginView, UserLogoutView
+from usuarios.views import UserLoginView, LogoutView
 
 
 
@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('login/', UserLoginView.as_view(), name='user-login'),
-    path('logout/', UserLogoutView.as_view(), name='user-logout'),
+    path('logout/', LogoutView.as_view(), name='user-logout'),
 ]
