@@ -7,3 +7,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'is_staff']
+
+class LogoutSerializer(serializers.Serializer):
+    pass
