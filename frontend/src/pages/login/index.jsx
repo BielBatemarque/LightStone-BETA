@@ -18,11 +18,24 @@ export const LoginScreen = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Evita a recarga da página
-    
-        const apiLogin = 'http://localhost:8000/login/';
-       console.log('tenta efetuar login')
+        try{
+            const apiLogin = 'http://localhost:8000/login/';
+            const request = await fetch(apiLogin, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(login),
+            }).then(response => response.json()).catch(err => console.log(err));
+
+            console.log(request);
+        }catch(e){
+            console.log(`Erro na api: ${e}`);
+        }
     };
 
+    
+    console.log(login);
     return (
         <div className="LoginScreen">
             <Container>
