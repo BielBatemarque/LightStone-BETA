@@ -18,20 +18,23 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class UserLoginView(APIView):
     def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
+        try:
+            username = request.data.get('username')
+            password = request.data.get('password')
 
-        if not username or not password:
-            return Response({'error': 'Informe o nome de usuário e senha.'}, status=status.HTTP_400_BAD_REQUEST)
+            if not username or not password:
+                return Response({'error': 'Informe o nome de usuário e senha.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            token, created = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key}, status=status.HTTP_200_OK)
-        else:
-            return Response({'error': 'Credenciais inválidas.'}, status=status.HTTP_401_UNAUTHORIZED)
+            if user is not None:
+                login(request, user)
+                token, created = Token.objects.get_or_create(user=user)
+                return Response({'token': token.key}, status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'Credenciais inválidas.'}, status=status.HTTP_401_UNAUTHORIZED)
+        except Exception as e:
+            return Response({'message': f'erro ao efetuar login: {str(e)}'})
 
 
 class LogoutView(APIView):
@@ -47,5 +50,5 @@ class LogoutView(APIView):
                 return Response({"message": "Logout realizado com sucesso."}, status=status.HTTP_200_OK)
             else:
                 return Response({"message": "Você não está autenticado."}, status=status.HTTP_401_UNAUTHORIZED)
-        except:
-            return Response({"message": "Erro durante o logout"})
+        except Exception as e:
+            return Response({"message": f"Erro durante o logout {str(e)}"})
