@@ -22,6 +22,9 @@ export const reducer = (state, action) => {
             return {...state, token: action.payload, logado:true};
 
         case 'logout':
-            return {...state, token: '', logado: false}
+            return {...state, token: '', logado: false};
+
+        default:
+            return{...state};
     }
 }
