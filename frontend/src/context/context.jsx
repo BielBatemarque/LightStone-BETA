@@ -3,7 +3,7 @@ import React, { useReducer } from "react";
 const initialState = {
     token:'',
     logado: false,
-}
+};
 
 export const globalContext = React.createContext(initialState);
 
@@ -27,4 +27,4 @@ export const reducer = (state, action) => {
         default:
             return{...state};
     }
-}
+};
