@@ -31,10 +31,11 @@ export const LoginScreen = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(login),
-            }).then(response => response.json()).catch(err => console.log(err));
+            });
+            const response = await request.json();
 
-            console.log(request);
-            const {token} = request;
+            console.log(request.status);
+            const { token } = response;
 
             if (token){
                 dispatch({type: 'autentication', payload: token});
