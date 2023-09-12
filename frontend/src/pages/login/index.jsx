@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react';
 
 import { ColumForm, Container, ImageContainer, InputStyled, SemiContainerInputs, StyledButton } from "./styles";
 import { globalContext } from '../../context/context';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginScreen = () => {
     const { dispatch, state } = useContext(globalContext);
+    const navigate = useNavigate();
 
     const [login, setLogin] = useState({
         username: '',
@@ -32,13 +34,20 @@ export const LoginScreen = () => {
             }).then(response => response.json()).catch(err => console.log(err));
 
             console.log(request);
+
+            if (request){
+                dispatch({type: 'autentication', payload: request});
+                navigate('/Home/');
+            }
+
         }catch(e){
             console.log(`Erro na api: ${e}`);
         }
     };
 
     
-    console.log(login);
+    // console.log(login);
+    console.log(state);
     return (
         <div className="LoginScreen">
             <Container>
