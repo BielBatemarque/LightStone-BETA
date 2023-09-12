@@ -33,13 +33,16 @@ export const LoginScreen = () => {
                 body: JSON.stringify(login),
             });
             const response = await request.json();
-
-            console.log(request.status);
             const { token } = response;
 
             if (token){
                 dispatch({type: 'autentication', payload: token});
                 navigate('/Home/');
+            }
+
+            if (!request.ok){
+                window.alert('Credenciais de login invalidas');
+                console.log('quando o user não conseguir fazer login o sistema deverá por na tela uma mensagem personalizada');
             }
 
         }catch(e){
