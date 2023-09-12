@@ -22,7 +22,7 @@ export const LoginScreen = () => {
     };
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // Evita a recarga da página
+        e.preventDefault();
         try{
             const apiLogin = 'http://localhost:8000/login/';
             const request = await fetch(apiLogin, {
@@ -35,7 +35,7 @@ export const LoginScreen = () => {
 
             console.log(request);
             const {token} = request;
-            
+
             if (token){
                 dispatch({type: 'autentication', payload: token});
                 navigate('/Home/');
