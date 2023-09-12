@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { ColumForm, Container, ImageContainer, InputStyled, SemiContainerInputs, StyledButton } from "./styles";
+import { globalContext } from '../../context/context';
 
 export const LoginScreen = () => {
+    const { dispatch, state } = useContext(globalContext);
+
     const [login, setLogin] = useState({
         username: '',
         password: '',
