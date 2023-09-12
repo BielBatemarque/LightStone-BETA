@@ -46,9 +46,6 @@ export const LoginScreen = () => {
         }
     };
 
-    
-    // console.log(login);
-    console.log(state);
     return (
         <div className="LoginScreen">
             <Container>
