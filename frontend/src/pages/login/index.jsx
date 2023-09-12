@@ -5,7 +5,7 @@ import { globalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 
 export const LoginScreen = () => {
-    const { dispatch, state } = useContext(globalContext);
+    const { dispatch } = useContext(globalContext);
     const navigate = useNavigate();
 
     const [login, setLogin] = useState({
