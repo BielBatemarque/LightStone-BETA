@@ -34,9 +34,10 @@ export const LoginScreen = () => {
             }).then(response => response.json()).catch(err => console.log(err));
 
             console.log(request);
-
-            if (request){
-                dispatch({type: 'autentication', payload: request});
+            const {token} = request;
+            
+            if (token){
+                dispatch({type: 'autentication', payload: token});
                 navigate('/Home/');
             }
 
