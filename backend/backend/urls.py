@@ -7,9 +7,7 @@ from colaboradores.views import ColaboradorViewsSets
 from fornecedores.views import FornecedorViewSets
 from Estoque.views import EstoqueViewsSets
 from materiais.views import MaterialViewSets
-from usuarios.views import UserLoginView, LogoutView
-
-
+from usuarios.views import UserLoginView, LogoutView, CreateUserView
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
@@ -25,4 +23,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('login/', UserLoginView.as_view(), name='user-login'),
     path('logout/', LogoutView.as_view(), name='user-logout'),
+    path('users/create/', CreateUserView.as_view(), name='create-user'),
 ]
