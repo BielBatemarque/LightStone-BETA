@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-
 import { ColumForm, Container, ImageContainer, InputStyled, SemiContainerInputs, StyledButton } from "./styles";
 import { globalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
@@ -42,7 +41,7 @@ export const LoginScreen = () => {
 
             if (!request.ok){
                 window.alert('Credenciais de login invalidas');
-                console.log('quando o user não conseguir fazer login o sistema deverá por na tela uma mensagem personalizada');
+                //quando o user não conseguir fazer login o sistema deverá por na tela uma mensagem personalizada
             }
 
         }catch(e){
