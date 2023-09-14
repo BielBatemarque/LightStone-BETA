@@ -4,7 +4,8 @@ import { useContext } from 'react';
 import { globalContext } from './context/context'
 
 function App() {
-  const token = useContext(globalContext);
+  const { state } = useContext(globalContext);
+    console.log(state);
 
   return (
     <div className="App">
