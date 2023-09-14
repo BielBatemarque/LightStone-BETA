@@ -56,6 +56,7 @@ class CreateUserView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request):
+        print(request.method)
         try:
             username = request.data.get('username')
             password = request.data.get('password')
@@ -64,7 +65,6 @@ class CreateUserView(APIView):
             usuario_novo.save()
 
             return Response({'message': f'Novo usuário criado com sucesso: {usuario_novo.username}'})
-                
         except Exception as e:
             return Response({'message': f'Erro ao criar novo usuário: {str(e)}'})
 
