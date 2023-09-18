@@ -1,5 +1,7 @@
 export const ClientesPage = () => {
     return(
-        <div className="Clientes"></div>
+        <div className="Clientes">
+            OPAOPAOPAOPA
+        </div>
     );
 }
