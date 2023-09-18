@@ -6,10 +6,10 @@ export const SideBar = () => {
         <SideBarDiv>
             <MenuItem text={'Menu'} linkTo={'/Home/'}/>
             <MenuItem text={'Clientes'} linkTo={'/Clientes/'}/>
-            <MenuItem text={'Colaboradores'} />
-            <MenuItem text={'Estoque'}/>
-            <MenuItem text={'Fornecedores'}/>
-            <MenuItem text={'Materiais'}/>
+            <MenuItem text={'Colaboradores'}  linkTo={'/Colaboradores/'}/>
+            <MenuItem text={'Estoque'} linkTo={'/Estoque/'}/>
+            <MenuItem text={'Fornecedores'} linkTo={'/Fornecedores/'}/>
+            <MenuItem text={'Materiais'} linkTo={'/Materiais/'}/>
         </SideBarDiv>
     );
 }
