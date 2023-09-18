@@ -1,5 +1,7 @@
 export const FornecedoresPage = () => {
     return(
-        <div className="Fornecedores"></div>
+        <div className="Fornecedores">
+            Fornecedores
+        </div>
     );
 }

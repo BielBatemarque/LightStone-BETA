@@ -1,5 +1,7 @@
 export const EstoquesPage = () => {
     return(
-        <div className="Estoques"></div>
+        <div className="Estoques">
+            Estoque
+        </div>
     );
 }

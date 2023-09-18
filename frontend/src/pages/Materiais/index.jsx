@@ -1,5 +1,7 @@
 export const MateriaisPage = () => {
     return(
-        <div className="materiais"></div>
+        <div className="materiais">
+            Materiais
+        </div>
     );
 }

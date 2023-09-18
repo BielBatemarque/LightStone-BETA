@@ -1,5 +1,7 @@
 export const ColaboradorPages = () => {
     return(
-        <div className="Colaboradores"></div>
+        <div className="Colaboradores">
+            Colaboradores
+        </div>
     );
 }
