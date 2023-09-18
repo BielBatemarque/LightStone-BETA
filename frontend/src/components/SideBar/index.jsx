@@ -4,11 +4,11 @@ import { SideBarDiv } from "./styles";
 export const SideBar = () => {
     return(
         <SideBarDiv>
-            <MenuItem />
-            <MenuItem />
-            <MenuItem />
-            <MenuItem />
-            <MenuItem />
+            <MenuItem text={'Clientes'}/>
+            <MenuItem text={'Colaboradores'} />
+            <MenuItem text={'Estoque'}/>
+            <MenuItem text={'Fornecedores'}/>
+            <MenuItem text={'Materiais'}/>
         </SideBarDiv>
     );
 }
