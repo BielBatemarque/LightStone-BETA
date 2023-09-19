@@ -6,3 +6,9 @@ class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
         fields = ['nome','cpf','endereco','data_nascimento','email']
+
+    def validate_email(self, value):
+        # Adicione sua validação personalizada para o campo 'email' aqui
+        if not "@" in (value) and not ".com" in value:
+            raise serializers.ValidationError("O email não está em um formato válido.")
+        return value
