@@ -7,9 +7,16 @@ export const StyledLink = styled(Link)`
     font-size: 1.5rem;
     margin-bottom: 1rem;
     margin-left: 55px;
-    width: 75%;
+    width: 70%;
+    padding: 3px;
+    margin-top: 2px;
+    height: 2.1rem;
+    border-radius: 5px;
+    padding-left:15px;
+    padding-bottom:6px;
 
     &:hover{
-        background-color:  rgb(95, 95, 95);
+        background-color:  rgb(68, 68, 68);
+        color: yellowgreen;
     }
 `;
