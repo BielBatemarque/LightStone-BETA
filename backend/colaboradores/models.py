@@ -7,6 +7,7 @@ class Colaborador(models.Model):
     telefone = models.CharField(max_length=15)
     cpf = models.TextField(max_length=11)
     email = models.CharField(max_length=100)
+    cargo = models.CharField(max_length=100, null=True)
 
     def __str__(self) -> str:
         return self.nome
