@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { MenuItem } from "../MenuItem";
 import { SideBarDiv } from "./styles";
+import { BsPerson } from 'react-icons/bs'
 import { globalContext } from "../../context/context";
 import { useNavigate } from "react-router-dom";
+import { LuLayoutDashboard } from 'react-icons/lu';
 
 export const SideBar = () => {
     const { state, dispatch } = useContext(globalContext);
@@ -33,8 +35,8 @@ export const SideBar = () => {
 
     return(
         <SideBarDiv>
-            <MenuItem text={'Menu'} linkTo={'/Home/'}/>
-            <MenuItem text={'Clientes'} linkTo={'/Clientes/'}/>
+            <MenuItem text={'Menu'} linkTo={'/Home/'} icon={<LuLayoutDashboard />}/>
+            <MenuItem text={'Clientes'} linkTo={'/Clientes/'} icon={<BsPerson />}/>
             <MenuItem text={'Colaboradores'}  linkTo={'/Colaboradores/'}/>
             <MenuItem text={'Estoque'} linkTo={'/Estoque/'}/>
             <MenuItem text={'Fornecedores'} linkTo={'/Fornecedores/'}/>

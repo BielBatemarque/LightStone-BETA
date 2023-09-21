@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { StyledLink } from './styles';
 
-export const MenuItem = ({ text, linkTo }) => {
+export const MenuItem = ({ text, linkTo, icon }) => {
     return(
-        <Link to={linkTo}>{text}</Link>
+        <StyledLink to={linkTo}>{icon} {text}</StyledLink>
     );
 };
