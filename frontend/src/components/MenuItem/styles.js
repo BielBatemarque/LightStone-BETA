@@ -18,5 +18,6 @@ export const StyledLink = styled(Link)`
     &:hover{
         background-color:  rgb(68, 68, 68);
         color: yellowgreen;
+        transition: 0.4s;
     }
 `;
