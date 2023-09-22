@@ -11,6 +11,7 @@ export const StyledLink = styled(Link)`
     padding: 3px;
     margin-top: 2px;
     height: 2.1rem;
+    padding-top: 6px;
     border-radius: 5px;
     padding-left:15px;
     padding-bottom:6px;
