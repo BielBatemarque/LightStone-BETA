@@ -41,6 +41,7 @@ export const SideBar = () => {
             <MenuItem text={'Estoque'} linkTo={'/Estoque/'}/>
             <MenuItem text={'Fornecedores'} linkTo={'/Fornecedores/'}/>
             <MenuItem text={'Materiais'} linkTo={'/Materiais/'}/>
+            <MenuItem text={'Vendas'}/>
 
             <button type="button" onClick={handleLogout}>Sair</button>
         </SideBarDiv>
