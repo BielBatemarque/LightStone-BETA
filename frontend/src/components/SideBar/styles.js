@@ -6,3 +6,8 @@ export const SideBarDiv = styled.div`
     display: flex;
     flex-direction: column;
 `;
+
+export const StyledCOllum = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
