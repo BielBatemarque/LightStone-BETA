@@ -7,6 +7,7 @@ import { ColaboradorPages } from '../../pages/Colaboradores';
 import { EstoquesPage } from '../../pages/Estoques';
 import { FornecedoresPage } from '../../pages/Fornecedores';
 import { MateriaisPage } from '../../pages/Materiais/index';
+import { VendasPage } from '../../pages/Vendas';
 
 export const Content = () => {
     return(
@@ -19,6 +20,7 @@ export const Content = () => {
                 <Route path='/Estoque/' element={<EstoquesPage/>}/>
                 <Route path='/Fornecedores/'element={<FornecedoresPage />}/>
                 <Route path='/Materiais/' element={<MateriaisPage />}/>
+                <Route path='/Vendas/' element={<VendasPage />} />
             </Routes>
         </ContainerMain>
     );
