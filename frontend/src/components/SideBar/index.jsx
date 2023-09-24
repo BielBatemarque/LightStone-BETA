@@ -5,6 +5,11 @@ import { BsPerson } from 'react-icons/bs'
 import { globalContext } from "../../context/context";
 import { useNavigate } from "react-router-dom";
 import { LuLayoutDashboard } from 'react-icons/lu';
+import { IoIosCash } from 'react-icons/io';
+import { GiStoneWall } from 'react-icons/gi'
+import { BsPersonWorkspace } from 'react-icons/bs';
+import { IoPersonAddSharp } from 'react-icons/io5';
+import { CgShutterstock } from 'react-icons/cg'
 
 export const SideBar = () => {
     const { state, dispatch } = useContext(globalContext);
@@ -37,11 +42,11 @@ export const SideBar = () => {
         <SideBarDiv>
             <MenuItem text={'Menu'} linkTo={'/Home/'} icon={<LuLayoutDashboard />}/>
             <MenuItem text={'Clientes'} linkTo={'/Clientes/'} icon={<BsPerson />}/>
-            <MenuItem text={'Colaboradores'}  linkTo={'/Colaboradores/'}/>
-            <MenuItem text={'Estoque'} linkTo={'/Estoque/'}/>
-            <MenuItem text={'Fornecedores'} linkTo={'/Fornecedores/'}/>
-            <MenuItem text={'Materiais'} linkTo={'/Materiais/'}/>
-            <MenuItem text={'Vendas'} linkTo={'/Vendas/'}/>
+            <MenuItem text={'Colaboradores'}  linkTo={'/Colaboradores/'} icon={<BsPersonWorkspace />}/>
+            <MenuItem text={'Estoque'} linkTo={'/Estoque/'} icon={<CgShutterstock />}/>
+            <MenuItem text={'Fornecedores'} linkTo={'/Fornecedores/'} icon={<IoPersonAddSharp />}/>
+            <MenuItem text={'Materiais'} linkTo={'/Materiais/'} icon={<GiStoneWall />} />
+            <MenuItem text={'Vendas'} linkTo={'/Vendas/'} icon={<IoIosCash />}/>
 
             <button type="button" onClick={handleLogout}>Sair</button>
         </SideBarDiv>
