@@ -50,7 +50,7 @@
                     <MenuItem text={'Vendas'} linkTo={'/Vendas/'} icon={<IoIosCash />}/>
                 </StyledCOllum>
 
-                <LogoutButton onClick={handleLogout}>Sait</LogoutButton>
+                <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
             </SideBarDiv>
         );
     }
