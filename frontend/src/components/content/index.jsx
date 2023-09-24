@@ -8,6 +8,7 @@ import { EstoquesPage } from '../../pages/Estoques';
 import { FornecedoresPage } from '../../pages/Fornecedores';
 import { MateriaisPage } from '../../pages/Materiais/index';
 import { VendasPage } from '../../pages/Vendas';
+import { RelatoriosPage } from '../../pages/Relatorios';
 
 export const Content = () => {
     return(
@@ -21,6 +22,7 @@ export const Content = () => {
                 <Route path='/Fornecedores/'element={<FornecedoresPage />}/>
                 <Route path='/Materiais/' element={<MateriaisPage />}/>
                 <Route path='/Vendas/' element={<VendasPage />} />
+                <Route path='Relatorios/' element={<RelatoriosPage />} />
             </Routes>
         </ContainerMain>
     );

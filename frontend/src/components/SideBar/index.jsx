@@ -9,7 +9,8 @@
     import { GiStoneWall } from 'react-icons/gi'
     import { BsPersonWorkspace } from 'react-icons/bs';
     import { IoPersonAddSharp } from 'react-icons/io5';
-    import { CgShutterstock } from 'react-icons/cg'
+    import { CgShutterstock } from 'react-icons/cg';
+    import { TbReportSearch } from 'react-icons/tb';
 
     export const SideBar = () => {
         const { state, dispatch } = useContext(globalContext);
@@ -48,6 +49,7 @@
                     <MenuItem text={'Fornecedores'} linkTo={'/Fornecedores/'} icon={<IoPersonAddSharp />}/>
                     <MenuItem text={'Materiais'} linkTo={'/Materiais/'} icon={<GiStoneWall />} />
                     <MenuItem text={'Vendas'} linkTo={'/Vendas/'} icon={<IoIosCash />}/>
+                    <MenuItem text={'Relatórios'} linkTo={'Relatorios'} icon={<TbReportSearch />}/>
                 </StyledCOllum>
 
                 <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
