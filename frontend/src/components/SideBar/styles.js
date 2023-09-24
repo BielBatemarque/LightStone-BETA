@@ -13,6 +13,9 @@ export const StyledCOllum = styled.div`
 `;
 
 export const LogoutButton = styled.button`
-    order: 1; /* Assign a lower order value to move it to the bottom */
-    margin-top: auto; /* To push the button to the bottom */
+    order: 1;
+    margin-top: auto;
+    margin-bottom:15px;
+    width: 70%;
+    align-self: center;
 `;
