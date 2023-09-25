@@ -10,7 +10,7 @@ export const ClientesPage = () => {
     }, []);
 
     const handleCarregaClientes = async () => {
-        const request = await fetch("http://localhost:8000/clientes/");
+        const request = await fetch('http://localhost:8000/clientes/');
         const response = await request.json();
 
         setClientes(response);
