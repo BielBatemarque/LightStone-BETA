@@ -13,10 +13,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
 
-      { state.logado? <FlexCointainer>
+      { state.logado ? 
+      <FlexCointainer>
           <SideBar />
           <Content />
-      </FlexCointainer> : <Content /> }
+      </FlexCointainer> 
+      : <Content /> }
         
       </BrowserRouter>
     </div>
