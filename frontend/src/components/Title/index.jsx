@@ -1,5 +1,7 @@
+import { StyledH1 } from "./styles";
+
 export const Title = ({ children }) => {
     return(
-        <h1>{children}</h1>
+        <StyledH1>{children}</StyledH1>
     );
 }
