@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Item } from "../../components/ItemListagem";
 import { Listing } from "../../components/Listing";
+import { FlexCointainer } from "../../components/FlexContainer";
+import { Title } from "../../components/Title";
+import { Button } from "../../components/Button";
 
 export const ClientesPage = () => {
     const[clientes, setClientes] = useState([]);
@@ -19,7 +22,10 @@ export const ClientesPage = () => {
 
     return(
         <div className="Clientes">
-           <h1>Clientes</h1>
+           <FlexCointainer pontas={true} size={'92%'}>
+            <Title>Clientes</Title>
+            <Button>Novo Cliente</Button>
+           </FlexCointainer>
            <Listing>
                 {clientes.map(cliente => (
                     <Item>{cliente.nome}</Item>
