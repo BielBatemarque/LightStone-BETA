@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ColumForm, Container, ImageContainer, InputStyled, SemiContainerInputs, StyledButton } from "./styles";
 import { globalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
-import { AtentionNotification, FailNotifications, SucssesNotifications } from '../../components/Notifications';
+import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
 
 export const LoginScreen = () => {
     const { dispatch } = useContext(globalContext);
@@ -42,7 +42,7 @@ export const LoginScreen = () => {
             }
 
             if (!request.ok){
-                FailNotifications('Credênciais Invalidas');
+                FailNotifications('Credênciais Inválidas');
             }
 
         }catch(e){
