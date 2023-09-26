@@ -27,7 +27,7 @@ export const ColaboradorPages = () => {
         <div className="Colaboradores">
             <FlexCointainer size={'93%'} pontas={true}>
                 <Title>Colaboradores</Title>
-                <Button>Novo Colaborador</Button>
+                <Button action={() => navigate('/Colaboradores/CadastrarColaborador/')}>Novo Colaborador</Button>
             </FlexCointainer>
             <Listing>
                 {colabs.map(colab => (
