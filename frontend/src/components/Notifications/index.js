@@ -7,3 +7,7 @@ export const SucssesNotifications = (text) => {
 export const FailNotifications = (text) => {
     toast.error(text);
 }
+
+export const AtentionNotification = (text) => {
+    toast.warn(text)
+}
