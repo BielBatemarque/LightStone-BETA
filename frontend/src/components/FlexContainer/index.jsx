@@ -1,7 +1,7 @@
 import { FlexDiv } from "./styles";
 
-export const FlexCointainer = ({ children }) => {
+export const FlexCointainer = ({ children, pontas, size }) => {
     return(
-        <FlexDiv>{children}</FlexDiv>
+        <FlexDiv pontas={pontas} size={size}>{children}</FlexDiv>
     );
 }
