@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ColumForm, Container, ImageContainer, InputStyled, SemiContainerInputs, StyledButton } from "./styles";
 import { globalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
+import { AtentionNotification, FailNotifications, SucssesNotifications } from '../../components/Notifications';
 
 export const LoginScreen = () => {
     const { dispatch } = useContext(globalContext);
@@ -37,11 +38,11 @@ export const LoginScreen = () => {
             if (token){
                 dispatch({type: 'autentication', payload: token});
                 navigate('/Home/');
+                SucssesNotifications('Autenticado com sucecesso')
             }
 
             if (!request.ok){
-                window.alert('Credenciais de login invalidas');
-                //quando o user não conseguir fazer login o sistema deverá por na tela uma mensagem personalizada
+                FailNotifications('Credênciais Invalidas');
             }
 
         }catch(e){
@@ -62,7 +63,7 @@ export const LoginScreen = () => {
                         <InputStyled type="text" name="username" placeholder="Nome de Usuário" onChange={handleChange} value={login.username} />
 
                         <label htmlFor="senha">Senha:</label>
-                        <InputStyled type='password' placeholder="Senha" name="password" onChange={handleChange} value={login.password} />
+                        <InputStyled type='password' placeholder="Senha" required name="password" onChange={handleChange} value={login.password} />
 
                         <StyledButton type="submit">Entrar</StyledButton>
                     </ColumForm>
