@@ -20,7 +20,6 @@ export const ClientesPage = () => {
 
         setClientes(response);
     };
-    console.log(clientes);
 
     return(
         <div className="Clientes">
