@@ -4,6 +4,8 @@ import { useContext } from 'react';
 import { globalContext } from './context/context'
 import { FlexCointainer } from './components/FlexContainer';
 import { SideBar } from './components/SideBar';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { state } = useContext(globalContext);
@@ -12,13 +14,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-
-      { state.logado ? 
-      <FlexCointainer>
+      <ToastContainer />
+      { state.logado ? <FlexCointainer>
           <SideBar />
           <Content />
-      </FlexCointainer> 
-      : <Content /> }
+      </FlexCointainer> : <Content /> }
         
       </BrowserRouter>
     </div>
