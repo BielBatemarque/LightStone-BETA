@@ -45,9 +45,9 @@
                     <MenuItem text={'Menu'} linkTo={'/Home/'} icon={<LuLayoutDashboard />}/>
                     <MenuItem text={'Clientes'} linkTo={'/Clientes/'} icon={<BsPerson />}/>
                     <MenuItem text={'Colaboradores'}  linkTo={'/Colaboradores/'} icon={<BsPersonWorkspace />}/>
-                    <MenuItem text={'Estoque'} linkTo={'/Estoque/'} icon={<CgShutterstock />}/>
                     <MenuItem text={'Fornecedores'} linkTo={'/Fornecedores/'} icon={<IoPersonAddSharp />}/>
                     <MenuItem text={'Materiais'} linkTo={'/Materiais/'} icon={<GiStoneWall />} />
+                    <MenuItem text={'Estoque'} linkTo={'/Estoque/'} icon={<CgShutterstock />}/>
                     <MenuItem text={'Vendas'} linkTo={'/Vendas/'} icon={<IoIosCash />}/>
                     <MenuItem text={'Relatórios'} linkTo={'Relatorios'} icon={<TbReportSearch />}/>
                 </StyledCOllum>
