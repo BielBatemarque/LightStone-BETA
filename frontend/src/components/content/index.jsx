@@ -8,6 +8,7 @@ import { EstoquesPage } from '../../pages/Estoques';
 import { FornecedoresPage } from '../../pages/Fornecedores';
 import { MateriaisPage } from '../../pages/Materiais/index';
 import { VendasPage } from '../../pages/Vendas';
+import { CadastrarColaboradorPage } from '../../pages/Colaboradores/cadastrarColaborador';
 import { RelatoriosPage } from '../../pages/Relatorios';
 import { CadastrarCLientePage } from '../../pages/Clientes/cadastrarCLiente';
 
@@ -25,6 +26,7 @@ export const Content = () => {
                 <Route path='/Vendas/' element={<VendasPage />} />
                 <Route path='/Relatorios/' element={<RelatoriosPage />} />
                 <Route path='/Clientes/cadastrarCliente/' element={<CadastrarCLientePage />}/>
+                <Route path='/Colaboradores/CadastrarColaborador/' element={<CadastrarColaboradorPage />} />
             </Routes>
         </ContainerMain>
     );
