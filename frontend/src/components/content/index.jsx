@@ -12,6 +12,7 @@ import { CadastrarColaboradorPage } from '../../pages/Colaboradores/cadastrarCol
 import { RelatoriosPage } from '../../pages/Relatorios';
 import { CadastrarCLientePage } from '../../pages/Clientes/cadastrarCLiente';
 import { CadastrarFornecedor } from '../../pages/Fornecedores/cadastrarFornecedor';
+import { CadastrarMaterialPage } from '../../pages/Materiais/cadastrarMaterial';
 
 export const Content = () => {
     return(
@@ -29,6 +30,7 @@ export const Content = () => {
                 <Route path='/Clientes/cadastrarCliente/' element={<CadastrarCLientePage />}/>
                 <Route path='/Colaboradores/CadastrarColaborador/' element={<CadastrarColaboradorPage />} />
                 <Route path='/Fornecedores/cadastrarFornecedor/' element={<CadastrarFornecedor />} /> 
+                <Route path='/Materiais/cadastrarMaterial/' element={<CadastrarMaterialPage />} />
             </Routes>
         </ContainerMain>
     );
