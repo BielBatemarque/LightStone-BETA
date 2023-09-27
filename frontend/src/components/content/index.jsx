@@ -11,6 +11,7 @@ import { VendasPage } from '../../pages/Vendas';
 import { CadastrarColaboradorPage } from '../../pages/Colaboradores/cadastrarColaborador';
 import { RelatoriosPage } from '../../pages/Relatorios';
 import { CadastrarCLientePage } from '../../pages/Clientes/cadastrarCLiente';
+import { CadastrarFornecedor } from '../../pages/Fornecedores/cadastrarFornecedor';
 
 export const Content = () => {
     return(
@@ -27,6 +28,7 @@ export const Content = () => {
                 <Route path='/Relatorios/' element={<RelatoriosPage />} />
                 <Route path='/Clientes/cadastrarCliente/' element={<CadastrarCLientePage />}/>
                 <Route path='/Colaboradores/CadastrarColaborador/' element={<CadastrarColaboradorPage />} />
+                <Route path='/Fornecedores/cadastrarFornecedor/' element={<CadastrarFornecedor />} /> 
             </Routes>
         </ContainerMain>
     );
