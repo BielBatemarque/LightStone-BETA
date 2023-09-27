@@ -49,7 +49,7 @@
                     <MenuItem text={'Materiais'} linkTo={'/Materiais/'} icon={<GiStoneWall />} />
                     <MenuItem text={'Estoque'} linkTo={'/Estoque/'} icon={<CgShutterstock />}/>
                     <MenuItem text={'Vendas'} linkTo={'/Vendas/'} icon={<IoIosCash />}/>
-                    <MenuItem text={'Relatórios'} linkTo={'Relatorios'} icon={<TbReportSearch />}/>
+                    <MenuItem text={'Relatórios'} linkTo={'/Relatorios/'} icon={<TbReportSearch />}/>
                 </StyledCOllum>
 
                 <LogoutButton onClick={handleLogout}>Sair</LogoutButton>

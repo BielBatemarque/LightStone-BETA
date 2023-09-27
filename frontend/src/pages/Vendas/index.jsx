@@ -1,7 +1,14 @@
+import { FlexCointainer } from "../../components/FlexContainer";
+import { Listing } from "../../components/Listing";
+import { Title } from "../../components/Title";
+
 export const VendasPage = () => {
     return(
         <div className="VendasPage">
-            Página de vendas
+            <FlexCointainer>
+                <Title>Vendas</Title>
+            </FlexCointainer>
+            <Listing></Listing>
         </div>
     );
 }
