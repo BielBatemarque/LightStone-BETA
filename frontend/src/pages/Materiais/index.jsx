@@ -29,8 +29,8 @@ export const MateriaisPage = () => {
                 <Button action={() => navigate('/Materiais/cadastrarMaterial/')}>Novo Material</Button>
             </FlexCointainer>
             <Listing>
-                {materiais.map(material => (
-                    <Item>{material.nome}</Item>
+                {materiais.map((material, index) => (
+                    <Item key={index}>{material.nome}</Item>
                 ))}
             </Listing>
         </div>
