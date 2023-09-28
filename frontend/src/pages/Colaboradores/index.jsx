@@ -30,8 +30,8 @@ export const ColaboradorPages = () => {
                 <Button action={() => navigate('/Colaboradores/CadastrarColaborador/')}>Novo Colaborador</Button>
             </FlexCointainer>
             <Listing>
-                {colabs.map(colab => (
-                    <Item>{colab.nome}</Item>
+                {colabs.map((colab,index) => (
+                    <Item key={index}>{colab.nome}</Item>
                 ))}
             </Listing>
         </div>
