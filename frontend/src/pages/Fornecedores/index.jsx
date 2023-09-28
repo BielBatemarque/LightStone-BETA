@@ -28,8 +28,8 @@ export const FornecedoresPage = () => {
                 <Button children={'Novo Fornecedor'} action={() => navigate('/Fornecedores/cadastrarFornecedor/')}/>
             </FlexCointainer>
             <Listing>
-                {fornecedores.map(fornecedor => (
-                    <Item>{fornecedor.nome_empresa}</Item>
+                {fornecedores.map((fornecedor, index) => (
+                    <Item key={index}>{fornecedor.nome_empresa}</Item>
                 ))}
             </Listing>
         </div>
