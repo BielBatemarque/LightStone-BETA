@@ -4,10 +4,12 @@ import { Title } from "../../components/Title";
 import { Cliente } from "../../models/Cliente";
 import { globalContext } from "../../context/context";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
+import { useNavigate } from "react-router-dom";
 
 export const CadastrarCLientePage = () => {
     const [cliente, setCliente] = useState(new Cliente());
     const { state } = useContext(globalContext);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -28,6 +30,8 @@ export const CadastrarCLientePage = () => {
 
         if (request.ok) {
             SucssesNotifications('Cadastrado com Sucesso');
+            navigate('/Clientes/');
+
         }else{
             FailNotifications('Erro ao cadastrar')
         }
