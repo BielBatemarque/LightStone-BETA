@@ -1,7 +1,7 @@
 import { StyledH1 } from "./styles";
 
-export const Title = ({ children }) => {
+export const Title = ({ children, color }) => {
     return(
-        <StyledH1>{children}</StyledH1>
+        <StyledH1 color={color}>{children}</StyledH1>
     );
 }
