@@ -1,6 +1,6 @@
     import { useContext } from "react";
     import { MenuItem } from "../MenuItem";
-    import { LogoutButton, SideBarDiv, StyledCOllum } from "./styles";
+    import { HelloCard, LogoutButton, SideBarDiv, StyledCOllum } from "./styles";
     import { BsPerson } from 'react-icons/bs'
     import { globalContext } from "../../context/context";
     import { useNavigate } from "react-router-dom";
@@ -52,6 +52,9 @@
                     <MenuItem text={'Relatórios'} linkTo={'/Relatorios/'} icon={<TbReportSearch />}/>
                 </StyledCOllum>
 
+                <HelloCard>
+                    <p>Olá, {state.username}</p>
+                </HelloCard>
                 <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
             </SideBarDiv>
         );
