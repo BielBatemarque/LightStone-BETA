@@ -23,7 +23,7 @@ export const ClientesPage = () => {
 
     return(
         <div className="Clientes">
-           <FlexCointainer pontas={true}  size={'92%'}>
+           <FlexCointainer pontas='true' size={'92%'}>
             <Title>Clientes</Title>
             <Button action={() => navegate('/Clientes/cadastrarCliente/')}>Novo Cliente</Button>
            </FlexCointainer>

@@ -23,7 +23,7 @@ export const VendasPage = () => {
 
     return(
         <div className="VendasPage">
-            <FlexCointainer pontas={true} size={'93%'}>
+            <FlexCointainer pontas="true" size={'93%'}>
                 <Title>Vendas</Title>
                 <Button action={() => navigate('//')}>Cadastrar Venda</Button>
             </FlexCointainer>

@@ -23,7 +23,7 @@ export const FornecedoresPage = () => {
 
     return(
         <div className="Fornecedores">
-            <FlexCointainer pontas={true} size={'93%'}>
+            <FlexCointainer pontas="true" size={'93%'}>
                 <Title>Fornecedores</Title>
                 <Button children={'Novo Fornecedor'} action={() => navigate('/Fornecedores/cadastrarFornecedor/')}/>
             </FlexCointainer>

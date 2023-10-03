@@ -24,7 +24,7 @@ export const MateriaisPage = () => {
 
     return(
         <div className="materiais">
-            <FlexCointainer pontas={true} size={'93%'}>
+            <FlexCointainer pontas="true" size={'93%'}>
                 <Title>Materiais</Title>
                 <Button action={() => navigate('/Materiais/cadastrarMaterial/')}>Novo Material</Button>
             </FlexCointainer>
