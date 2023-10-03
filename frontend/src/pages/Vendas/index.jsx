@@ -21,8 +21,6 @@ export const VendasPage = () => {
         handleLoadVendas();
     }, []);
 
-    console.log(vendas)
-
     return(
         <div className="VendasPage">
             <FlexCointainer pontas={true} size={'93%'}>
