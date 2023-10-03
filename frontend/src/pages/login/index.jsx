@@ -33,10 +33,11 @@ export const LoginScreen = () => {
                 body: JSON.stringify(login),
             });
             const response = await request.json();
-            const { token } = response;
+            console.log(response);
+            const { token, user } = response;
 
             if (token){
-                dispatch({type: 'autentication', payload: token});
+                dispatch({type: 'autentication', payload: token, username: user});
                 navigate('/Home/');
                 SucssesNotifications('Autenticado com sucecesso')
             }
