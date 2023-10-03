@@ -9,7 +9,6 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { state } = useContext(globalContext);
-    console.log(state);
 
   return (
     <div className="App">
