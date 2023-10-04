@@ -1,7 +1,9 @@
+import { Title } from "../../components/Title";
+
 export const CadastrarMaterialPage = () => {
     return(
         <div className="">
-            Cadastrar Novo Material
+            <Title>Cadastrar Material</Title>
         </div>
     );
 }
