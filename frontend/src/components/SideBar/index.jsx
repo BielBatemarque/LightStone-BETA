@@ -39,6 +39,10 @@
             }
         }
 
+        const handleFormatUsername = (name) => {
+            return name.charAt(0).toUpperCase() + name.slice(1);
+        }
+
         return(
             <SideBarDiv>
                 <StyledCOllum>
@@ -53,7 +57,7 @@
                 </StyledCOllum>
 
                 <HelloCard>
-                    <p>Olá, {state.username}</p>
+                    <p>Olá, {handleFormatUsername(state.username)}</p>
                 </HelloCard>
                 <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
             </SideBarDiv>
