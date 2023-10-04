@@ -1,7 +1,12 @@
+import { Title } from "../../components/Title"
+
 export const CadastrarColaboradorPage = () => {
     return(
         <div className="">
-            Novo Colaborador
+            <Title>Cadastrar Colaborador</Title>
+            <form action="">
+                
+            </form>
         </div>
     )
 }
