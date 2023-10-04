@@ -1,7 +1,9 @@
+import { Title } from "../../components/Title";
+
 export const CadastrarFornecedor = () => {
     return(
         <div className="cadastrarFornecedor">
-            Cadastrar Fornecedor
+           <Title>Cadastrar Fornecedor</Title>
         </div>
     );
 }
