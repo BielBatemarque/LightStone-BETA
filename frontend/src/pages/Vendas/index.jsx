@@ -25,7 +25,7 @@ export const VendasPage = () => {
         <div className="VendasPage">
             <FlexCointainer pontas="true" size={'93%'}>
                 <Title>Vendas</Title>
-                <Button action={() => navigate('//')}>Cadastrar Venda</Button>
+                <Button action={() => navigate('/Vendas/CadastrarVenda/')}>Cadastrar Venda</Button>
             </FlexCointainer>
             <Listing>
                 {vendas.map((venda, index) => (
