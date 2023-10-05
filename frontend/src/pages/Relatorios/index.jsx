@@ -1,7 +1,9 @@
+import { Title } from "../../components/Title";
+
 export const RelatoriosPage = () => {
     return(
-        <div className="relatoriosPage">
-            Relatórios
-        </div>
+       <>
+            <Title>Relatórios</Title>
+       </> 
     );
 }

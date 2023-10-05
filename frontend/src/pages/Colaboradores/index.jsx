@@ -24,7 +24,7 @@ export const ColaboradorPages = () => {
     console.log(colabs);
 
     return(
-        <div className="Colaboradores">
+        <>
             <FlexCointainer size={'93%'} pontas='true'>
                 <Title>Colaboradores</Title>
                 <Button action={() => navigate('/Colaboradores/CadastrarColaborador/')}>Novo Colaborador</Button>
@@ -32,8 +32,8 @@ export const ColaboradorPages = () => {
             <Listing>
                 {colabs.map((colab,index) => (
                     <Item key={index}>{colab.nome}</Item>
-                ))}
+                    ))}
             </Listing>
-        </div>
+         </>
     );
 }

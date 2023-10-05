@@ -22,7 +22,7 @@ export const VendasPage = () => {
     }, []);
 
     return(
-        <div className="VendasPage">
+        <>
             <FlexCointainer pontas="true" size={'93%'}>
                 <Title>Vendas</Title>
                 <Button action={() => navigate('/Vendas/CadastrarVenda/')}>Cadastrar Venda</Button>
@@ -30,8 +30,8 @@ export const VendasPage = () => {
             <Listing>
                 {vendas.map((venda, index) => (
                     <Item key={index}>{venda.valor_total}</Item>
-                ))}
+                    ))}
             </Listing>
-        </div>
+        </>
     );
 }

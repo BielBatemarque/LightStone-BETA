@@ -39,7 +39,7 @@ export const CadastrarCLientePage = () => {
     };
 
     return(
-        <div className="cadastrarCliente">
+        <>
             <Title>Cadastrar Cliente</Title>
             <form>
                 <input type="text" name="nome" onChange={handleChange}/> <br />
@@ -51,6 +51,6 @@ export const CadastrarCLientePage = () => {
                 <Button action={handleCadastraCliente}>Cadastrar</Button>
 
             </form>
-        </div>
+        </>
     );
 };

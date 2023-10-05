@@ -6,8 +6,8 @@ export const HomePage = () => {
     console.log(state);
     
     return(
-        <div className="HomePage">
+       <>
             Home
-        </div>
+       </> 
     );
 };
