@@ -22,16 +22,16 @@ export const ClientesPage = () => {
     };
 
     return(
-        <div className="Clientes">
-           <FlexCointainer pontas='true' size={'92%'}>
-            <Title>Clientes</Title>
-            <Button action={() => navegate('/Clientes/cadastrarCliente/')}>Novo Cliente</Button>
+        <>
+            <FlexCointainer pontas='true' size={'92%'}>
+                <Title>Clientes</Title>
+                <Button action={() => navegate('/Clientes/cadastrarCliente/')}>Novo Cliente</Button>
            </FlexCointainer>
            <Listing>
                 {clientes.map((cliente, index) => (
                     <Item key={index}>{cliente.nome}</Item>
-                ))}
-           </Listing>
-        </div>
+                    ))}
+            </Listing>
+        </>
     );
 }
