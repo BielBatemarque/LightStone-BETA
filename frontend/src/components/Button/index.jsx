@@ -1,7 +1,7 @@
 import { StyledButton } from "./styles";
 
-export const Button = ({children, icon, action}) => {
+export const Button = ({children, icon, action, color }) => {
     return(
-        <StyledButton onClick={action}>{icon}{children}</StyledButton>
+        <StyledButton onClick={action} color={color}>{icon}{children}</StyledButton>
     );
 };
