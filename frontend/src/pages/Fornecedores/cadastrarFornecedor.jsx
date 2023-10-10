@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Fornecedor } from '../../models/Fornecedor';
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from 'react-router-dom';
+import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 
 export const CadastrarFornecedor = () => {
     const [fornecedor, setFornecedor] = useState(new Fornecedor());
@@ -29,6 +30,13 @@ export const CadastrarFornecedor = () => {
         });
 
         const response = await request.json();
+
+        if (request.ok){
+            SucssesNotifications('Fornecedor Cadastrado com Sucesso');
+            navigate('/Fornecedores/');
+        }else if(!request.ok){
+            FailNotifications('Não foi possivel cadastrar Fornecedor');
+        }
 
         console.log(request.status, response);
     };
