@@ -1,6 +1,12 @@
+import { Button } from "../../components/Button";
 import { Title } from "../../components/Title";
 
 export const CadastrarMaterialPage = () => {
+    const handleCadastrarMaterial = async (e) => {
+        e.preventDefault();
+        window.alert('Cadastrar Material');
+    };
+    
     return(
         <>
             <Title>Cadastrar Material</Title>
@@ -10,6 +16,7 @@ export const CadastrarMaterialPage = () => {
                 <select name="" id="">
                     <option value="">Selecione</option>
                 </select>
+                <Button action={handleCadastrarMaterial}>Cadastrar Material</Button>
             </form>
         </>
     );
