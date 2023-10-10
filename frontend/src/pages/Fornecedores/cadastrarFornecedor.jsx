@@ -2,9 +2,13 @@ import { Title } from "../../components/Title";
 import { Button } from '../../components/Button';
 import { useState } from "react";
 import { Fornecedor } from '../../models/Fornecedor';
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from 'react-router-dom';
 
 export const CadastrarFornecedor = () => {
     const [fornecedor, setFornecedor] = useState(new Fornecedor());
+    const { state } = useAuth();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -14,10 +18,22 @@ export const CadastrarFornecedor = () => {
 
     const handleCadastrarFornecedor = async (e) => {
         e.preventDefault();
-        window.alert('cadastrar Fornecedor')
+
+        const request = await fetch('http://localhost:8000/fornecedores/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${state.token}`,
+            },
+            body: JSON.stringify(fornecedor),
+        });
+
+        const response = await request.json();
+
+        console.log(request.status, response);
     };
 
-    console.log(fornecedor);
+    console.log(fornecedor, state);
     return(
         <>
            <Title>Cadastrar Fornecedor</Title>
