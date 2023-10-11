@@ -14,7 +14,8 @@ export const CadastrarMaterialPage = () => {
                 <input type="text" placeholder="Nome do material"/> <br />
                 <input type="text" placeholder="Cor base"/> <br />
                 <select name="" id="">
-                    <option value="">Selecione</option>
+                    <option value="">Fornecedor</option>
+
                 </select>
                 <Button action={handleCadastrarMaterial}>Cadastrar Material</Button>
             </form>
