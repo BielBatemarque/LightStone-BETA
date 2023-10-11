@@ -5,4 +5,4 @@ from rest_framework import routers, serializers, viewsets
 class FornecedorSerializers(serializers.ModelSerializer):
     class Meta:
         model = Fornecedor
-        fields = ['nome_empresa', 'cnpj', 'endereco']
+        fields = ['id', 'nome_empresa', 'cnpj', 'endereco']

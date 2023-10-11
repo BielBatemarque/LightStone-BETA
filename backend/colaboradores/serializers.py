@@ -5,5 +5,5 @@ from rest_framework import routers, serializers, viewsets
 class ColaboradorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Colaborador
-        fields = ['nome', 'nascimento', 'telefone', 'cpf', 'email']
+        fields = ['id', 'nome', 'nascimento', 'telefone', 'cpf', 'email']
 

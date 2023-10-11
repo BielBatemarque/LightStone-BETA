@@ -4,4 +4,4 @@ from .models import Estoque
 class EstoqueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estoque
-        fields = ['material', 'quantidade_metros']
+        fields = ['id', 'material', 'quantidade_metros']

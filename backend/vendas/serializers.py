@@ -5,4 +5,4 @@ class VendasSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Venda
-        fields = ['valor_total', 'cliente']
+        fields = ['id', 'valor_total', 'cliente']
