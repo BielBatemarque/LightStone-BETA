@@ -14,7 +14,6 @@ export const CadastrarFornecedor = () => {
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFornecedor({...fornecedor, [name]:value});
-
     }
 
     const handleCadastrarFornecedor = async (e) => {
