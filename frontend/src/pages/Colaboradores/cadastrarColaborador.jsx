@@ -16,12 +16,12 @@ export const CadastrarColaboradorPage = () => {
         <>
             <Title>Cadastrar Colaborador</Title>
             <form action="">
-                <input type="text" placeholder="nome"/> <br />
-                <input type="date" name="" id="" /> <br />
-                <input type="text" placeholder="telefone"/><br />
-                <input type="text" placeholder="CPF" /> <br />
-                <input type="email" placeholder="email"/> <br />
-                <input type="text" name="" id="" placeholder="cargo"/> <br />
+                <input type="text" placeholder="nome" name="nome"/> <br />
+                <input type="date" name="nascimento" id="" /> <br />
+                <input type="text" placeholder="telefone" name="telefone"/><br />
+                <input type="text" placeholder="CPF" name="cpf" /> <br />
+                <input type="email" placeholder="email" name="email"/> <br />
+                <input type="text" id="" placeholder="cargo" name="cargo"/> <br />
 
                 <Button children={'Cadastrar'} action={handleCadastrarColab}/>
             </form>
