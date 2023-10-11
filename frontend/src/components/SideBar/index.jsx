@@ -11,6 +11,7 @@
     import { IoPersonAddSharp } from 'react-icons/io5';
     import { CgShutterstock } from 'react-icons/cg';
     import { TbReportSearch } from 'react-icons/tb';
+    import { RiLogoutBoxLine } from 'react-icons/ri';
 
     export const SideBar = () => {
         const { state, dispatch } = useContext(globalContext);
@@ -59,7 +60,7 @@
                 <HelloCard>
                     <p>Olá, {handleFormatUsername(state.username)}</p>
                 </HelloCard>
-                <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
+                <LogoutButton onClick={handleLogout}> <RiLogoutBoxLine />Sair</LogoutButton>
             </SideBarDiv>
         );
     }

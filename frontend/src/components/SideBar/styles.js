@@ -17,6 +17,13 @@ export const LogoutButton = styled.button`
     margin-bottom:15px;
     width: 70%;
     align-self: center;
+    height: 2.2rem;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    background-color: rgb(159, 158, 158);
+    cursor: pointer;
+    font-size: 1.2rem;
 `;
 
 export const HelloCard = styled.div`
