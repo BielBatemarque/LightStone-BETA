@@ -20,13 +20,17 @@ export const EstoquesPage = () => {
         handleLoadingEstoques();
     }, []);
 
+    const handleMovimentacaoDeEstoque =  async (tipoMovimentação) => {
+        window.alert(`Tipo da movimentação: ${tipoMovimentação}`);
+    }
+
     return(
         <>
            <FlexCointainer pontas='true' size={'93%'}>
                 <Title>Estoque</Title>
                 <ContainerBtns>
-                    <Button color={'red'}>Registrar Saída</Button>
-                    <Button >Registrar Entrada</Button>
+                    <Button color={'red'} action={() => handleMovimentacaoDeEstoque('Saída')}>Registrar Saída</Button>
+                    <Button action={() => handleMovimentacaoDeEstoque('Entrada')} >Registrar Entrada</Button>
                 </ContainerBtns>
            </FlexCointainer>
            <Listing>
