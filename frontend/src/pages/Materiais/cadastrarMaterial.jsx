@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Button } from "../../components/Button";
+import { Material } from '../../models/Material';
 import { Title } from "../../components/Title";
 
 export const CadastrarMaterialPage = () => {
+    const [material, setMaterial] = useState(new Material())
     const handleCadastrarMaterial = async (e) => {
         e.preventDefault();
         window.alert('Cadastrar Material');
