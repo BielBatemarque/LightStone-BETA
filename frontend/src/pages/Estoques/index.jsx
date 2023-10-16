@@ -14,7 +14,7 @@ export const EstoquesPage = () => {
         const response = await request.json()
 
         setEstoques(response);
-    }
+    };
 
     useEffect(() => {
         handleLoadingEstoques();
@@ -22,7 +22,7 @@ export const EstoquesPage = () => {
 
     const handleMovimentacaoDeEstoque =  async (tipoMovimentação) => {
         window.alert(`Tipo da movimentação: ${tipoMovimentação}`);
-    }
+    };
 
     return(
         <>
@@ -40,4 +40,4 @@ export const EstoquesPage = () => {
            </Listing>
         </>  
     );
-}
+};
