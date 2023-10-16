@@ -34,4 +34,4 @@ export const ClientesPage = () => {
             </Listing>
         </>
     );
-}
+};
