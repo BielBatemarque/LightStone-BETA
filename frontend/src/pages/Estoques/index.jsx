@@ -35,7 +35,7 @@ export const EstoquesPage = () => {
            </FlexCointainer>
            <Listing>
                 {estoques.map((estoque, index) => (
-                    <Item key={index} >{estoque.material}</Item>
+                    <Item key={index}>{estoque.material}</Item>
                 ))}
            </Listing>
         </>  
