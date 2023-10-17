@@ -13,12 +13,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <ToastContainer />
-      { state.logado ? <FlexCointainer>
-          <SideBar />
-          <Content />
-      </FlexCointainer> : <Content /> }
-        
+        <ToastContainer />
+        { state.logado ? <FlexCointainer>
+            <SideBar />
+            <Content />
+        </FlexCointainer> : <Content /> }
       </BrowserRouter>
     </div>
   );
