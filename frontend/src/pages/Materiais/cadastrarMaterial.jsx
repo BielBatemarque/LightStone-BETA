@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { Material } from '../../models/Material';
 import { Title } from "../../components/Title";
+import { useAuth } from "../../hooks/useAuth";
+import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 
 export const CadastrarMaterialPage = () => {
     const [material, setMaterial] = useState(new Material());
     const [fornecedores, setFornecedores] = useState([]);
+    const { state } = useAuth();
 
     const handleLoadFornecedores = async () => {
         const request = await fetch('http://localhost:8000/fornecedores/');
@@ -18,10 +21,30 @@ export const CadastrarMaterialPage = () => {
         handleLoadFornecedores();
     }, []);
 
+    useEffect(() => {
+       setMaterial({...material, fornecedor: parseInt(material.fornecedor)});
+    }, [material.fornecedor]);
+
 
     const handleCadastrarMaterial = async (e) => {
         e.preventDefault();
-        window.alert('Cadastrar Material');
+        
+        const request = await fetch('http://localhost:8000/materiais/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'Application/json',
+                'Authorization': `Token ${state.token}`,
+            },
+            body: JSON.stringify(material),
+        });
+        const response = await request.json();
+        console.log(response);
+
+        if(request.ok){
+            SucssesNotifications('Cadastrado com Sucesso');
+        }else{
+            FailNotifications('Erro ao cadastrar');
+        }
     };
 
     const handleChange = (e) => {
