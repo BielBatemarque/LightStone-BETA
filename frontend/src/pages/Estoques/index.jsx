@@ -5,9 +5,11 @@ import { Listing } from '../../components/Listing';
 import { Title } from '../../components/Title/index';
 import { Item } from '../../components/ItemListagem';
 import { ContainerBtns } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 export const EstoquesPage = () => {
     const [estoques, setEstoques] = useState([]);
+    const navigate = useNavigate();
 
     const handleLoadingEstoques = async () => {
         const request = await fetch('http://localhost:8000/estoques/');
@@ -29,8 +31,8 @@ export const EstoquesPage = () => {
            <FlexCointainer pontas='true' size={'93%'}>
                 <Title>Estoque</Title>
                 <ContainerBtns>
-                    <Button color={'red'} action={() => handleMovimentacaoDeEstoque('Saída')}>Registrar Saída</Button>
-                    <Button action={() => handleMovimentacaoDeEstoque('Entrada')} >Registrar Entrada</Button>
+                    <Button color={'red'} action={() => navigate('/Estoque/movimentacaoDeEstoque/')}>Registrar Saída</Button>
+                    <Button action={() => navigate('/Estoque/movimentacaoDeEstoque/')} >Registrar Entrada</Button>
                 </ContainerBtns>
            </FlexCointainer>
            <Listing>
