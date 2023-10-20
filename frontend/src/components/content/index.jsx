@@ -14,6 +14,7 @@ import { CadastrarCLientePage } from '../../pages/Clientes/cadastrarCLiente';
 import { CadastrarFornecedor } from '../../pages/Fornecedores/cadastrarFornecedor';
 import { CadastrarMaterialPage } from '../../pages/Materiais/cadastrarMaterial';
 import { MovimentacaoDeEstoque } from '../../pages/Estoques/MovimentaçãoDeEstoque';
+import { MaisInformacoesFornecedor } from '../../pages/Fornecedores/MaisInformacoesFornecedor';
 
 export const Content = () => {
     return(
@@ -33,6 +34,7 @@ export const Content = () => {
                 <Route path='/Fornecedores/cadastrarFornecedor/' element={<CadastrarFornecedor />} /> 
                 <Route path='/Materiais/cadastrarMaterial/' element={<CadastrarMaterialPage />} />
                 <Route path='/Estoque/movimentacaoDeEstoque/' element={<MovimentacaoDeEstoque />} />
+                <Route path='Fornecedor/maisInformacoesFornecedor/:id' element={<MaisInformacoesFornecedor />} /> 
             </Routes>
         </ContainerMain>
     );
