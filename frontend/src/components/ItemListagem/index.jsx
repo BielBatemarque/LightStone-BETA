@@ -1,7 +1,7 @@
 import { ItemListagem } from "./styles";
 
-export const Item = ({ children }) => {
+export const Item = ({ children, action }) => {
     return(
-        <ItemListagem>{children}</ItemListagem>
+        <ItemListagem onClick={action}>{children}</ItemListagem>
     );
 };
