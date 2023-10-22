@@ -29,7 +29,7 @@ export const ClientesPage = () => {
            </FlexCointainer>
            <Listing>
                 {clientes.map((cliente, index) => (
-                    <Item key={index}>{cliente.nome}</Item>
+                    <Item key={index} action={() => navegate(`/Clientes/maisInformacoesCliente/${cliente.id}`)}>{cliente.nome}</Item>
                     ))}
             </Listing>
         </>
