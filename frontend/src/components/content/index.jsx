@@ -34,7 +34,7 @@ export const Content = () => {
                 <Route path='/Fornecedores/cadastrarFornecedor/' element={<CadastrarFornecedor />} /> 
                 <Route path='/Materiais/cadastrarMaterial/' element={<CadastrarMaterialPage />} />
                 <Route path='/Estoque/movimentacaoDeEstoque/' element={<MovimentacaoDeEstoque />} />
-                <Route path='Fornecedor/maisInformacoesFornecedor/:id' element={<MaisInformacoesFornecedor />} /> 
+                <Route path='/Fornecedor/maisInformacoesFornecedor/:id' element={<MaisInformacoesFornecedor />} /> 
             </Routes>
         </ContainerMain>
     );
