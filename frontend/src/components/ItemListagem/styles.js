@@ -13,4 +13,6 @@ export const ItemListagem = styled.li`
     padding: 5px;
     box-shadow: 1px 1px 3px black;
     text-align: center;
+    cursor: pointer;
+
 `;
