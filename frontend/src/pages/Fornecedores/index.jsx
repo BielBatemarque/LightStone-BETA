@@ -29,7 +29,7 @@ export const FornecedoresPage = () => {
             </FlexCointainer>
             <Listing>
                 {fornecedores.map((fornecedor, index) => (
-                    <Item key={index} action={() => window.alert('Mais informações')}>{fornecedor.nome_empresa}</Item>
+                    <Item key={index} action={() => navigate(`/Fornecedor/maisInformacoesFornecedor/${fornecedor.id}`)}>{fornecedor.nome_empresa}</Item>
                 ))}
             </Listing>
         </div>
