@@ -31,7 +31,7 @@ export const ColaboradorPages = () => {
             </FlexCointainer>
             <Listing>
                 {colabs.map((colab,index) => (
-                    <Item key={index}>{colab.nome}</Item>
+                    <Item key={index} action={() => navigate(`/Colaborador/maisInformacoesColaborador/${colab.id}`)}>{colab.nome}</Item>
                     ))}
             </Listing>
          </>
