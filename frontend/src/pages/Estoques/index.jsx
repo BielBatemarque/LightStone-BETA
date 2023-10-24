@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const EstoquesPage = () => {
     const [estoques, setEstoques] = useState([]);
+    const [materiais, setMateriais] = useState([]);
     const navigate = useNavigate();
 
     const handleLoadingEstoques = async () => {
