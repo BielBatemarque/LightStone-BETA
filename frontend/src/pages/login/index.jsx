@@ -55,7 +55,7 @@ export const LoginScreen = () => {
         <div className="LoginScreen">
             <Container>
                 <ImageContainer>
-                    opa
+                        <p style={{color:'green'}}>Opa</p>
                 </ImageContainer>
                 <SemiContainerInputs>
                     <ColumForm onSubmit={handleLogin} method='POST'>
