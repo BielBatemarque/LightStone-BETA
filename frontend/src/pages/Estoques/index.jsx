@@ -35,6 +35,8 @@ export const EstoquesPage = () => {
         window.alert(`Tipo da movimentação: ${tipoMovimentação}`);
     };
 
+    console.log(materiais);
+
     return(
         <>
            <FlexCointainer pontas='true' size={'93%'}>
