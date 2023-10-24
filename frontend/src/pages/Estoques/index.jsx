@@ -35,6 +35,10 @@ export const EstoquesPage = () => {
         window.alert(`Tipo da movimentação: ${tipoMovimentação}`);
     };
 
+    const handleMesclaItens = () => {
+        
+    }
+
     console.log(materiais);
 
     return(
@@ -43,7 +47,7 @@ export const EstoquesPage = () => {
                 <Title>Estoque</Title>
                 <ContainerBtns>
                     <Button color={'red'} action={() => navigate('/Estoque/movimentacaoDeEstoque/')}>Registrar Saída</Button>
-                    <Button action={() => navigate('/Estoque/movimentacaoDeEstoque/')} >Registrar Entrada</Button>
+                    <Button action={() => navigate('/Estoque/movimentacaoDeEstoque/')}>Registrar Entrada</Button>
                 </ContainerBtns>
            </FlexCointainer>
            <Listing>
