@@ -19,8 +19,16 @@ export const EstoquesPage = () => {
         setEstoques(response);
     };
 
+    const handleLoadingMateriais = async () => {
+        const request = await fetch('http://localhost:8000/materiais/');
+        const response = await request.json()
+
+        setMateriais(response);
+    }
+
     useEffect(() => {
         handleLoadingEstoques();
+        handleLoadingMateriais();
     }, []);
 
     const handleMovimentacaoDeEstoque =  async (tipoMovimentação) => {
