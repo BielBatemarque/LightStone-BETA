@@ -9,6 +9,7 @@ export const HomePage = () => {
     return(
        <>
            <Title>DashBoard</Title>
+           <p>Tela onde será incluso o dashBoard</p>
        </> 
     );
 };
