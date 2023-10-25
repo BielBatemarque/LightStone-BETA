@@ -29,7 +29,7 @@ export const VendasPage = () => {
             </FlexCointainer>
             <Listing>
                 {vendas.map((venda, index) => (
-                    <Item key={index}>{venda.valor_total}</Item>
+                    <Item key={index} action={() => navigate(`/Vendas/MaisInformacoesVenda/${venda.id}`)}>{venda.valor_total}</Item>
                     ))}
             </Listing>
         </>
