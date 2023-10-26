@@ -5,5 +5,5 @@ export class Cliente{
         this.endereco = endereco;
         this.data_nascimento = data_nascimento;
         this.email = email;
-    }
-}
+    };
+};
