@@ -12,6 +12,7 @@
     import { CgShutterstock } from 'react-icons/cg';
     import { TbReportSearch } from 'react-icons/tb';
     import { RiLogoutBoxLine } from 'react-icons/ri';
+    import { MdPeopleAlt } from 'react-icons/md';
 
     export const SideBar = () => {
         const { state, dispatch } = useContext(globalContext);
@@ -53,6 +54,7 @@
                     <MenuItem text={'Fornecedores'} linkTo={'/Fornecedores/'} icon={<IoPersonAddSharp />}/>
                     <MenuItem text={'Materiais'} linkTo={'/Materiais/'} icon={<GiStoneWall />} />
                     <MenuItem text={'Estoque'} linkTo={'/Estoque/'} icon={<CgShutterstock />}/>
+                    { state.isSuperUser && <MenuItem text={'Usuários'} linkTo={'/Usuarios/'} icon={ <MdPeopleAlt /> }/> }
                     <MenuItem text={'Vendas'} linkTo={'/Vendas/'} icon={<IoIosCash />}/>
                     <MenuItem text={'Relatórios'} linkTo={'/Relatorios/'} icon={<TbReportSearch />}/>
                 </StyledCOllum>
