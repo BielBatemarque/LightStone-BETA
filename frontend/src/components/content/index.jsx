@@ -18,6 +18,7 @@ import { MaisInformacoesFornecedor } from '../../pages/Fornecedores/MaisInformac
 import { MaisInformacoesCliente } from '../../pages/Clientes/MaisInformacoesCliente';
 import { MaisInformacoesColaborador } from '../../pages/Colaboradores/MaisInformacoesColaborador';
 import { MaisInformacoesVenda } from '../../pages/Vendas/MaisInformacoesVendas';
+import { Usuarios } from '../../pages/Usuarios';
 
 export const Content = () => {
     return(
@@ -46,7 +47,8 @@ export const Content = () => {
                 <Route path='/Fornecedores/cadastrarFornecedor/' element={<CadastrarFornecedor />} /> 
                 <Route path='/Fornecedor/maisInformacoesFornecedor/:id' element={<MaisInformacoesFornecedor />} /> 
 
-
+                {/* Rotas de Usuários */}
+                <Route path='/Usuarios/' element={<Usuarios/>}/>
 
                 {/* Rotas de Materiais */}
                 <Route path='/Materiais/' element={<MateriaisPage />}/>
