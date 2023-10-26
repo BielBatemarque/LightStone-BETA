@@ -65,4 +65,4 @@
                 <LogoutButton onClick={handleLogout}> <RiLogoutBoxLine />Sair</LogoutButton>
             </SideBarDiv>
         );
-    }
+    };
