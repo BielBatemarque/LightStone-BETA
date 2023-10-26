@@ -3,5 +3,5 @@ export class Material{
         this.nome = nome;
         this.cor_base = corBase;
         this.fornecedor = fornecedores;
-    }
-}
+    };
+};
