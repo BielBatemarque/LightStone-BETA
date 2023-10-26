@@ -4,6 +4,7 @@ const initialState = {
     token:'',
     logado: false,
     username: '',
+    isSuperUser: null,
 };
 
 export const globalContext = React.createContext(initialState);
@@ -19,10 +20,10 @@ export const AppContext = ({ children }) => {
 export const reducer = (state, action) => {
     switch(action.type){
         case 'autentication':
-            return {...state, token: action.payload, logado:true, username: action.username};
+            return {...state, token: action.payload, logado:true, username: action.username, isSuperUser: action.isSuperUser};
 
         case 'logout':
-            return {...state, token: '', logado: false, username: ''};
+            return {...state, token: '', logado: false, username: '', isSuperUser: null};
 
         default:
             return{...state};
