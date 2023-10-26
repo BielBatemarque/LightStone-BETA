@@ -34,10 +34,10 @@ export const LoginScreen = () => {
             });
             const response = await request.json();
             console.log(response);
-            const { token, user } = response;
+            const { token, user, superUser } = response;
 
             if (token){
-                dispatch({type: 'autentication', payload: token, username: user});
+                dispatch({type: 'autentication', payload: token, username: user, isSuperUser: superUser});
                 navigate('/Home/');
                 SucssesNotifications('Autenticado com sucecesso')
             }
