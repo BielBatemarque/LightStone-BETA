@@ -6,4 +6,4 @@ export const Usuarios = () => {
             <Title>Usuários</Title>
         </>
     );
-}
+};
