@@ -6,4 +6,4 @@ export const Listing = ({ children }) => {
             {children}
         </Listagem>
     );
-}
+};
