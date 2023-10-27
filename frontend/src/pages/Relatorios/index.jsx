@@ -7,4 +7,4 @@ export const RelatoriosPage = () => {
             <p>Tela da qual poderão ser impressos diversos relatórios no formato PDF</p>
        </> 
     );
-}
+};
