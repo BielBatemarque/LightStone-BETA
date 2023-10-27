@@ -66,4 +66,4 @@ export const Content = () => {
             </Routes>
         </ContainerMain>
     );
-}
+};
