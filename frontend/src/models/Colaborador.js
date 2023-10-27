@@ -6,5 +6,5 @@ export class Colaborador{
         this.cpf = cpf;
         this.email = email;
         this.cargo = cargo;
-    }
-}
+    };
+};
