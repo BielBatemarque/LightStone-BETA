@@ -69,4 +69,4 @@ export const CadastrarMaterialPage = () => {
             </form>
         </>
     );
-}
+};
