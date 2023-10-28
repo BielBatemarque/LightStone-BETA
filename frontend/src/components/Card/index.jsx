@@ -1,7 +1,7 @@
-export const Card = () => {
+import { CardDiv } from "./styles";
+
+export const Card = ({ children }) => {
     return(
-        <div className="Card">
-            <p>CARD</p>
-        </div>
+        <CardDiv>{children}</CardDiv>
     );
 };
