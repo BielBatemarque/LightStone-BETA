@@ -39,11 +39,11 @@
             }else if(request.status === 401){
                 window.alert('Não existe sessão ativa');
             }
-        }
+        };
 
         const handleFormatUsername = (name) => {
             return name.charAt(0).toUpperCase() + name.slice(1);
-        }
+        };
 
         return(
             <SideBarDiv>
