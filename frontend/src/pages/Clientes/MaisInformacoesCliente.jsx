@@ -22,4 +22,4 @@ export const MaisInformacoesCliente = () => {
             <Title>Cliente: {cliente.nome}</Title>
         </>
     );
-}
+};
