@@ -24,7 +24,7 @@ export const EstoquesPage = () => {
         const response = await request.json()
 
         setMateriais(response);
-    }
+    };
 
     useEffect(() => {
         handleLoadingEstoques();
