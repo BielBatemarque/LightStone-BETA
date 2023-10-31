@@ -14,7 +14,8 @@ export const CadastrarColaboradorPage = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setColab({...colab, [name]: value});
-    }
+    };
+    
     const handleCadastrarColab = async (e) => {
         e.preventDefault();
 
