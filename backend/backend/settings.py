@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'colaboradores',
     'materiais',
     'Estoque',
-    'vendas'
+    'vendas',
+    'orcamentos',
+    'relatorios',
 ]
 
 MIDDLEWARE = [
