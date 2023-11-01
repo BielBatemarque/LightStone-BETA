@@ -19,7 +19,7 @@ export const MateriaisPage = () => {
 
     useEffect(() => {
         handleLoadingMateriais();
-    });
+    }, []);
 
 
     return(
