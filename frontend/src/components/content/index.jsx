@@ -19,6 +19,7 @@ import { MaisInformacoesCliente } from '../../pages/Clientes/MaisInformacoesClie
 import { MaisInformacoesColaborador } from '../../pages/Colaboradores/MaisInformacoesColaborador';
 import { MaisInformacoesVenda } from '../../pages/Vendas/MaisInformacoesVendas';
 import { Usuarios } from '../../pages/Usuarios';
+import { MaisInformacoesMaterial } from '../../pages/Materiais/maisInformacoesMateriais';
 
 export const Content = () => {
     return(
@@ -53,6 +54,7 @@ export const Content = () => {
                 {/* Rotas de Materiais */}
                 <Route path='/Materiais/' element={<MateriaisPage />}/>
                 <Route path='/Materiais/cadastrarMaterial/' element={<CadastrarMaterialPage />} />
+                <Route path='/Materiais/maisInformacoesMaterial/:id' element={<MaisInformacoesMaterial />}/>
 
 
                 {/* Rotas de Estoque */}
