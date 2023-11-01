@@ -30,7 +30,7 @@ export const MateriaisPage = () => {
             </FlexCointainer>
             <Listing>
                 {materiais.map((material, index) => (
-                    <Item key={index}>{material.nome}</Item>
+                    <Item key={index} action={() => navigate(`/Materiais/maisInformacoesMaterial/${material.id}`)}>{material.nome}</Item>
                     ))}
             </Listing>
             </>
