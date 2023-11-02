@@ -2,10 +2,12 @@ import { useParams } from 'react-router-dom';
 import { Title } from '../../components/Title/index';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '../../components/Button';
+import { useAuth } from '../../hooks/useAuth';
 
 export const MaisInformacoesCliente = () => {
     const { id } = useParams(':id');
-    const [cliente, setCliente] = useState({});    
+    const [cliente, setCliente] = useState({});
+    const { state }  = useAuth();
 
     const handleLoadCliente = async () => {
         const request = await fetch(`http://localhost:8000/clientes/${id}`);
@@ -25,8 +27,22 @@ export const MaisInformacoesCliente = () => {
 
     const handleUpdateCliente = async (e) => {
         e.preventDefault();
-        window.alert('Alterar Cliente')
+
+        const request = await fetch(`http://localhost:8000/clientes/${id}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${state.token}`,
+
+            },
+            body: JSON.stringify(cliente),
+        });
+
+        const response = await request.json();
+        console.log(response);
     };
+
+    console.log(cliente);
 
     return(
         <>
