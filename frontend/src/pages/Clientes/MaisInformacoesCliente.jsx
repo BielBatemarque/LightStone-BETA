@@ -1,13 +1,15 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Title } from '../../components/Title/index';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '../../components/Button';
 import { useAuth } from '../../hooks/useAuth';
+import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
 
 export const MaisInformacoesCliente = () => {
     const { id } = useParams(':id');
     const [cliente, setCliente] = useState({});
     const { state }  = useAuth();
+    const navigate = useNavigate();
 
     const handleLoadCliente = async () => {
         const request = await fetch(`http://localhost:8000/clientes/${id}`);
@@ -33,14 +35,35 @@ export const MaisInformacoesCliente = () => {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${state.token}`,
-
             },
             body: JSON.stringify(cliente),
         });
 
-        const response = await request.json();
-        console.log(response);
+        if (request.ok){
+            SucssesNotifications('Cliente editado com sucesso');
+            navigate('/Clientes/');
+        }else{
+            FailNotifications('Erro ao editar cliente');
+        }
     };
+
+    const handleDeleteCliente = async (e) => {
+        e.preventDefault();
+
+        const request = await fetch(`http://localhost:8000/clientes/${id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${state.token}`,
+            },
+        });
+
+        if(request.ok){
+            SucssesNotifications('Cliente excluido com sucesso');
+            navigate('/Clientes/');
+        }
+        
+    }
 
     console.log(cliente);
 
@@ -56,6 +79,8 @@ export const MaisInformacoesCliente = () => {
                 <input type="email" name='email' onChange={handleChange} value={cliente.email} placeholder='Email'/> <br />
                 <Button>Salvar</Button>
             </form>
+
+            <Button color={'red'} action={handleDeleteCliente}>Deletar Cliente</Button>
             
         </>
     );
