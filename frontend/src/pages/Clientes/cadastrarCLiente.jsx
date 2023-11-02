@@ -42,11 +42,11 @@ export const CadastrarCLientePage = () => {
         <>
             <Title>Cadastrar Cliente</Title>
             <form>
-                <input type="text" name="nome" onChange={handleChange}/> <br />
-                <input type="text" name="cpf" onChange={handleChange}/> <br />
-                <textarea name="endereco" id="" cols="30" rows="3" onChange={handleChange}></textarea><br />
-                <input type="date" name="data_nascimento" onChange={handleChange}/><br />
-                <input type="email" name="email" onChange={handleChange}/><br />
+                <input type="text" name="nome" onChange={handleChange} placeholder="Nome"/> <br />
+                <input type="text" name="cpf" onChange={handleChange} placeholder="CPF"/> <br />
+                <textarea name="endereco" id="" cols="30" rows="3" onChange={handleChange} placeholder="Endereço"></textarea><br />
+                <input type="date" name="data_nascimento" onChange={handleChange} placeholder="Nascimento"/><br />
+                <input type="email" name="email" onChange={handleChange} placeholder="email"/><br />
 
                 <Button action={handleCadastraCliente}>Cadastrar</Button>
 
