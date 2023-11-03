@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const EstoquesPage = () => {
     const [estoques, setEstoques] = useState([]);
-    const [materiais, setMateriais] = useState([]);
+    const [, setMateriais] = useState([]);
     const navigate = useNavigate();
 
     const handleLoadingEstoques = async () => {
@@ -34,12 +34,6 @@ export const EstoquesPage = () => {
     const handleMovimentacaoDeEstoque =  async (tipoMovimentação) => {
         window.alert(`Tipo da movimentação: ${tipoMovimentação}`);
     };
-
-    const handleMesclaItens = () => {
-        
-    }
-
-    console.log(materiais);
 
     return(
         <>
