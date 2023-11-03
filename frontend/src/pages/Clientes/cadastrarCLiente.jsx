@@ -33,7 +33,7 @@ export const CadastrarCLientePage = () => {
             navigate('/Clientes/');
 
         }else{
-            FailNotifications('Erro ao cadastrar')
+            FailNotifications('Erro ao cadastrar');
         }
 
     };
