@@ -65,8 +65,6 @@ export const MaisInformacoesCliente = () => {
         
     }
 
-    console.log(cliente);
-
     return(
         <>
             <Title>Cliente: {cliente.nome}</Title>
@@ -80,8 +78,7 @@ export const MaisInformacoesCliente = () => {
                 <Button>Salvar</Button>
             </form>
 
-            <Button color={'red'} action={handleDeleteCliente}>Deletar Cliente</Button>
-            
+            <Button color={'red'} action={handleDeleteCliente}>Deletar Cliente</Button> 
         </>
     );
 };
