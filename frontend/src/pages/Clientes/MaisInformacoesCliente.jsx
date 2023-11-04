@@ -63,7 +63,7 @@ export const MaisInformacoesCliente = () => {
             navigate('/Clientes/');
         }
         
-    }
+    };
 
     return(
         <>
