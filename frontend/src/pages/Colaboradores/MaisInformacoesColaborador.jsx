@@ -2,10 +2,13 @@ import { useParams } from "react-router-dom";
 import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
+import { useAuth } from '../../hooks/useAuth';
+import { SucssesNotifications } from "../../components/Notifications";
 
 export const MaisInformacoesColaborador = () => {
     const [colaborador, setColaborador] = useState({});
     const { id } = useParams(':id');
+    const { state } = useAuth();
 
     const handleLoadColaborador = async () => {
         const request = await fetch(`http://localhost:8000/colaboradores/${id}`);
@@ -24,11 +27,28 @@ export const MaisInformacoesColaborador = () => {
         setColaborador({...colaborador, [name]: value});
     };
 
+    const handleUpdateColaborador = async (e) => {
+        e.preventDefault();
+
+        const request = await fetch(`http://localhost:8000/colaboradores/${id}/`, {
+            method: 'PUT',
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization' : `Token ${state.token}`
+            },
+            body:JSON.stringify(colaborador),
+        });
+
+        if (request.ok){
+            SucssesNotifications('Colaborador editado com sucesso')
+        }
+    };
+
     return(
         <>
             <Title>Colaborador: {colaborador.nome}</Title>
 
-            <form>
+            <form onSubmit={handleUpdateColaborador}>
             <input type="text" placeholder="nome" name="nome" onChange={handleChange} value={colaborador.nome}/> <br />
                 <input type="date" name="nascimento" id="" onChange={handleChange} value={colaborador.nascimento}/> <br />
                 <input type="text" placeholder="telefone" name="telefone" onChange={handleChange} value={colaborador.telefone}/><br />
