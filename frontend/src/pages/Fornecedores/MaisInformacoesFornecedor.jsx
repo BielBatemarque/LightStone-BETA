@@ -51,7 +51,20 @@ export const MaisInformacoesFornecedor = () => {
     };
 
     const handleDeleteFornecedor = async () => {
-        const request = await fetch(``, {})
+        const request = await fetch(`http://localhost:8000/fornecedores/${id}/`,{
+            method: 'DELETE',
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization' : `Token ${state.token}`,
+            },
+        });
+        if (request.ok){
+            SucssesNotifications('Fornecedor Deletado com Sucesso');
+            navigate('/Fornecedores/');
+        }else{
+            FailNotifications('Não foi possivel deletar Fornecedor');
+        }
+
     };
 
     return(
@@ -64,6 +77,8 @@ export const MaisInformacoesFornecedor = () => {
                 <input type="text" placeholder="Endereço" name="endereco" onChange={handleChange} value={fornecedor.endereco}/> <br />
                 <Button>Editar Fornecedor</Button>
             </form>
+
+            <Button color={'red'} action={handleDeleteFornecedor}>Deletar Fornecedor</Button>
         </>
     );
 };
