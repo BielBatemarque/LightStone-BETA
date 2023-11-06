@@ -20,6 +20,8 @@ import { MaisInformacoesColaborador } from '../../pages/Colaboradores/MaisInform
 import { MaisInformacoesVenda } from '../../pages/Vendas/MaisInformacoesVendas';
 import { Usuarios } from '../../pages/Usuarios';
 import { MaisInformacoesMaterial } from '../../pages/Materiais/maisInformacoesMateriais';
+import { CadastrarUsuarioPage } from '../../pages/Usuarios/cadastrarUsuario';
+import { MaisInformacoesUsuarios } from '../../pages/Usuarios/MaisInformacoesUsuario';
 
 export const Content = () => {
     return(
@@ -50,6 +52,8 @@ export const Content = () => {
 
                 {/* Rotas de Usuários */}
                 <Route path='/Usuarios/' element={<Usuarios/>}/>
+                <Route path='/Usuarios/cadastrarUsuario/' element={<CadastrarUsuarioPage />} />
+                <Route path='/Usuarios/MaisInformacoesUsuario/:id' element={<MaisInformacoesUsuarios />}/>
 
                 {/* Rotas de Materiais */}
                 <Route path='/Materiais/' element={<MateriaisPage />}/>
