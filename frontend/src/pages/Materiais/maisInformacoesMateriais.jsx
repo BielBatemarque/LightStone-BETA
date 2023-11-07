@@ -6,18 +6,18 @@ import { useParams } from 'react-router-dom';
 export const MaisInformacoesMaterial = () => {
     const [material, setMaterial] = useState({});
     const [fornecedores, setFornecedroes] = useState([]);
-    const id = useParams(':id');
+    const { id } = useParams(':id');
 
     const handleLoadForncedores = async () => {
         const request = await fetch('http://localhost:8000/fornecedores/');
         const response = await request.json();
 
         setFornecedroes(response);
-    }
+    };
 
     useEffect(() => {
         handleLoadForncedores();
-    });
+    }, []);
 
 
     const handleChange = (e) => {
@@ -29,14 +29,26 @@ export const MaisInformacoesMaterial = () => {
             setMaterial({...material, [name]: value});
         }
     };
+
+    const handleLoadMaterial = async () => {
+        const request = await fetch(`http://localhost:8000/materiais/${id}/`);
+        const response = await request.json();
+
+        setMaterial(response);
+    };
+
+    useEffect(() => {
+        handleLoadMaterial();
+    }, []);
+
     return(
         <>
-            <Title>Material: {}</Title>
+            <Title>Material: {material.nome}</Title>
 
             <form action="">
-                <input type="text" placeholder="Nome do material" name="nome" onChange={handleChange}/> <br />
-                <input type="text" placeholder="Cor base" name="cor_base" onChange={handleChange}/> <br />
-                <select name="fornecedor" id="" onChange={handleChange}>
+                <input type="text" placeholder="Nome do material" name="nome" onChange={handleChange} value={material.nome}/> <br />
+                <input type="text" placeholder="Cor base" name="cor_base" onChange={handleChange} value={material.cor_base}/> <br />
+                <select name="fornecedor" id="" onChange={handleChange} value={material.fornecedor}>
                     {fornecedores.map((fornecedor, index) => (
                         <option value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</option>
                     ))}
