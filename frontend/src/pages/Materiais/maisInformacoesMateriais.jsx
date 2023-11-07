@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Title } from '../../components/Title/index';
 import { Button } from '../../components/Button/index';
+import { useParams } from 'react-router-dom';
 
 export const MaisInformacoesMaterial = () => {
     const [material, setMaterial] = useState({});
     const [fornecedores, setFornecedroes] = useState([]);
+    const id = useParams(':id');
+
+    const handleLoadForncedores = async () => {
+        const request = await fetch('http://localhost:8000/fornecedores/');
+        const response = await request.json();
+
+        setFornecedroes(response);
+    }
+
+    useEffect(() => {
+        handleLoadForncedores();
+    });
 
 
     const handleChange = (e) => {
@@ -27,7 +40,7 @@ export const MaisInformacoesMaterial = () => {
                     {fornecedores.map((fornecedor, index) => (
                         <option value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</option>
                     ))}
-                </select>
+                </select><br />
                 <Button>Cadastrar Material</Button>
             </form>
         </>
