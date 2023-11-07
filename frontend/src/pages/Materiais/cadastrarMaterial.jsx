@@ -23,7 +23,7 @@ export const CadastrarMaterialPage = () => {
 
     useEffect(() => {
        setMaterial({...material, fornecedor: parseInt(material.fornecedor)});
-    }, [material.fornecedor]);
+    }, []);
 
 
     const handleCadastrarMaterial = async (e) => {
@@ -49,10 +49,15 @@ export const CadastrarMaterialPage = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setMaterial({...material, [name]: value});
+        if(name === 'fornecedor'){
+            const selectedFornecedorId = parseInt(value);
+            setMaterial({...material, [name]: [selectedFornecedorId]});
+        }else{   
+            setMaterial({...material, [name]: value});
+        }
     };
 
-    console.log(material);
+    console.log(material.fornecedor);
     
     return(
         <>
