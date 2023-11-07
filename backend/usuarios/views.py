@@ -9,10 +9,15 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.hashers import make_password
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def create(self, request, *args, **kwargs):
+        request.data['password'] = make_password(request.data['password'])
+        return super().create(request, *args, **kwargs)
 
 class UserLoginView(APIView):
     def post(self, request):
@@ -54,22 +59,4 @@ class LogoutView(APIView):
                 return Response({"message": "Você não está autenticado."}, status=status.HTTP_401_UNAUTHORIZED)
         except Exception as e:
             return Response({"message": f"Erro durante o logout {str(e)}"})
-        
-class CreateUserView(APIView):
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
-
-    def post(self, request):
-        print(request.method)
-        try:
-            username = request.data.get('username')
-            password = request.data.get('password')
-
-            usuario_novo = User.objects.create_user(username=username, password=password)
-            usuario_novo.save()
-
-            return Response({'message': f'Novo usuário criado com sucesso: {usuario_novo.username}'})
-        except Exception as e:
-            return Response({'message': f'Erro ao criar novo usuário: {str(e)}'})
-
-
+    
