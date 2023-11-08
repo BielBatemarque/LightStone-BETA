@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Title } from '../../components/Title/index';
 import { Button } from '../../components/Button/index';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import { FailNotifications, SucssesNotifications } from '../../components/Notifications/index';
 
 export const MaisInformacoesMaterial = () => {
     const [material, setMaterial] = useState({});
     const [fornecedores, setFornecedroes] = useState([]);
     const { id } = useParams(':id');
+    const { state } = useAuth();
+    const navigate = useNavigate();
 
     const handleLoadForncedores = async () => {
         const request = await fetch('http://localhost:8000/fornecedores/');
@@ -41,11 +45,31 @@ export const MaisInformacoesMaterial = () => {
         handleLoadMaterial();
     }, []);
 
+    const handleUpdateMaterial = async (e) => {
+        e.preventDefault();
+
+        const request = await fetch(`http://localhost:8000/materiais/${id}/`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${state.token}`,
+            },
+            body: JSON.stringify(material),
+        });
+
+        if (request.ok){
+            SucssesNotifications('Sucesso ao editar Material');
+            navigate('/Materiais/');
+        }else{
+            FailNotifications('Não foi possivel editar material');
+        }
+    };
+
     return(
         <>
             <Title>Material: {material.nome}</Title>
 
-            <form action="">
+            <form onSubmit={handleUpdateMaterial}>
                 <input type="text" placeholder="Nome do material" name="nome" onChange={handleChange} value={material.nome}/> <br />
                 <input type="text" placeholder="Cor base" name="cor_base" onChange={handleChange} value={material.cor_base}/> <br />
                 <select name="fornecedor" id="" onChange={handleChange} value={material.fornecedor}>
@@ -53,8 +77,9 @@ export const MaisInformacoesMaterial = () => {
                         <option value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</option>
                     ))}
                 </select><br />
-                <Button>Cadastrar Material</Button>
+                <Button>Editar Material</Button>
             </form>
+
         </>
     );
 };
