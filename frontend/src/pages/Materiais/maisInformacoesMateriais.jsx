@@ -65,6 +65,23 @@ export const MaisInformacoesMaterial = () => {
         }
     };
 
+    const handleDeleteMaterial = async () => {
+        const request = await fetch(`http://localhost:8000/materiais/${id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${state.token}`,
+            },
+        });
+
+        if (request.ok) {
+            SucssesNotifications('Sucesso ao deletar Material');
+            navigate('/Materiais/');
+        }else{
+            FailNotifications('Não foi possivel deletar material');
+        }
+    };
+
     return(
         <>
             <Title>Material: {material.nome}</Title>
@@ -79,7 +96,7 @@ export const MaisInformacoesMaterial = () => {
                 </select><br />
                 <Button>Editar Material</Button>
             </form>
-
+            <Button color={'red'} action={handleDeleteMaterial}>Deletar Material</Button>
         </>
     );
 };
