@@ -4,11 +4,13 @@ import { Material } from '../../models/Material';
 import { Title } from "../../components/Title";
 import { useAuth } from "../../hooks/useAuth";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
+import { useNavigate } from "react-router-dom";
 
 export const CadastrarMaterialPage = () => {
     const [material, setMaterial] = useState(new Material());
     const [fornecedores, setFornecedores] = useState([]);
     const { state } = useAuth();
+    const navigate = useNavigate();
 
     const handleLoadFornecedores = async () => {
         const request = await fetch('http://localhost:8000/fornecedores/');
@@ -42,6 +44,7 @@ export const CadastrarMaterialPage = () => {
 
         if(request.ok){
             SucssesNotifications('Cadastrado com Sucesso');
+            navigate('/Materiais/');
         }else{
             FailNotifications('Erro ao cadastrar');
         }
