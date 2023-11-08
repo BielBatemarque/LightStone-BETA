@@ -33,6 +33,6 @@ export const MateriaisPage = () => {
                     <Item key={index} action={() => navigate(`/Materiais/maisInformacoesMaterial/${material.id}`)}>{material.nome}</Item>
                     ))}
             </Listing>
-            </>
+        </>
     );
-}
+};
