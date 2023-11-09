@@ -18,7 +18,27 @@ class UserViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         request.data['password'] = make_password(request.data['password'])
         return super().create(request, *args, **kwargs)
+    
+    def perform_update(self, serializer):
+        # Verifica se o campo de senha foi fornecido na solicitação
+        if 'password' in self.request.data:
+            self.request.data['password'] = make_password(self.request.data['password'])
+        serializer.save()
 
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+
+        # Modifica o campo de senha se fornecido na solicitação
+        if 'password' in request.data:
+            request.data['password'] = make_password(request.data['password'])
+
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
+    
 class UserLoginView(APIView):
     def post(self, request):
         try:
