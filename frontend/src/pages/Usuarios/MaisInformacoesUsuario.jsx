@@ -48,6 +48,23 @@ export const MaisInformacoesUsuarios = () => {
         setUsuario({...usuario, [name]: value});
     };
 
+    const handleDeleteUser = async () => {
+        const request = await fetch(`http://localhost:8000/users/${id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${state.token}`,
+            },
+        });
+
+        if(request.ok){
+            SucssesNotifications('Sucesso ao deletar usuário');
+            navigate('/Usuarios/');
+        }else{
+            FailNotifications('Falha ao deletar usuário');
+        }
+    };
+
     console.log(usuario);
 
     return(
@@ -63,6 +80,8 @@ export const MaisInformacoesUsuarios = () => {
                 <input type="password" name="password" placeholder="Senha" onChange={handleChange} value={usuario.password}/><br />
                 <Button>Editar Usuário</Button>
             </form>
+
+            <Button color={'red'} action={handleDeleteUser}>Deletar Usuário</Button>
         </>
     );
 };
