@@ -9,6 +9,7 @@ from Estoque.views import EstoqueViewsSets
 from materiais.views import MaterialViewSets
 from usuarios.views import UserLoginView, LogoutView
 from vendas.views import VendaViewSet
+from relatorios.views import PDFView
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
@@ -25,4 +26,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('login/', UserLoginView.as_view(), name='user-login'),
     path('logout/', LogoutView.as_view(), name='user-logout'),
+    path('gerar_pdf/', PDFView.as_view(), name='gerar_pdf'),
 ]
