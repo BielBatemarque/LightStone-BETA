@@ -12,7 +12,8 @@ export const RelatoriosPage = () => {
 
            const a = document.createElement('a');
            a.href = url;
-           a.download = 'relatorio.pdf';
+           a.target = '_blank';
+            // a.download = 'relatorio.pdf';
            document.body.appendChild(a);
            a.click();
  
