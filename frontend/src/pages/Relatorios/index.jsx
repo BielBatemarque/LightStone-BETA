@@ -29,7 +29,7 @@ export const RelatoriosPage = () => {
           console.error('Erro na requisição:', error);
         }
       };
-
+    
     return(
        <>
             <Title>Relatórios</Title>
