@@ -8,18 +8,18 @@ export const RelatoriosPage = () => {
           const response = await fetch('http://localhost:8000/gerar_pdf/');
           
           if (response.ok) {
-           const blob = await response.blob();
-           const url = window.URL.createObjectURL(blob);
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
 
-           const a = document.createElement('a');
-           a.href = url;
-           a.target = '_blank';
-            // a.download = 'relatorio.pdf';
-           document.body.appendChild(a);
-           a.click();
- 
-           document.body.removeChild(a);
-           SucssesNotifications('Relatório gerado com sucesso');
+            const a = document.createElement('a');
+            a.href = url;
+            a.target = '_blank';
+              // a.download = 'relatorio.pdf';
+            document.body.appendChild(a);
+            a.click();
+  
+            document.body.removeChild(a);
+            SucssesNotifications('Relatório gerado com sucesso');
 
           } else {
             console.error('Erro na requisição:', response.statusText);
