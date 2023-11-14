@@ -74,7 +74,7 @@ export const MaisInformacoesColaborador = () => {
                 <input type="text" placeholder="telefone" name="telefone" onChange={handleChange} value={colaborador.telefone}/><br />
                 <input type="text" placeholder="CPF" name="cpf" onChange={handleChange}  value={colaborador.cpf}/> <br />
                 <input type="email" placeholder="email" name="email" onChange={handleChange} value={colaborador.email}/> <br />
-                <input type="text" id="" placeholder="cargo" name="cargo" onChange={handleChange} value={colaborador.cargo}/> <br />
+                <input type="text" placeholder="cargo" name="cargo" onChange={handleChange} value={colaborador.cargo}/> <br />
 
                 <Button>Editar Colaborador</Button>
             </form>
