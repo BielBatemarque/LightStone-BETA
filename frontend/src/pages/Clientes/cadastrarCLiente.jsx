@@ -14,7 +14,7 @@ export const CadastrarCLientePage = () => {
     const handleChange = (e) => {
         const {name, value} = e.target;
         setCliente({...cliente, [name]: value});
-    }
+    };
 
     const handleCadastraCliente = async (e) => {
         e.preventDefault();
