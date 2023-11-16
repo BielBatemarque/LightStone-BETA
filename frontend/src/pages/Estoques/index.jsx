@@ -14,10 +14,21 @@ export const EstoquesPage = () => {
 
     const handleLoadingEstoques = async () => {
         const request = await fetch('http://localhost:8000/estoques/');
-        const response = await request.json()
+        const response = await request.json();
 
-        setEstoques(response);
+        const estoquesComNomesDeMateriais = response.map(async (estoque) => {
+            const materialRequest = await fetch(`http://localhost:8000/materiais/${estoque.material}`);
+            const materialResponse = await materialRequest.json();
+            return { ...estoque, materialNome: materialResponse.nome };
+        });
+
+        const estoquesAtualizados = await Promise.all(estoquesComNomesDeMateriais);
+
+        setEstoques(estoquesAtualizados);
     };
+
+    console.log(estoques);
+
 
     const handleLoadingMateriais = async () => {
         const request = await fetch('http://localhost:8000/materiais/');
@@ -30,6 +41,7 @@ export const EstoquesPage = () => {
         handleLoadingEstoques();
         handleLoadingMateriais();
     }, []);
+    //useEffect para unir materiais e estoques
 
     const handleMovimentacaoDeEstoque =  async (tipoMovimentação) => {
         window.alert(`Tipo da movimentação: ${tipoMovimentação}`);
@@ -46,7 +58,7 @@ export const EstoquesPage = () => {
            </FlexCointainer>
            <Listing>
                 {estoques.map((estoque, index) => (
-                    <Item key={index}>{estoque.material}</Item>
+                    <Item key={index}>{estoque.materialNome}</Item>
                 ))}
            </Listing>
         </>  
