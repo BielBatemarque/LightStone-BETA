@@ -32,9 +32,12 @@ export const RelatoriosPage = () => {
     
     return(
        <>
-            <Title>Relatórios</Title>
-            <p>Tela da qual poderão ser impressos diversos relatórios no formato PDF</p>
+            <Title>Relatório de vendas</Title>
+              <p>Tela da qual poderão ser impressos diversos relatórios no formato PDF</p>
             <Button action={fetchData}>Baixar PDF</Button>
+
+            <Title>Relatórios de entradas e saídas</Title>
+            <Button>Gerar Relatório</Button>
        </> 
     );
 };
