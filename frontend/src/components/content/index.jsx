@@ -63,7 +63,7 @@ export const Content = () => {
 
                 {/* Rotas de Estoque */}
                 <Route path='/Estoque/' element={<EstoquesPage/>}/>
-                <Route path='/Estoque/movimentacaoDeEstoque/' element={<MovimentacaoDeEstoque />} />
+                <Route path='/Estoque/movimentacaoDeEstoque/:tipoMovimentacao' element={<MovimentacaoDeEstoque />} />
 
                 {/* Rotas de Vendas */}
                 <Route path='/Vendas/' element={<VendasPage />} />
