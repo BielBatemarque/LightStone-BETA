@@ -41,7 +41,6 @@ export const EstoquesPage = () => {
         handleLoadingEstoques();
         handleLoadingMateriais();
     }, []);
-    //useEffect para unir materiais e estoques
 
     const handleMovimentacaoDeEstoque =  async (tipoMovimentação) => {
         window.alert(`Tipo da movimentação: ${tipoMovimentação}`);
@@ -52,8 +51,8 @@ export const EstoquesPage = () => {
            <FlexCointainer pontas='true' size={'93%'}>
                 <Title>Estoque</Title>
                 <ContainerBtns>
-                    <Button color={'red'} action={() => navigate('/Estoque/movimentacaoDeEstoque/')}>Registrar Saída</Button>
-                    <Button action={() => navigate('/Estoque/movimentacaoDeEstoque/')}>Registrar Entrada</Button>
+                    <Button color={'red'} action={() => navigate('/Estoque/movimentacaoDeEstoque/saida')}>Registrar Saída</Button>
+                    <Button action={() => navigate('/Estoque/movimentacaoDeEstoque/entrada')}>Registrar Entrada</Button>
                 </ContainerBtns>
            </FlexCointainer>
            <Listing>
