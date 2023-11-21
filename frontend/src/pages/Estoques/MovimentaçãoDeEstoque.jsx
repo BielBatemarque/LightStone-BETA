@@ -21,21 +21,37 @@ export const MovimentacaoDeEstoque = () => {
         console.log(response);
 
         setQtdMetros(quantidade_metros);
-
     };
 
     const handleLoadMaterial = async () => {
-        const request = await fetch('http://localhost:8000/materiais/');
-        const response = await request.json();
-
-        setMateriais(response);
+        const materiaisRequest = await fetch('http://localhost:8000/materiais/');
+        const estoqueRequest = await fetch('http://localhost:8000/estoques/');
+    
+        const materiaisResponse = await materiaisRequest.json();
+        const estoqueResponse = await estoqueRequest.json();
+    
+        // Mesclar os dados dos materiais com os dados do estoque
+        const materiaisComEstoque = materiaisResponse.map(material => {
+            const estoqueInfo = estoqueResponse.find(e => e.material === material.id);
+    
+            return {
+                ...material,
+                estoque: estoqueInfo || { quantidade_metros: 0 }
+            };
+        });
+    
+        setMateriais(materiaisComEstoque);
     };
 
     const handleMaterialChange = event => {
         const selectedId = event.target.value;
         setMaterialSelected(selectedId);
+    
+        // Agora, você pode usar selectedId diretamente como o ID do estoque
         handleLoadQuantidadeMetros(selectedId);
     };
+
+
 
 
     return(
@@ -45,7 +61,7 @@ export const MovimentacaoDeEstoque = () => {
             <form action>
                 <select name="material" onChange={handleMaterialChange}>
                     {materiais.map(mat => (
-                        <option key={mat.id} value={mat.id}>{mat.nome}</option>
+                        <option key={mat.id} value={mat.estoque.id}>{mat.nome}</option>
                     ))}
                 </select>
                 
