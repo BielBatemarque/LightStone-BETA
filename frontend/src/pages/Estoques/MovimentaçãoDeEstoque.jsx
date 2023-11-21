@@ -61,12 +61,16 @@ export const MovimentacaoDeEstoque = () => {
         }
     }, [metrosInput]);
 
+    const handleMovimentaEstoque = async (e) => {
+        e.preventDefault();
+    };
+
 
     return(
         <>
             <Title>Movimentação: {tipoMovimentacao}</Title>
             <h3>Quantidade atual em M²: {qtdMetros}</h3>
-            <form>
+            <form onSubmit={handleMovimentaEstoque}>
                 <select name="material" onChange={handleMaterialChange}>
                     {materiais.map(mat => (
                         <option key={mat.id} value={mat.estoque.id}>{mat.nome}</option>
