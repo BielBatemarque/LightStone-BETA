@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
+import { FailNotifications } from "../../components/Notifications";
 
 export const MovimentacaoDeEstoque = () => {
     const [materiais, setMateriais] = useState([]);
@@ -49,13 +50,23 @@ export const MovimentacaoDeEstoque = () => {
         handleLoadQuantidadeMetros(selectedId);
     };
 
-    console.log(metrosInput);
+    const validaNumero = (valor) => {
+        return !isNaN(valor);
+    };
+
+    
+    useEffect(() => {
+        if(!validaNumero(metrosInput)){
+            FailNotifications('Favor digite um valor numerico');
+        }
+    }, [metrosInput]);
+
 
     return(
         <>
             <Title>Movimentação: {tipoMovimentacao}</Title>
             <h3>Quantidade atual em M²: {qtdMetros}</h3>
-            <form action>
+            <form>
                 <select name="material" onChange={handleMaterialChange}>
                     {materiais.map(mat => (
                         <option key={mat.id} value={mat.estoque.id}>{mat.nome}</option>
@@ -63,7 +74,6 @@ export const MovimentacaoDeEstoque = () => {
                 </select>
                 <br />
                 <input type="text" placeholder="quantidade de metros" onChange={(e) => setMetrosInput(Number(e.target.value))}/>
-                
             </form>
             <Button>Registrar Movimentação</Button>
         </>
