@@ -8,6 +8,7 @@ export const MovimentacaoDeEstoque = () => {
     const { tipoMovimentacao } = useParams();
     const [qtdMetros, setQtdMetros] = useState(0);
     const [, setMaterialSelected] = useState(null);
+    const [metrosInput, setMetrosInput] = useState(null);
 
     useEffect(() => {
         handleLoadMaterial();
@@ -48,6 +49,8 @@ export const MovimentacaoDeEstoque = () => {
         handleLoadQuantidadeMetros(selectedId);
     };
 
+    console.log(metrosInput);
+
     return(
         <>
             <Title>Movimentação: {tipoMovimentacao}</Title>
@@ -58,6 +61,8 @@ export const MovimentacaoDeEstoque = () => {
                         <option key={mat.id} value={mat.estoque.id}>{mat.nome}</option>
                     ))}
                 </select>
+                <br />
+                <input type="text" placeholder="quantidade de metros" onChange={(e) => setMetrosInput(Number(e.target.value))}/>
                 
             </form>
             <Button>Registrar Movimentação</Button>
