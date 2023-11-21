@@ -7,7 +7,7 @@ export const MovimentacaoDeEstoque = () => {
     const [materiais, setMateriais] = useState([]);
     const { tipoMovimentacao } = useParams();
     const [qtdMetros, setQtdMetros] = useState(0);
-    const [materialSelected, setMaterialSelected] = useState(null);
+    const [, setMaterialSelected] = useState(null);
 
     useEffect(() => {
         handleLoadMaterial();
@@ -30,7 +30,6 @@ export const MovimentacaoDeEstoque = () => {
         const materiaisResponse = await materiaisRequest.json();
         const estoqueResponse = await estoqueRequest.json();
     
-        // Mesclar os dados dos materiais com os dados do estoque
         const materiaisComEstoque = materiaisResponse.map(material => {
             const estoqueInfo = estoqueResponse.find(e => e.material === material.id);
     
@@ -46,13 +45,8 @@ export const MovimentacaoDeEstoque = () => {
     const handleMaterialChange = event => {
         const selectedId = event.target.value;
         setMaterialSelected(selectedId);
-    
-        // Agora, você pode usar selectedId diretamente como o ID do estoque
         handleLoadQuantidadeMetros(selectedId);
     };
-
-
-
 
     return(
         <>
@@ -69,4 +63,4 @@ export const MovimentacaoDeEstoque = () => {
             <Button>Registrar Movimentação</Button>
         </>
     );
-}
+};
