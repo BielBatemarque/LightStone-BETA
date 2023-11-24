@@ -22,6 +22,7 @@ import { Usuarios } from '../../pages/Usuarios';
 import { MaisInformacoesMaterial } from '../../pages/Materiais/maisInformacoesMateriais';
 import { CadastrarUsuarioPage } from '../../pages/Usuarios/cadastrarUsuario';
 import { MaisInformacoesUsuarios } from '../../pages/Usuarios/MaisInformacoesUsuario';
+import { MaisInformacoesEstoque } from '../../pages/Estoques/MaisInformacoesEstoque';
 
 export const Content = () => {
     return(
@@ -64,6 +65,7 @@ export const Content = () => {
                 {/* Rotas de Estoque */}
                 <Route path='/Estoque/' element={<EstoquesPage/>}/>
                 <Route path='/Estoque/movimentacaoDeEstoque/:tipoMovimentacao/' element={<MovimentacaoDeEstoque />} />
+                <Route path='/Estoque/maisInformacoesEstoque/:id/' element={<MaisInformacoesEstoque />}/>
 
                 {/* Rotas de Vendas */}
                 <Route path='/Vendas/' element={<VendasPage />} />
