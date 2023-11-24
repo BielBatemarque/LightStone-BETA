@@ -35,25 +35,25 @@ export const Content = () => {
                 {/* Rotas de Clientes */}
                 <Route path='/Clientes/' element={<ClientesPage />}/>
                 <Route path='/Clientes/cadastrarCliente/' element={<CadastrarCLientePage />}/>
-                <Route path='/Clientes/maisInformacoesCliente/:id' element={<MaisInformacoesCliente/>}/>
+                <Route path='/Clientes/maisInformacoesCliente/:id/' element={<MaisInformacoesCliente/>}/>
 
 
                 {/* Rotas de Colaboradores */}
                 <Route path='/Colaboradores/' element={<ColaboradorPages/>}/>
                 <Route path='/Colaboradores/CadastrarColaborador/' element={<CadastrarColaboradorPage />} />
-                <Route path='/Colaborador/maisInformacoesColaborador/:id' element={<MaisInformacoesColaborador />} />
+                <Route path='/Colaborador/maisInformacoesColaborador/:id/' element={<MaisInformacoesColaborador />} />
 
 
 
                 {/* Rotas de Fornecedores */}
                 <Route path='/Fornecedores/'element={<FornecedoresPage />}/>
                 <Route path='/Fornecedores/cadastrarFornecedor/' element={<CadastrarFornecedor />} /> 
-                <Route path='/Fornecedor/maisInformacoesFornecedor/:id' element={<MaisInformacoesFornecedor />} /> 
+                <Route path='/Fornecedor/maisInformacoesFornecedor/:id/' element={<MaisInformacoesFornecedor />} /> 
 
                 {/* Rotas de Usuários */}
                 <Route path='/Usuarios/' element={<Usuarios/>}/>
                 <Route path='/Usuarios/cadastrarUsuario/' element={<CadastrarUsuarioPage />} />
-                <Route path='/Usuarios/MaisInformacoesUsuario/:id' element={<MaisInformacoesUsuarios />}/>
+                <Route path='/Usuarios/MaisInformacoesUsuario/:id/' element={<MaisInformacoesUsuarios />}/>
 
                 {/* Rotas de Materiais */}
                 <Route path='/Materiais/' element={<MateriaisPage />}/>
@@ -63,11 +63,11 @@ export const Content = () => {
 
                 {/* Rotas de Estoque */}
                 <Route path='/Estoque/' element={<EstoquesPage/>}/>
-                <Route path='/Estoque/movimentacaoDeEstoque/:tipoMovimentacao' element={<MovimentacaoDeEstoque />} />
+                <Route path='/Estoque/movimentacaoDeEstoque/:tipoMovimentacao/' element={<MovimentacaoDeEstoque />} />
 
                 {/* Rotas de Vendas */}
                 <Route path='/Vendas/' element={<VendasPage />} />
-                <Route path='/Vendas/MaisInformacoesVenda/:id' element={<MaisInformacoesVenda />} />
+                <Route path='/Vendas/MaisInformacoesVenda/:id/' element={<MaisInformacoesVenda />} />
                 
             </Routes>
         </ContainerMain>
