@@ -5,6 +5,7 @@ import { Cliente } from "../../models/Cliente";
 import { globalContext } from "../../context/context";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
+import { FundoTitle } from "./styles";
 
 export const CadastrarCLientePage = () => {
     const [cliente, setCliente] = useState(new Cliente());
@@ -40,7 +41,9 @@ export const CadastrarCLientePage = () => {
 
     return(
         <>
-            <Title>Cadastrar Cliente</Title>
+            <FundoTitle>
+                <Title mt={0}>Cadastrar Cliente</Title>
+            </FundoTitle>
             <form>
                 <input type="text" name="nome" onChange={handleChange} placeholder="Nome"/> <br />
                 <input type="text" name="cpf" onChange={handleChange} placeholder="CPF"/> <br />
