@@ -7,6 +7,7 @@ import { FailNotifications, SucssesNotifications } from "../../components/Notifi
 import { useNavigate } from "react-router-dom";
 import { FundoForm, FundoTitle } from "./styles";
 
+
 export const CadastrarCLientePage = () => {
     const [cliente, setCliente] = useState(new Cliente());
     const { state } = useContext(globalContext);
