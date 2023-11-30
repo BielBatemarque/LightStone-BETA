@@ -31,6 +31,7 @@ export const MaisInformacoesEstoque = () => {
     return(
         <>
             <Title>Mais Informações: {material.nome}</Title>
+            <p>Quantidade de metros: {estoque.quantidade_metros}</p>
         </>
     );
 };
