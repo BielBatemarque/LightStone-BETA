@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const StyledInput = styled.input`
+    width: 30rem;
+    height: 1.5rem;
+    padding: 0.2rem;
 
 `;
 
@@ -26,3 +29,4 @@ export const FundoForm = styled.div`
     box-shadow: gray 3px 3px 5px;
     border-radius: 0px 0px 10px 10px;
 `;
+

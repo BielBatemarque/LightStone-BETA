@@ -5,7 +5,7 @@ import { Cliente } from "../../models/Cliente";
 import { globalContext } from "../../context/context";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
-import { FundoForm, FundoTitle } from "./styles";
+import { FundoForm, FundoTitle, StyledInput } from "./styles";
 
 
 export const CadastrarCLientePage = () => {
@@ -47,7 +47,8 @@ export const CadastrarCLientePage = () => {
             </FundoTitle>
             <FundoForm>
                 <form>
-                    <input type="text" name="nome" onChange={handleChange} placeholder="Nome"/> <br />
+                    <StyledInput  type="text" name="nome" onChange={handleChange} placeholder="Nome"/> <br />
+                    {/* type="text" name="nome" onChange={handleChange} placeholder="Nome" */}
                     <input type="text" name="cpf" onChange={handleChange} placeholder="CPF"/> <br />
                     <textarea name="endereco" id="" cols="30" rows="3" onChange={handleChange} placeholder="Endereço"></textarea><br />
                     <input type="date" name="data_nascimento" onChange={handleChange} placeholder="Nascimento"/><br />
