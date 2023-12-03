@@ -4,7 +4,8 @@ export const StyledInput = styled.input`
     width: 30rem;
     height: 1.5rem;
     padding: 0.2rem;
-
+    border-radius: 5px;
+    border: none;
 `;
 
 export const FundoTitle = styled.div`
