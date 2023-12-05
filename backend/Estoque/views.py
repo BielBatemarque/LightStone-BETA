@@ -33,4 +33,18 @@ class EntradaDeEstoque(APIView):
     
 class SaidaDeEstoque(APIView):
     def post(self, request, estoque_id):
-        return
+        estoque = get_object_or_404(Estoque, id=estoque_id)
+        serializer = MovimentacaoDeEstoqueSerializer(data=request.data)
+
+        if serializer.is_valid():
+            quantidade = serializer.validated_data['quantidade']
+            usuario = request.user
+
+            try:
+                MovimentacaoDeEstoque.objects.create(user=usuario, quantidade=int(quantidade), tipo='saida', produto=estoque.material)
+                return Response({'Mensagem': 'Movimentação registrada com sucesso'})
+            except Exception as e:
+                print(str(e))
+                return Response({'Erro': 'Erro interno ao processar a requisição'})
+        else:
+            return Response({'Erro': serializer.errors})
