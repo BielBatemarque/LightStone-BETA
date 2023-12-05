@@ -41,5 +41,13 @@ export const StyledTextArea = styled.textarea`
     border: none;
     border-radius: 5px;
     padding: 5px;
-    
+
+`;
+
+export const FlexDiv = styled.div`
+    margin: 0 auto;
+    display: flex;
+    text-align: center;
+    width: 40%;
+    justify-content: space-evenly;
 `;

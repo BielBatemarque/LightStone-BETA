@@ -6,7 +6,7 @@ import { globalContext } from "../../context/context";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
 import { FundoForm, FundoTitle, StyledForm, StyledInput } from "./styles";
-import { StyledTextArea } from './styles'; 
+import { StyledTextArea, FlexDiv } from './styles'; 
 
 
 export const CadastrarCLientePage = () => {
@@ -55,8 +55,10 @@ export const CadastrarCLientePage = () => {
                     <StyledInput type="date" name="data_nascimento" onChange={handleChange} placeholder="Nascimento"/><br />
                     <StyledInput type="email" name="email" onChange={handleChange} placeholder="email"/><br />
 
-                    <Button action={handleCadastraCliente}>Cadastrar</Button>
-
+                    <FlexDiv>
+                        <Button action={handleCadastraCliente}>Cadastrar</Button>
+                        <Button color={'red'} action={() => navigate('/Clientes/')}>Cancelar</Button>
+                    </FlexDiv>
                 </StyledForm>
             </FundoForm>
         </>
