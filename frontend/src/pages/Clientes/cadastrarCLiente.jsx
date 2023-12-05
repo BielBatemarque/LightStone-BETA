@@ -5,7 +5,8 @@ import { Cliente } from "../../models/Cliente";
 import { globalContext } from "../../context/context";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
-import { FundoForm, FundoTitle, StyledInput } from "./styles";
+import { FundoForm, FundoTitle, StyledForm, StyledInput } from "./styles";
+import { StyledTextArea } from './styles'; 
 
 
 export const CadastrarCLientePage = () => {
@@ -46,17 +47,17 @@ export const CadastrarCLientePage = () => {
                 <Title mt={0}>Cadastrar Cliente</Title>
             </FundoTitle>
             <FundoForm>
-                <form>
+                <StyledForm>
                     <StyledInput  type="text" name="nome" onChange={handleChange} placeholder="Nome"/> <br />
                     {/* type="text" name="nome" onChange={handleChange} placeholder="Nome" */}
-                    <input type="text" name="cpf" onChange={handleChange} placeholder="CPF"/> <br />
-                    <textarea name="endereco" id="" cols="30" rows="3" onChange={handleChange} placeholder="Endereço"></textarea><br />
-                    <input type="date" name="data_nascimento" onChange={handleChange} placeholder="Nascimento"/><br />
-                    <input type="email" name="email" onChange={handleChange} placeholder="email"/><br />
+                    <StyledInput type="text" name="cpf" onChange={handleChange} placeholder="CPF"/> <br />
+                    <StyledTextArea name="endereco" id="" cols="30" rows="3" onChange={handleChange} placeholder="Endereço"></StyledTextArea><br />
+                    <StyledInput type="date" name="data_nascimento" onChange={handleChange} placeholder="Nascimento"/><br />
+                    <StyledInput type="email" name="email" onChange={handleChange} placeholder="email"/><br />
 
                     <Button action={handleCadastraCliente}>Cadastrar</Button>
 
-                </form>
+                </StyledForm>
             </FundoForm>
         </>
     );
