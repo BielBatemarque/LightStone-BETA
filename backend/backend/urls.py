@@ -28,5 +28,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='user-logout'),
     path('gerar_pdf/', PDFView.as_view(), name='gerar_pdf'),
     path('entrada_estoque/<int:estoque_id>/', EntradaDeEstoque.as_view(), name='entrada_estoque'),
-    path('saida_estoque/', SaidaDeEstoque.as_view(), name='saida_estoque'),
+    path('saida_estoque/<int:estoque_id>/', SaidaDeEstoque.as_view(), name='saida_estoque'),
 ]
