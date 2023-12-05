@@ -22,7 +22,7 @@ export const CadastrarCLientePage = () => {
     const handleCadastraCliente = async (e) => {
         e.preventDefault();
 
-        const request = await fetch('http://localhost:8000/clientes/',{
+        const request = await fetch('http://localhost:8000/clientes/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
