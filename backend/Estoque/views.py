@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from .serializers import EstoqueSerializer
+from .serializers import EstoqueSerializer, MovimentacaoDeEstoqueSerializer
 from rest_framework import viewsets
-from .models import Estoque
+from .models import Estoque, MovimentacaoDeEstoque
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -13,9 +14,23 @@ class EstoqueViewsSets(viewsets.ModelViewSet):
     serializer_class = EstoqueSerializer
 
 class EntradaDeEstoque(APIView):
-    def post(self, request):
-        return
+    def post(self, request, estoque_id):
+        estoque = get_object_or_404(Estoque, id=estoque_id)
+        serializer = MovimentacaoDeEstoqueSerializer(data=request.data)
+
+        if serializer.is_valid():
+            quantidade = serializer.validated_data['quantidade']
+            usuario = request.user
+            print(usuario)
+            try:  
+                MovimentacaoDeEstoque.objects.create(user=usuario, quantidade=int(quantidade), tipo='entrada', produto=estoque.material)
+                return Response({'Mensagem': 'Movimentação registrada com sucesso'})
+            except Exception as e:
+                print(str(e))
+                return Response({'Erro': 'Erro interno ao processar a requisição'})
+        else:
+            return Response({'Erro': serializer.errors})
     
 class SaidaDeEstoque(APIView):
-    def post(self, request):
+    def post(self, request, estoque_id):
         return
