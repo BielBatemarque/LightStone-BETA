@@ -31,3 +31,15 @@ export const FundoForm = styled.div`
     border-radius: 0px 0px 10px 10px;
 `;
 
+export const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const StyledTextArea = styled.textarea`
+    width: 30rem;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    
+`;
