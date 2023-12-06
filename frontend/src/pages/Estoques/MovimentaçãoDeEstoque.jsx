@@ -15,6 +15,14 @@ export const MovimentacaoDeEstoque = () => {
         handleLoadMaterial();
     }, []);
 
+    useEffect(() => {
+        if (materiais.length > 0) {
+            const firstMaterialId = materiais[0].estoque.id;
+            setMaterialSelected(firstMaterialId);
+            handleLoadQuantidadeMetros(firstMaterialId);
+        }
+    }, [materiais]);
+
     const handleLoadQuantidadeMetros = async (id) => {
         const request = await fetch(`http://localhost:8000/estoques/${id}/`);
         const response = await request.json();
