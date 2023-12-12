@@ -24,10 +24,10 @@ export const MateriaisPage = () => {
 
     return(
        <>
-            <FlexCointainer pontas="true" size={'93%'}>
-                <Title>Materiais</Title>
-                <Button action={() => navigate('/Materiais/cadastrarMaterial/')}>Novo Material</Button>
-            </FlexCointainer>
+         <FlexCointainer pontas="true" size={'93%'}>
+            <Title>Materiais</Title>
+            <Button action={() => navigate('/Materiais/cadastrarMaterial/')}>Novo Material</Button>
+        </FlexCointainer>
             <Listing>
                 {materiais.map((material, index) => (
                     <Item key={index} action={() => navigate(`/Materiais/maisInformacoesMaterial/${material.id}`)}>{material.nome}</Item>
