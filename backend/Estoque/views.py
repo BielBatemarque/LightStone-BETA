@@ -13,17 +13,23 @@ class EstoqueViewsSets(viewsets.ModelViewSet):
     queryset = Estoque.objects.all()
     serializer_class = EstoqueSerializer
 
+class MovimentacaoDeEstoqueViewsSets(viewsets.ModelViewSet):
+    queryset = MovimentacaoDeEstoque.objects.all()
+    serializer_class = MovimentacaoDeEstoqueSerializer
+
 class EntradaDeEstoque(APIView):
     def post(self, request, estoque_id):
         estoque = get_object_or_404(Estoque, id=estoque_id)
         serializer = MovimentacaoDeEstoqueSerializer(data=request.data)
+        print(estoque.material)
 
         if serializer.is_valid():
             quantidade = serializer.validated_data['quantidade']
             usuario = request.user
-            print(usuario)
+            # print(usuario)
             try:  
                 MovimentacaoDeEstoque.objects.create(user=usuario, quantidade=int(quantidade), tipo='entrada', produto=estoque.material)
+
                 return Response({'Mensagem': 'Movimentação registrada com sucesso'})
             except Exception as e:
                 print(str(e))
