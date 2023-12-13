@@ -3,13 +3,17 @@ import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { FailNotifications } from "../../components/Notifications";
+import { Estoque } from '../../models/Estoque';
+import { useAuth } from '../../hooks/useAuth';
 
 export const MovimentacaoDeEstoque = () => {
+    const { state } = useAuth();
     const [materiais, setMateriais] = useState([]);
     const { tipoMovimentacao } = useParams();
     const [qtdMetros, setQtdMetros] = useState(0);
     const [, setMaterialSelected] = useState(null);
     const [metrosInput, setMetrosInput] = useState(null);
+    const [estoque, setEstoque] = useState(new Estoque);
 
     useEffect(() => {
         handleLoadMaterial();
@@ -29,6 +33,7 @@ export const MovimentacaoDeEstoque = () => {
 
         const { quantidade_metros } = response;
         console.log(response);
+        setEstoque(response);
 
         setQtdMetros(quantidade_metros);
     };
@@ -70,7 +75,21 @@ export const MovimentacaoDeEstoque = () => {
     }, [metrosInput]);
 
     const handleMovimentaEstoque = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
+
+        const api = tipoMovimentacao === 'entrada' ? `http://localhost:8000/entrada_estoque/${estoque.id}/` : `http://localhost:8000/saida_estoque/${estoque.id}/`;
+        
+        const request = await fetch(api, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Token ${state.token}`,
+            },
+            body:{
+
+            },
+        });
+
     };
 
 
@@ -85,9 +104,9 @@ export const MovimentacaoDeEstoque = () => {
                     ))}
                 </select>
                 <br />
-                <input type="text" placeholder="quantidade de metros" onChange={(e) => setMetrosInput(Number(e.target.value))}/>
+                <input type="text" placeholder="quantidade de metros" onChange={(e) => setMetrosInput(Number(e.target.value))}/> <br />
+                <Button>Registrar Movimentação</Button>
             </form>
-            <Button>Registrar Movimentação</Button>
         </>
     );
 };
