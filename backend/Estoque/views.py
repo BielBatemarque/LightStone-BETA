@@ -26,7 +26,7 @@ class EntradaDeEstoque(APIView):
         if serializer.is_valid():
             quantidade = serializer.validated_data['quantidade']
             usuario = request.user
-            # print(usuario)
+             
             try:  
                 MovimentacaoDeEstoque.objects.create(user=usuario, quantidade=int(quantidade), tipo='entrada', produto=estoque.material)
 
