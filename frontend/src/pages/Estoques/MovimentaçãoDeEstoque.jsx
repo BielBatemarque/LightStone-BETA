@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
-import { FailNotifications } from "../../components/Notifications";
+import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { Estoque } from '../../models/Estoque';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -96,6 +96,12 @@ export const MovimentacaoDeEstoque = () => {
 
         const response = await request.json();
         console.log(response);
+
+        if (request.ok){
+            SucssesNotifications('sucesso ao movimentar estoque');
+        }else{
+
+        }
 
     };
 
