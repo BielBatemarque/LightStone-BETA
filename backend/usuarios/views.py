@@ -55,7 +55,7 @@ class UserLoginView(APIView):
                 token, created = Token.objects.get_or_create(user=user)
                 print(username)
                 if user.is_staff:
-                    return Response({'token': token.key, 'user': username, 'superUser': True}, status=status.HTTP_200_OK)
+                    return Response({'token': token.key, 'user': username, 'superUser': True, 'id': user.id }, status=status.HTTP_200_OK)
                 else:
                     return Response({'token': token.key, 'user': username, 'superUser': False}, status=status.HTTP_200_OK)
             else:
