@@ -53,7 +53,7 @@ class UserLoginView(APIView):
             if user is not None:
                 login(request, user)
                 token, created = Token.objects.get_or_create(user=user)
-                print(username)
+                print(username, user.id)
                 if user.is_staff:
                     return Response({'token': token.key, 'user': username, 'superUser': True, 'id': user.id }, status=status.HTTP_200_OK)
                 else:
