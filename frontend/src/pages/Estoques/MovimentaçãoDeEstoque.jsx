@@ -100,7 +100,7 @@ export const MovimentacaoDeEstoque = () => {
         if (request.ok){
             SucssesNotifications('sucesso ao movimentar estoque');
         }else{
-
+            FailNotifications('Erro na transação')
         }
 
     };
