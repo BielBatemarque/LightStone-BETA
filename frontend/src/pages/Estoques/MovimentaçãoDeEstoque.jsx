@@ -87,10 +87,10 @@ export const MovimentacaoDeEstoque = () => {
                 'Authorization': `Token ${state.token}`,
             },
             body: JSON.stringify({
-                'user': '',
+                'user': state.user,
                 'quantidade': Number(metrosInput),
                 'tipo': 'entrada',
-                'produto': materialSelect,
+                'produto': estoque.material,
             }),
         });
 
@@ -99,7 +99,7 @@ export const MovimentacaoDeEstoque = () => {
 
     };
 
-    console.log(materiais, materialSelect);
+    console.log(materiais, estoque.material);
 
 
     return(
