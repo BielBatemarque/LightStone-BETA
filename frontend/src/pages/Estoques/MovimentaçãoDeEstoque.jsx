@@ -11,9 +11,10 @@ export const MovimentacaoDeEstoque = () => {
     const [materiais, setMateriais] = useState([]);
     const { tipoMovimentacao } = useParams();
     const [qtdMetros, setQtdMetros] = useState(0);
-    const [, setMaterialSelected] = useState(null);
+    const [ materialSelect, setMaterialSelected] = useState(null);
     const [metrosInput, setMetrosInput] = useState(null);
-    const [estoque, setEstoque] = useState(new Estoque);
+    const [estoque, setEstoque] = useState(new Estoque());
+    const [produtoSelecionado, setProdutoSelecionado] = useState(null);
 
     useEffect(() => {
         handleLoadMaterial();
@@ -85,12 +86,20 @@ export const MovimentacaoDeEstoque = () => {
                 'Content-type': 'application/json',
                 'Authorization': `Token ${state.token}`,
             },
-            body:{
-
-            },
+            body: JSON.stringify({
+                'user': '',
+                'quantidade': Number(metrosInput),
+                'tipo': 'entrada',
+                'produto': materialSelect,
+            }),
         });
 
+        const response = await request.json();
+        console.log(response);
+
     };
+
+    console.log(materiais, materialSelect);
 
 
     return(
