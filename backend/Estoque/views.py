@@ -26,7 +26,8 @@ class EntradaDeEstoque(APIView):
         if serializer.is_valid():
             quantidade = serializer.validated_data['quantidade']
             usuario = request.user
-             
+            print(estoque.material.nome)
+
             try:  
                 MovimentacaoDeEstoque.objects.create(user=usuario, quantidade=int(quantidade), tipo='entrada', produto=estoque.material)
 
@@ -45,7 +46,7 @@ class SaidaDeEstoque(APIView):
         if serializer.is_valid():
             quantidade = serializer.validated_data['quantidade']
             usuario = request.user
-
+            print(estoque.material.nome)
             try:
                 MovimentacaoDeEstoque.objects.create(user=usuario, quantidade=int(quantidade), tipo='saida', produto=estoque.material)
                 return Response({'Mensagem': 'Movimentação registrada com sucesso'})
