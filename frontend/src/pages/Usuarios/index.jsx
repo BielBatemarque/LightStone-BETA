@@ -24,7 +24,7 @@ export const Usuarios = () => {
 
     useEffect(() => {
         handleLoadUsers();
-    }, [])
+    }, []);
 
     return(
         <>
