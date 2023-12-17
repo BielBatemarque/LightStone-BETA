@@ -49,6 +49,9 @@ class SaidaDeEstoque(APIView):
             print(estoque.material.nome)
             try:
                 MovimentacaoDeEstoque.objects.create(user=usuario, quantidade=int(quantidade), tipo='saida', produto=estoque.material)
+                estoque.quantidade_metros = estoque.quantidade_metros - int(quantidade)
+                estoque.save()
+                
                 return Response({'Mensagem': 'Movimentação registrada com sucesso'})
             except Exception as e:
                 print(str(e))
