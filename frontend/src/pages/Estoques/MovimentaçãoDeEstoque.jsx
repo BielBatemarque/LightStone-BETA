@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
@@ -14,6 +14,7 @@ export const MovimentacaoDeEstoque = () => {
     const [ materialSelect, setMaterialSelected] = useState(null);
     const [metrosInput, setMetrosInput] = useState(null);
     const [estoque, setEstoque] = useState(new Estoque());
+    const navigate = useNavigate();
     const [produtoSelecionado, setProdutoSelecionado] = useState(null);
 
     useEffect(() => {
@@ -99,6 +100,7 @@ export const MovimentacaoDeEstoque = () => {
 
         if (request.ok){
             SucssesNotifications('sucesso ao movimentar estoque');
+            navigate('/Estoque/');
         }else{
             FailNotifications('Erro na transação')
         }
