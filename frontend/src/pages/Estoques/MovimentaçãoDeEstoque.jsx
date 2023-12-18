@@ -70,11 +70,7 @@ export const MovimentacaoDeEstoque = () => {
 
     
     useEffect(() => {
-        if (Number(metrosInput) < 0){
-            AtentionNotification('informou valor negativo');
-        }
-
-        else if(!validaNumero(metrosInput)){
+      if(!validaNumero(metrosInput)){
             FailNotifications('Favor digite um valor numerico');
         }
     }, [metrosInput]);
