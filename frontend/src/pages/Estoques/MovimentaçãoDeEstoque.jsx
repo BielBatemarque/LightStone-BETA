@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
-import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
+import { AtentionNotification, FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { Estoque } from '../../models/Estoque';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -70,7 +70,11 @@ export const MovimentacaoDeEstoque = () => {
 
     
     useEffect(() => {
-        if(!validaNumero(metrosInput)){
+        if (Number(metrosInput) < 0){
+            AtentionNotification('informou valor negativo');
+        }
+
+        else if(!validaNumero(metrosInput)){
             FailNotifications('Favor digite um valor numerico');
         }
     }, [metrosInput]);
