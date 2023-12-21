@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
-import { AtentionNotification, FailNotifications, SucssesNotifications } from "../../components/Notifications";
+import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { Estoque } from '../../models/Estoque';
 import { useAuth } from '../../hooks/useAuth';
 
