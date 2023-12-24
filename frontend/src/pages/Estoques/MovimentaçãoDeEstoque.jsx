@@ -11,7 +11,7 @@ export const MovimentacaoDeEstoque = () => {
     const [materiais, setMateriais] = useState([]);
     const { tipoMovimentacao } = useParams();
     const [qtdMetros, setQtdMetros] = useState(0);
-    const [ , setMaterialSelected] = useState(null);
+    const [ materialSelected, setMaterialSelected] = useState(null);
     const [metrosInput, setMetrosInput] = useState(null);
     const [estoque, setEstoque] = useState(new Estoque());
     const navigate = useNavigate();
@@ -75,6 +75,8 @@ export const MovimentacaoDeEstoque = () => {
         }
     }, [metrosInput]);
 
+    console.log(materialSelected);
+    
     const handleMovimentaEstoque = async (e) => {
         e.preventDefault(); 
 
