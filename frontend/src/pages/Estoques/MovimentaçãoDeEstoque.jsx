@@ -118,7 +118,7 @@ export const MovimentacaoDeEstoque = () => {
             <h3>Quantidade atual em M²: {qtdMetros}</h3>
             <form onSubmit={handleMovimentaEstoque}>
                 <select name="material" onChange={handleMaterialChange}>
-                    {materiais.map(mat => (
+                    { materiais.map(mat => (
                         <option key={mat.id} value={mat.estoque.id}>{mat.nome}</option>
                     ))}
                 </select>
