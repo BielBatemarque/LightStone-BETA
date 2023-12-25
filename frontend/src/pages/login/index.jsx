@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { ColumForm, Container, ImageContainer, InputStyled, SemiContainerInputs, StyledButton } from "./styles";
+import { ColumForm, Container, ImageContainer, SemiContainerInputs, StyledButton } from "./styles";
 import { globalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
+import { InputLabel } from '../../components/InputLabel';
 
 export const LoginScreen = () => {
     const { dispatch } = useContext(globalContext);
@@ -61,10 +62,10 @@ export const LoginScreen = () => {
                     <ColumForm onSubmit={handleLogin} method='POST'>
 
                         <label htmlFor="username">Usuário</label>
-                        <InputStyled type="text" name="username" placeholder="Nome de Usuário" onChange={handleChange} value={login.username} />
+                        <InputLabel type="text" name="username" text="Nome de Usuário" onChange={handleChange} value={login.username} />
 
                         <label htmlFor="senha">Senha:</label>
-                        <InputStyled type='password' placeholder="Senha" required name="password" onChange={handleChange} value={login.password} />
+                        <InputLabel type='password' text="Senha" required name="password" onChange={handleChange} value={login.password} />
 
                         <StyledButton type="submit">Entrar</StyledButton>
                     </ColumForm>
