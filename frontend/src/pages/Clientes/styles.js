@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const StyledInput = styled.input`
     width: 30rem;
-    height: 1.5rem;
+    height: 1.7rem;
     padding: 0.2rem;
     border-radius: 5px;
     border: none;
+    margin-top: 1rem;
 `;
 
 export const FundoTitle = styled.div`
@@ -34,6 +35,10 @@ export const FundoForm = styled.div`
 export const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+    align-items: center;
+
 `;
 
 export const StyledTextArea = styled.textarea`
@@ -41,6 +46,7 @@ export const StyledTextArea = styled.textarea`
     border: none;
     border-radius: 5px;
     padding: 5px;
+    margin-top: 1rem;
 
 `;
 
@@ -48,6 +54,6 @@ export const FlexDiv = styled.div`
     margin: 0 auto;
     display: flex;
     text-align: center;
-    width: 40%;
+    width: 30%;
     justify-content: space-evenly;
 `;
