@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { ColumForm, Container, ImageContainer, SemiContainerInputs, StyledButton } from "./styles";
+import { ColumForm, Container, ImageContainer, SemiContainerInputs, StyledButton, StyledImame } from "./styles";
 import { globalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
 import { InputLabel } from '../../components/InputLabel';
+import granito from '../../assets/granito.png';
 
 export const LoginScreen = () => {
     const { dispatch } = useContext(globalContext);
@@ -56,7 +57,7 @@ export const LoginScreen = () => {
         <div className="LoginScreen">
             <Container>
                 <ImageContainer>
-                        <p style={{color:'green'}}>Opa</p>
+                        <StyledImame src={granito} alt="" />
                 </ImageContainer>
                 <SemiContainerInputs>
                     <ColumForm onSubmit={handleLogin} method='POST'>

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width: 80%;
     height: 80vh;
-    background-color: red;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -20,7 +19,6 @@ export const SemiContainerInputs = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-    background-color: green;
     width: 40%;
     margin: 0;
     position: relative;
@@ -49,6 +47,11 @@ export const StyledButton = styled.button`
     margin-top: 1rem;
 `;
 
+export const StyledImame = styled.img`
+    position: relative;
+    width: 100%;
+    height: 100%;
+`;
 
 export const InputStyled = styled.input`
     width: 25vw;
