@@ -30,11 +30,11 @@ export const ColumForm = styled.form`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 90%; /* Definir a altura da tela inteira */
+        height: 80%; /* Definir a altura da tela inteira */
 `;
 
 export const StyledButton = styled.button`
-    background-color: rgba(0,0,0);
+    background-color: rgb(42, 42, 42);
     height: 2.5rem;
     color: white;
     border: none;
@@ -45,6 +45,11 @@ export const StyledButton = styled.button`
     padding: 5px;
     cursor: pointer;
     margin-top: 1rem;
+
+    &:hover{
+        background-color: rgb(68, 68, 68);
+        transition: 0.5s;
+    }
 `;
 
 export const StyledImame = styled.img`

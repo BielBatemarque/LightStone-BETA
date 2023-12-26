@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
 import { InputLabel } from '../../components/InputLabel';
 import granito from '../../assets/granito.png';
+import { Title } from '../../components/Title/index';
 
 export const LoginScreen = () => {
     const { dispatch } = useContext(globalContext);
@@ -60,6 +61,13 @@ export const LoginScreen = () => {
                         <StyledImame src={granito} alt="" />
                 </ImageContainer>
                 <SemiContainerInputs>
+                    <div style={{
+                        width: '100%',
+                        textAlign: 'center',
+                    }}>
+                        <Title>Stone CO.</Title>
+                    </div>
+
                     <ColumForm onSubmit={handleLogin} method='POST'>
 
                         <InputLabel type="text" name="username" text="Nome de Usuário" onChange={handleChange} value={login.username} />
