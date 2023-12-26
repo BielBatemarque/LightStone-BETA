@@ -1,10 +1,10 @@
-# LightStone - Sistema de Gerenciamento de Marmorarias
+# Stone CO. - Sistema de Gerenciamento de Marmorarias
 
-Bem-vindo(a) ao repositório do LightStone, um poderoso sistema de gerenciamento e controle desenvolvido com o uso do Django Rest Framework e React. Este sistema foi projetado para atender às necessidades específicas das marmorarias, oferecendo um conjunto abrangente de ferramentas para simplificar e aprimorar suas operações diárias.
+Bem-vindo(a) ao repositório do Stone CO., um poderoso sistema de gerenciamento e controle desenvolvido com o uso do Django Rest Framework e React. Este sistema foi projetado para atender às necessidades específicas das marmorarias, oferecendo um conjunto abrangente de ferramentas para simplificar e aprimorar suas operações diárias.
 
 ## Visão Geral
 
-O LightStone é uma aplicação que combina a eficiência do backend Django Rest Framework com a interatividade do frontend React. O objetivo principal é otimizar a gestão de marmorarias, desde a administração de estoques de pedras até o acompanhamento de projetos e pedidos. A integração das duas tecnologias permite uma experiência de usuário fluida e uma arquitetura escalável.
+O Stone CO. é uma aplicação que combina a eficiência do backend Django Rest Framework com a interatividade do frontend React. O objetivo principal é otimizar a gestão de marmorarias, desde a administração de estoques de pedras até o acompanhamento de projetos e pedidos. A integração das duas tecnologias permite uma experiência de usuário fluida e uma arquitetura escalável.
 
 ## Funcionalidades Principais
 
