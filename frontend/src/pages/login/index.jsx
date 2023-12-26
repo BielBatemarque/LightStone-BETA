@@ -61,10 +61,7 @@ export const LoginScreen = () => {
                 <SemiContainerInputs>
                     <ColumForm onSubmit={handleLogin} method='POST'>
 
-                        <label htmlFor="username">Usuário</label>
                         <InputLabel type="text" name="username" text="Nome de Usuário" onChange={handleChange} value={login.username} />
-
-                        <label htmlFor="senha">Senha:</label>
                         <InputLabel type='password' text="Senha" required name="password" onChange={handleChange} value={login.password} />
 
                         <StyledButton type="submit">Entrar</StyledButton>
