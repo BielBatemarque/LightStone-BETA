@@ -23,6 +23,7 @@ import { MaisInformacoesMaterial } from '../../pages/Materiais/maisInformacoesMa
 import { CadastrarUsuarioPage } from '../../pages/Usuarios/cadastrarUsuario';
 import { MaisInformacoesUsuarios } from '../../pages/Usuarios/MaisInformacoesUsuario';
 import { MaisInformacoesEstoque } from '../../pages/Estoques/MaisInformacoesEstoque';
+import { CadastrarVenda } from '../../pages/Vendas/CadastrarVenda';
 
 export const Content = () => {
     return(
@@ -70,6 +71,7 @@ export const Content = () => {
                 {/* Rotas de Vendas */}
                 <Route path='/Vendas/' element={<VendasPage />} />
                 <Route path='/Vendas/MaisInformacoesVenda/:id/' element={<MaisInformacoesVenda />} />
+                <Route path='/Vendas/CadastrarVenda/' element={<CadastrarVenda />} />
                 
             </Routes>
         </ContainerMain>
