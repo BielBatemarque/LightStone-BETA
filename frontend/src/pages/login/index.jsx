@@ -3,7 +3,7 @@ import { ColumForm, Container, ImageContainer, SemiContainerInputs, StyledButton
 import { globalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
-import { InputLabel } from '../../components/InputLabel';
+import { FloatLabel } from '../../components/FloatLabel';
 import granito from '../../assets/granito.png';
 import { Title } from '../../components/Title/index';
 
@@ -70,8 +70,8 @@ export const LoginScreen = () => {
 
                     <ColumForm onSubmit={handleLogin} method='POST'>
 
-                        <InputLabel type="text" name="username" text="Nome de Usuário" onChange={handleChange} value={login.username} />
-                        <InputLabel type='password' text="Senha" required name="password" onChange={handleChange} value={login.password} />
+                        <FloatLabel type="text" name="username" text="Nome de Usuário" onChange={handleChange} value={login.username} />
+                        <FloatLabel type='password' text="Senha" required name="password" onChange={handleChange} value={login.password} />
 
                         <StyledButton type="submit">Entrar</StyledButton>
                     </ColumForm>
