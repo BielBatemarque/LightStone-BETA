@@ -5,8 +5,9 @@ import { Cliente } from "../../models/Cliente";
 import { globalContext } from "../../context/context";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
-import { FundoForm, FundoTitle, StyledForm, StyledInput } from "./styles";
-import { StyledTextArea, FlexDiv } from './styles'; 
+import { FundoForm, FundoTitle, StyledForm } from "./styles";
+import { FlexDiv } from './styles'; 
+import { FloatLabel } from '../../components/FloatLabel/index';
 
 
 export const CadastrarCLientePage = () => {
@@ -48,12 +49,12 @@ export const CadastrarCLientePage = () => {
             </FundoTitle>
             <FundoForm>
                 <StyledForm>
-                    <StyledInput  type="text" name="nome" onChange={handleChange} placeholder="Nome"/> <br />
+                    <FloatLabel  type="text" name="nome" onChange={handleChange} text="Nome"/> <br />
                     {/* type="text" name="nome" onChange={handleChange} placeholder="Nome" */}
-                    <StyledInput type="text" name="cpf" onChange={handleChange} placeholder="CPF"/> <br />
-                    <StyledTextArea name="endereco" id="" cols="30" rows="3" onChange={handleChange} placeholder="Endereço"></StyledTextArea><br />
-                    <StyledInput type="date" name="data_nascimento" onChange={handleChange} placeholder="Nascimento"/><br />
-                    <StyledInput type="email" name="email" onChange={handleChange} placeholder="email"/><br />
+                    <FloatLabel type="text" name="cpf" onChange={handleChange} text="CPF"/> <br />
+                    <FloatLabel name="endereco" onChange={handleChange} text="Endereço" /><br />
+                    <FloatLabel type="date" name="data_nascimento" onChange={handleChange} text="Nascimento"/><br />
+                    <FloatLabel type="email" name="email" onChange={handleChange} text="email"/><br />
 
                     <FlexDiv>
                         <Button action={handleCadastraCliente}>Cadastrar</Button>
