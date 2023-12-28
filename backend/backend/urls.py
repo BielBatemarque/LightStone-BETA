@@ -10,6 +10,7 @@ from materiais.views import MaterialViewSets
 from usuarios.views import UserLoginView, LogoutView
 from vendas.views import VendaViewSet
 from relatorios.views import PDFView
+from pecas.views import PecasViewSets
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
@@ -20,6 +21,7 @@ router.register(r'estoques', EstoqueViewsSets)
 router.register(r'materiais', MaterialViewSets)
 router.register(r'vendas', VendaViewSet)
 router.register(r'movimentacoes_estoque', MovimentacaoDeEstoqueViewsSets)
+router.register(r'pecas', PecasViewSets)
 
 urlpatterns = [
     path('', include(router.urls)),
