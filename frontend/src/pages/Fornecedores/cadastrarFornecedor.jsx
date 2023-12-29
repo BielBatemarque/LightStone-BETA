@@ -5,6 +5,8 @@ import { Fornecedor } from '../../models/Fornecedor';
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from 'react-router-dom';
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
+import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
+import { FloatLabel } from "../../components/FloatLabel";
 
 export const CadastrarFornecedor = () => {
     const [fornecedor, setFornecedor] = useState(new Fornecedor());
@@ -43,13 +45,21 @@ export const CadastrarFornecedor = () => {
     console.log(fornecedor, state);
     return(
         <>
-           <Title>Cadastrar Fornecedor</Title>
-           <form onSubmit={handleCadastrarFornecedor}>
-            <input type="text" placeholder="Nome da empresa" name="nome_empresa" onChange={handleChange}/> <br />
-            <input type="text" placeholder="CNPJ" name="cnpj" onChange={handleChange}/><br />
-            <input type="text" placeholder="Endereço" name="endereco" onChange={handleChange}/> <br />
-            <Button>Cadastrar Fornecedor</Button>
-           </form>
+            <FundoTitle>
+                <Title mt={0}>Cadastrar Fornecedor</Title>
+            </FundoTitle>
+            <FundoForm>
+                <StyledForm onSubmit={handleCadastrarFornecedor}>
+                    <FloatLabel type="text" text="Nome da empresa" name="nome_empresa" onChange={handleChange}/> <br />
+                    <FloatLabel type="text" text="CNPJ" name="cnpj" onChange={handleChange}/><br />
+                    <FloatLabel type="text" text="Endereço" name="endereco" onChange={handleChange}/> <br />
+                    
+                    <FlexDiv>
+                        <Button>Cadastrar</Button>
+                        <Button color={'red'} action={() => navigate('/Fornecedores/')}>Cancelar</Button>
+                    </FlexDiv>
+                </StyledForm>
+            </FundoForm>
         </>
     );
 }
