@@ -5,6 +5,8 @@ import { Colaborador } from "../../models/Colaborador";
 import { useAuth } from "../../hooks/useAuth";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
+import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
+import { FloatLabel } from '../../components/FloatLabel/index';
 
 export const CadastrarColaboradorPage = () => {
     const [colab, setColab] = useState(new Colaborador());
@@ -41,17 +43,24 @@ export const CadastrarColaboradorPage = () => {
 
     return(
         <>
-            <Title>Cadastrar Colaborador</Title>
-            <form>
-                <input type="text" placeholder="nome" name="nome" onChange={handleChange}/> <br />
-                <input type="date" name="nascimento" id="" onChange={handleChange} /> <br />
-                <input type="text" placeholder="telefone" name="telefone" onChange={handleChange}/><br />
-                <input type="text" placeholder="CPF" name="cpf" onChange={handleChange} /> <br />
-                <input type="email" placeholder="email" name="email" onChange={handleChange}/> <br />
-                <input type="text" id="" placeholder="cargo" name="cargo" onChange={handleChange}/> <br />
+            <FundoTitle>
+                <Title mt={0}>Cadastrar Colaborador</Title>
+            </FundoTitle>
+            <FundoForm>
+                <StyledForm>
+                    <FloatLabel type="text" text="nome" name="nome" onChange={handleChange}/> <br />
+                    <FloatLabel type="date" text="nascimento" name="nascimento" onChange={handleChange} /> <br />
+                    <FloatLabel type="text" text="telefone" name="telefone" onChange={handleChange}/><br />
+                    <FloatLabel type="text" text="CPF" name="cpf" onChange={handleChange} /> <br />
+                    <FloatLabel type="email" text="email" name="email" onChange={handleChange}/> <br />
+                    <FloatLabel type="text" id="" text="cargo" name="cargo" onChange={handleChange}/> <br />
 
-                <Button children={'Cadastrar'} action={handleCadastrarColab}/>
-            </form>
+                    <FlexDiv>
+                        <Button children={'Cadastrar'} action={handleCadastrarColab}/>
+                        <Button children={'Cancelar'} color={'red'} action={() => navigate('/Colaboradores/')}/>
+                    </FlexDiv>
+                </StyledForm>
+            </FundoForm>
         </>
     );
 };
