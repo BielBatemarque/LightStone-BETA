@@ -5,6 +5,8 @@ import { Title } from "../../components/Title";
 import { useAuth } from "../../hooks/useAuth";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
+import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
+import { FloatLabel } from "../../components/FloatLabel";
 
 export const CadastrarMaterialPage = () => {
     const [material, setMaterial] = useState(new Material());
@@ -64,17 +66,28 @@ export const CadastrarMaterialPage = () => {
     
     return(
         <>
-            <Title>Cadastrar Material</Title>
-            <form action="">
-                <input type="text" placeholder="Nome do material" name="nome" onChange={handleChange}/> <br />
-                <input type="text" placeholder="Cor base" name="cor_base" onChange={handleChange}/> <br />
-                <select name="fornecedor" id="" onChange={handleChange}>
+            <FundoTitle>
+                <Title mt={0}>Cadastrar Material</Title>
+            </FundoTitle>
+            <FundoForm>
+
+            <StyledForm>
+                <FloatLabel type="text" text="Nome do material" name="nome" onChange={handleChange}/> <br />
+                <FloatLabel type="text" text="Cor base" name="cor_base" onChange={handleChange}/> <br />
+                <span>
+                    <label>Fornecedor:  </label>
+                <select name="fornecedor" id="" onChaSnge={handleChange}>
                     {fornecedores.map((fornecedor, index) => (
                         <option value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</option>
-                    ))}
+                        ))}
                 </select>
-                <Button action={handleCadastrarMaterial}>Cadastrar Material</Button>
-            </form>
+                </span>
+                <FlexDiv>
+                    <Button action={handleCadastrarMaterial}>Cadastrar</Button>
+                    <Button color={'red'} action={() => navigate('/Materiais/')}>Cancelar</Button>
+                </FlexDiv>
+            </StyledForm>
+            </FundoForm>
         </>
     );
 };
