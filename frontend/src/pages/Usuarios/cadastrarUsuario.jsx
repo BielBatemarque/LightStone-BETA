@@ -4,6 +4,8 @@ import { Title } from "../../components/Title";
 import { useAuth } from "../../hooks/useAuth";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
+import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
+import { FloatLabel } from "../../components/FloatLabel";
 
 export const CadastrarUsuarioPage = () => {
     const [user, setUser] = useState({});
@@ -37,23 +39,30 @@ export const CadastrarUsuarioPage = () => {
         }
     };
 
-
-
-
     return(
         <>
-            <Title>Cadastrar Usuário</Title>
+            <FundoTitle>
+                <Title mt={0}>Cadastrar Usuário</Title>
+            </FundoTitle>
+            <FundoForm>
 
-            <form onSubmit={handleCadastrarUser}>
-                <input type="text" name="username" placeholder="nome de usuário" onChange={handleChange}/><br />
-                <input type="email" name="email" placeholder="Email" onChange={handleChange} /><br />
-                <select name="is_staff" onChange={handleChange}>
-                    <option value="true">Sim</option>
-                    <option value="false">Não</option>
-                </select>   <br />
-                <input type="password" name="password" placeholder="Senha" onChange={handleChange}/><br />
-                <Button>Cadastrar Usuário</Button>
-            </form>
+                <StyledForm onSubmit={handleCadastrarUser}>
+                    <FloatLabel type="text" name="username" text="nome de usuário" onChange={handleChange}/><br />
+                    <FloatLabel type="email" name="email" text="Email" onChange={handleChange} /><br />
+                    <span>
+                        <label>Usuário administrador:  </label>
+                        <select name="is_staff" onChange={handleChange}>
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </select>   <br />
+                    </span>
+                    <FloatLabel type="password" name="password" text="Senha" onChange={handleChange}/><br />
+                    <FlexDiv>
+                        <Button>Cadastrar</Button>
+                        <Button color={'red'} action={() => navigate('/Usuarios/')}>Cancelar</Button>
+                    </FlexDiv>
+                </StyledForm>
+            </FundoForm>
         </>
     );
 };
