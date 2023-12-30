@@ -42,10 +42,6 @@ export const EstoquesPage = () => {
         handleLoadingMateriais();
     }, []);
 
-    const handleMovimentacaoDeEstoque =  async (tipoMovimentação) => {
-        window.alert(`Tipo da movimentação: ${tipoMovimentação}`);
-    };
-
     return(
         <>
            <FlexCointainer pontas='true' size={'93%'}>
