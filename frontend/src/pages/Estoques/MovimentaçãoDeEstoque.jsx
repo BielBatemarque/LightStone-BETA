@@ -5,6 +5,8 @@ import { Button } from "../../components/Button";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { Estoque } from '../../models/Estoque';
 import { useAuth } from '../../hooks/useAuth';
+import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
+import { FloatLabel } from "../../components/FloatLabel";
 
 export const MovimentacaoDeEstoque = () => {
     const { state } = useAuth();
@@ -114,18 +116,28 @@ export const MovimentacaoDeEstoque = () => {
 
     return(
         <>
-            <Title>Movimentação: {tipoMovimentacao}</Title>
-            <h3>Quantidade atual em M²: {qtdMetros}</h3>
-            <form onSubmit={handleMovimentaEstoque}>
-                <select name="material" onChange={handleMaterialChange}>
-                    { materiais.map(mat => (
-                        <option key={mat.id} value={mat.estoque.id}>{mat.nome}</option>
-                    ))}
-                </select>
-                <br />
-                <input type="text" placeholder="quantidade de metros" onChange={(e) => setMetrosInput(Number(e.target.value))}/> <br />
-                <Button>Registrar Movimentação</Button>
-            </form>
+            <FundoTitle>
+                <Title mt={0}>Movimentação: {tipoMovimentacao}</Title>
+            </FundoTitle>
+            <FundoForm>
+                <StyledForm onSubmit={handleMovimentaEstoque}>
+                    <h3>Quantidade atual em M²: {qtdMetros}</h3>
+                    <span>
+                        <b>Material:   </b>
+                        <select name="material" onChange={handleMaterialChange}>
+                            { materiais.map(mat => (
+                                <option key={mat.id} value={mat.estoque.id}>{mat.nome}</option>
+                                ))}
+                        </select>
+                    </span>
+                    <br />
+                    <FloatLabel type="text" text="quantidade de metros" onChange={(e) => setMetrosInput(Number(e.target.value))}/> <br />
+                    <FlexDiv>
+                        <Button>Registrar</Button>
+                        <Button color={'red'} action={() => navigate('/Estoque/')}>Cancelar</Button>
+                    </FlexDiv>
+                </StyledForm>
+            </FundoForm>
         </>
     );
 };
