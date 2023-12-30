@@ -7,6 +7,7 @@ import { FailNotifications, SucssesNotifications } from "../../components/Notifi
 import { useNavigate } from "react-router-dom";
 import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
 import { FloatLabel } from "../../components/FloatLabel";
+import { StyledOptions, StyledSelect } from "./styles";
 
 export const CadastrarMaterialPage = () => {
     const [material, setMaterial] = useState(new Material());
@@ -54,9 +55,11 @@ export const CadastrarMaterialPage = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        let fornecedores = [];
+
         if(name === 'fornecedor'){
-            const selectedFornecedorId = parseInt(value);
-            setMaterial({...material, [name]: [selectedFornecedorId]});
+            fornecedores.push(parseInt(value));
+            setMaterial({...material, [name]: fornecedores});
         }else{   
             setMaterial({...material, [name]: value});
         }
@@ -76,11 +79,11 @@ export const CadastrarMaterialPage = () => {
                 <FloatLabel type="text" text="Cor base" name="cor_base" onChange={handleChange}/> <br />
                 <span>
                     <label>Fornecedor:  </label>
-                <select name="fornecedor" id="" onChaSnge={handleChange}>
+                <StyledSelect name="fornecedor" id="" onChange={handleChange}>
                     {fornecedores.map((fornecedor, index) => (
-                        <option value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</option>
+                        <StyledOptions value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</StyledOptions>
                         ))}
-                </select>
+                </StyledSelect>
                 </span>
                 <FlexDiv>
                     <Button action={handleCadastrarMaterial}>Cadastrar</Button>
