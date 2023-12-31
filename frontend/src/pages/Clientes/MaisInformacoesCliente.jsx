@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '../../components/Button';
 import { useAuth } from '../../hooks/useAuth';
 import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
+import { FlexDiv, FundoTitle, FundoForm, StyledForm } from '../Clientes/styles';
+import { FloatLabel } from '../../components/FloatLabel';
 
 export const MaisInformacoesCliente = () => {
     const { id } = useParams(':id');
@@ -67,18 +69,22 @@ export const MaisInformacoesCliente = () => {
 
     return(
         <>
-            <Title>Cliente: {cliente.nome}</Title>
-
-            <form onSubmit={handleUpdateCliente}>
-                <input type="text" name='nome' onChange={handleChange} value={cliente.nome} placeholder='Nome'/><br />
-                <input type="text" name='cpf' onChange={handleChange} value={cliente.cpf} placeholder='CPF'/><br />
-                <input type="text" name='endereco' onChange={handleChange} value={cliente.endereco} placeholder='Endereço'/> <br />
-                <input type="text" name="data_nascimento" onChange={handleChange} value={cliente.data_nascimento} placeholder='Nascimento' /><br />
-                <input type="email" name='email' onChange={handleChange} value={cliente.email} placeholder='Email'/> <br />
-                <Button>Salvar</Button>
-            </form>
-
-            <Button color={'red'} action={handleDeleteCliente}>Deletar Cliente</Button> 
+            <FundoTitle>
+                <Title mt={0}>Cliente: {cliente.nome}</Title>
+            </FundoTitle>
+            <FundoForm>
+                <StyledForm onSubmit={handleUpdateCliente}>
+                    <FloatLabel type="text" name='nome' onChange={handleChange} value={cliente.nome} text='Nome'/><br />
+                    <FloatLabel type="text" name='cpf' onChange={handleChange} value={cliente.cpf} text='CPF'/><br />
+                    <FloatLabel type="text" name='endereco' onChange={handleChange} value={cliente.endereco} text='Endereço'/> <br />
+                    <FloatLabel type="text" name="data_nascimento" onChange={handleChange} value={cliente.data_nascimento} text='Nascimento' /><br />
+                    <FloatLabel type="email" name='email' onChange={handleChange} value={cliente.email} text='Email'/> <br />
+                    <Button>Salvar</Button>
+                </StyledForm>
+            <FlexDiv>
+                <Button color={'red'} action={handleDeleteCliente}>Deletar Cliente</Button> 
+            </FlexDiv>
+            </FundoForm>
         </>
     );
 };
