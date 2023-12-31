@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from '../../components/Button';
 import { useAuth } from "../../hooks/useAuth";
+import { FundoForm, FundoTitle, StyledForm } from '../Clientes/styles';
+import { FloatLabel } from '../../components/FloatLabel';
+import { Title } from '../../components/Title/index';
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 
 export const MaisInformacoesFornecedor = () => {
@@ -69,16 +72,20 @@ export const MaisInformacoesFornecedor = () => {
 
     return(
         <>
-            <h1>Fornecedor: {fornecedor.nome_empresa}</h1>
+            <FundoTitle>
+                <Title mt={0}>Fornecedor: {fornecedor.nome_empresa}</Title>
+            </FundoTitle>
 
-            <form onSubmit={handleUpdateFornecedor}>
-                <input type="text" placeholder="Nome da empresa" name="nome_empresa" onChange={handleChange} value={fornecedor.nome_empresa}/> <br />
-                <input type="text" placeholder="CNPJ" name="cnpj" onChange={handleChange} value={fornecedor.cnpj}/><br />
-                <input type="text" placeholder="Endereço" name="endereco" onChange={handleChange} value={fornecedor.endereco}/> <br />
-                <Button>Editar Fornecedor</Button>
-            </form>
+            <FundoForm>
 
-            <Button color={'red'} action={handleDeleteFornecedor}>Deletar Fornecedor</Button>
+                <StyledForm onSubmit={handleUpdateFornecedor}>
+                    <FloatLabel type="text" text="Nome da empresa" name="nome_empresa" onChange={handleChange} value={fornecedor.nome_empresa}/> <br />
+                    <FloatLabel type="text" text="CNPJ" name="cnpj" onChange={handleChange} value={fornecedor.cnpj}/><br />
+                    <FloatLabel type="text" text="Endereço" name="endereco" onChange={handleChange} value={fornecedor.endereco}/> <br />
+                    <Button>Editar Fornecedor</Button>
+                    <Button color={'red'} action={handleDeleteFornecedor}>Deletar Fornecedor</Button>
+                </StyledForm>
+            </FundoForm>
         </>
     );
 };
