@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { useAuth } from '../../hooks/useAuth';
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
+import { FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
+import { FloatLabel } from "../../components/FloatLabel";
 
 export const MaisInformacoesColaborador = () => {
     const [colaborador, setColaborador] = useState({});
@@ -66,20 +68,24 @@ export const MaisInformacoesColaborador = () => {
     };
     return(
         <>
-            <Title>Colaborador: {colaborador.nome}</Title>
+            <FundoTitle>
+                <Title mt={0}>Colaborador: {colaborador.nome}</Title>
+            </FundoTitle>
+            <FundoForm>
 
-            <form onSubmit={handleUpdateColaborador}>
-            <input type="text" placeholder="nome" name="nome" onChange={handleChange} value={colaborador.nome}/> <br />
-                <input type="date" name="nascimento" id="" onChange={handleChange} value={colaborador.nascimento}/> <br />
-                <input type="text" placeholder="telefone" name="telefone" onChange={handleChange} value={colaborador.telefone}/><br />
-                <input type="text" placeholder="CPF" name="cpf" onChange={handleChange}  value={colaborador.cpf}/> <br />
-                <input type="email" placeholder="email" name="email" onChange={handleChange} value={colaborador.email}/> <br />
-                <input type="text" placeholder="cargo" name="cargo" onChange={handleChange} value={colaborador.cargo}/> <br />
+                <StyledForm onSubmit={handleUpdateColaborador}>
+                    <FloatLabel type="text" text="nome" name="nome" onChange={handleChange} value={colaborador.nome}/> <br />
+                    <FloatLabel type="date" name="nascimento" id="" onChange={handleChange} value={colaborador.nascimento}/> <br />
+                    <FloatLabel type="text" text="telefone" name="telefone" onChange={handleChange} value={colaborador.telefone}/><br />
+                    <FloatLabel type="text" text="CPF" name="cpf" onChange={handleChange}  value={colaborador.cpf}/> <br />
+                    <FloatLabel type="email" text="email" name="email" onChange={handleChange} value={colaborador.email}/> <br />
+                    <FloatLabel type="text" text="cargo" name="cargo" onChange={handleChange} value={colaborador.cargo}/> <br />
 
-                <Button>Editar Colaborador</Button>
-            </form>
+                    <Button>Editar Colaborador</Button>
+                    <Button action={handleDeleteColaborador} color={'red'}>Deletar Colaborador</Button>
+                </StyledForm>
 
-            <Button action={handleDeleteColaborador} color={'red'}>Deletar Colaborador</Button>
+            </FundoForm>
         </>
     );
 };
