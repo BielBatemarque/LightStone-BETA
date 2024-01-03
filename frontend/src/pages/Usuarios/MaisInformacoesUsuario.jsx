@@ -4,6 +4,10 @@ import { Button } from '../../components/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
+import { FundoForm, FundoTitle, StyledForm } from '../Clientes/styles';
+import { FloatLabel } from "../../components/FloatLabel";
+import { StyledSelect } from "../Materiais/styles";
+
 
 export const MaisInformacoesUsuarios = () => {
     const [usuario, setUsuario] = useState({});
@@ -69,19 +73,27 @@ export const MaisInformacoesUsuarios = () => {
 
     return(
         <>
-            <Title>Editar Usuário</Title>
-            <form onSubmit={handleUpdateUser}>
-                <input type="text" name="username" placeholder="nome de usuário" onChange={handleChange} value={usuario.username}/><br />
-                <input type="email" name="email" placeholder="Email" onChange={handleChange} value={usuario.email}/><br />
-                <select name="is_staff" onChange={handleChange} value={usuario.is_staff}>
-                    <option value="true">Sim</option>
-                    <option value="false">Não</option>
-                </select>   <br />
-                <input type="password" name="password" placeholder="Senha" onChange={handleChange} value={usuario.password}/><br />
-                <Button>Editar Usuário</Button>
-            </form>
+            <FundoTitle>
+                <Title mt={0}>Editar Usuário</Title>
+            </FundoTitle>
+            <FundoForm>
 
-            <Button color={'red'} action={handleDeleteUser}>Deletar Usuário</Button>
+                <StyledForm onSubmit={handleUpdateUser}>
+                    <FloatLabel type="text" name="username" text="nome de usuário" onChange={handleChange} value={usuario.username}/><br />
+                    <FloatLabel type="email" name="email" text="Email" onChange={handleChange} value={usuario.email}/><br />
+                    <span>
+                        <label style={{marginRight: '1rem'}}>Super-Usuário: </label>
+                        <StyledSelect name="is_staff" onChange={handleChange} value={usuario.is_staff}>
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </StyledSelect>
+                    </span>
+                    <FloatLabel type="password" name="password" text="Senha" onChange={handleChange} value={usuario.password}/><br />
+                    <Button>Editar Usuário</Button>
+                    <Button color={'red'} action={handleDeleteUser}>Deletar Usuário</Button>
+                </StyledForm>
+
+            </FundoForm>
         </>
     );
 };
