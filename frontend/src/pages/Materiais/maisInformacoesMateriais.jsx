@@ -4,6 +4,9 @@ import { Button } from '../../components/Button/index';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { FailNotifications, SucssesNotifications } from '../../components/Notifications/index';
+import { FundoForm, FundoTitle, StyledForm } from '../Clientes/styles';
+import { FloatLabel } from '../../components/FloatLabel/index';
+import { StyledSelect } from './styles';
 
 export const MaisInformacoesMaterial = () => {
     const [material, setMaterial] = useState({});
@@ -84,19 +87,25 @@ export const MaisInformacoesMaterial = () => {
 
     return(
         <>
-            <Title>Material: {material.nome}</Title>
-
-            <form onSubmit={handleUpdateMaterial}>
-                <input type="text" placeholder="Nome do material" name="nome" onChange={handleChange} value={material.nome}/> <br />
-                <input type="text" placeholder="Cor base" name="cor_base" onChange={handleChange} value={material.cor_base}/> <br />
-                <select name="fornecedor" id="" onChange={handleChange} value={material.fornecedor}>
-                    {fornecedores.map((fornecedor, index) => (
-                        <option value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</option>
-                    ))}
-                </select><br />
-                <Button>Editar Material</Button>
-            </form>
-            <Button color={'red'} action={handleDeleteMaterial}>Deletar Material</Button>
+            <FundoTitle>
+                <Title mt={0}>Material: {material.nome}</Title>
+            </FundoTitle>
+            <FundoForm>
+                <StyledForm onSubmit={handleUpdateMaterial}>
+                    <FloatLabel type="text" text="Nome do material" name="nome" onChange={handleChange} value={material.nome}/> <br />
+                    <FloatLabel type="text" text="Cor base" name="cor_base" onChange={handleChange} value={material.cor_base}/> <br />
+                    <span>
+                        <label style={{marginRight: '1rem'}}>Fornecedor:  </label>
+                        <StyledSelect name="fornecedor" id="" onChange={handleChange} value={material.fornecedor}>
+                            {fornecedores.map((fornecedor, index) => (
+                                <option value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</option>
+                                ))}
+                        </StyledSelect>
+                    </span>
+                    <Button>Editar Material</Button>
+                    <Button color={'red'} action={handleDeleteMaterial}>Deletar Material</Button>
+                </StyledForm>
+            </FundoForm>
         </>
     );
 };
