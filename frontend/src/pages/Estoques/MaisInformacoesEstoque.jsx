@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Estoque } from '../../models/Estoque';
+import { FundoForm, FundoTitle, StyledForm } from '../Clientes/styles';
+
 
 export const MaisInformacoesEstoque = () => {
     const [estoque, setEstoque] = useState(new Estoque());
@@ -30,8 +32,12 @@ export const MaisInformacoesEstoque = () => {
 
     return(
         <>
-            <Title>Mais Informações: {material.nome}</Title>
-            <p>Quantidade de metros: {estoque.quantidade_metros}</p>
+            <FundoTitle>
+                <Title mt={0}>Estoque: {material.nome}</Title>
+            </FundoTitle>
+            <FundoForm>
+                <p style={{margin: '0'}}>Quantidade de metros: {estoque.quantidade_metros}</p>
+            </FundoForm>
         </>
     );
 };
