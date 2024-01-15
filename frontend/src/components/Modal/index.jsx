@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { ModalDiv } from "./styles";
 
-export const Modal = () => {
+export const Modal = ({text, type, isOpen}) => {
     return(
-        <ModalDiv>
-            opa
+        <ModalDiv isOpen={isOpen}>
+            {text}
         </ModalDiv>
     );
 }
