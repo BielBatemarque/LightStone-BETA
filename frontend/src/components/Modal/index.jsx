@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { ModalDiv } from "./styles";
 
-export const Modal = ({text, type, isOpen}) => {
+export const Modal = ({text, isOpen}) => {
     return(
         <ModalDiv isOpen={isOpen}>
             {text}
