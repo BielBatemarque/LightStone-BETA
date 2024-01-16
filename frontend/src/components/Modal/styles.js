@@ -8,5 +8,5 @@ export const ModalDiv = styled.div`
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
-    display: ${(isOpen) => (isOpen ? 'block' : 'none')};
+    display: ${(props) => (props.isOpen ? 'block' : 'none')};
 `;
