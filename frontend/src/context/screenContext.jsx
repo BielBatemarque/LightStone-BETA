@@ -20,9 +20,9 @@ export const ScreenReducer = (state, action) => {
 };
 
 export const ScrenState = ({ children }) => {
-    const [state, dispatch] = useReducer(ScreenContext, ScreenReducer);
+    const [screenState, dispatch] = useReducer(ScreenReducer, initialScreenState);
 
     return(
-        <ScreenContext.Provider value={{state, dispatch}}>{children}</ScreenContext.Provider>
+        <ScreenContext.Provider value={{screenState, dispatch}}>{children}</ScreenContext.Provider>
     );
 };
