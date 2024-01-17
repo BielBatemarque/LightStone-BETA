@@ -36,7 +36,9 @@ export const MaisInformacoesEstoque = () => {
                 <Title mt={0}>Estoque: {material.nome}</Title>
             </FundoTitle>
             <FundoForm>
-                <p style={{margin: '0'}}>Quantidade de metros: {estoque.quantidade_metros}</p>
+                <h1 style={{margin: '0', textAlign:'center'}}>Quantidade de metros: {estoque.quantidade_metros}</h1>
+                <hr />
+                <h2 style={{marginTop: '1rem', textAlign: 'center'}}>Historico de Movimentações</h2>
             </FundoForm>
         </>
     );
