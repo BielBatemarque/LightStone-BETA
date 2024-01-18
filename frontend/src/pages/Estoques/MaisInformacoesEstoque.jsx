@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Estoque } from '../../models/Estoque';
-import { FundoForm, FundoTitle, StyledForm } from '../Clientes/styles';
+import { FundoForm, FundoTitle } from '../Clientes/styles';
 
 
 export const MaisInformacoesEstoque = () => {
