@@ -3,6 +3,7 @@ import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Estoque } from '../../models/Estoque';
 import { FundoForm, FundoTitle } from '../Clientes/styles';
+import { ItemListagemMovEstoque, ListagemDeMovimentacoes } from "./styles";
 
 
 export const MaisInformacoesEstoque = () => {
@@ -39,6 +40,14 @@ export const MaisInformacoesEstoque = () => {
                 <h1 style={{margin: '0', textAlign:'center'}}>Quantidade de metros: {estoque.quantidade_metros}</h1>
                 <hr />
                 <h2 style={{marginTop: '1rem', textAlign: 'center'}}>Historico de Movimentações</h2>
+                <ListagemDeMovimentacoes>
+                    <ItemListagemMovEstoque>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                    </ItemListagemMovEstoque>
+                </ListagemDeMovimentacoes>
+
             </FundoForm>
         </>
     );
