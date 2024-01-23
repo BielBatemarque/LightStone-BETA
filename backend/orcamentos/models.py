@@ -6,5 +6,7 @@ from materiais.models import Material
 class Orcamento(models.Model):
     valor_total = models.FloatField()
     cliente = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING)
-    materiais = models.ManyToManyField(Material)
+    material = models.ManyToManyField(Material)
     
+    def __str__(self) -> str:
+        return self.cliente.nome
