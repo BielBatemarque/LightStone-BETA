@@ -13,6 +13,7 @@
     import { TbReportSearch } from 'react-icons/tb';
     import { RiLogoutBoxLine } from 'react-icons/ri';
     import { MdPeopleAlt } from 'react-icons/md';
+import { SucssesNotifications } from "../Notifications";
 
     export const SideBar = () => {
         const { state, dispatch } = useContext(globalContext);
@@ -36,6 +37,7 @@
             if(request.status === 200){
                 dispatch({type: 'logout'});
                 navigate('/');
+                SucssesNotifications('Sucesso ao encerrar sessão');
             }else if(request.status === 401){
                 window.alert('Não existe sessão ativa');
             }
