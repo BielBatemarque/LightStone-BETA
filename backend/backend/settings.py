@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'vendas',
     'orcamentos',
     'relatorios',
-    'pecas'
+    'pecas',
 ]
 
 MIDDLEWARE = [
