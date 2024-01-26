@@ -31,6 +31,7 @@ export const CadastrarCLientePage = () => {
             },
             body:JSON.stringify(cliente),
         });
+        const response = await request.json();
 
         if (request.ok) {
             SucssesNotifications('Cadastrado com Sucesso');
