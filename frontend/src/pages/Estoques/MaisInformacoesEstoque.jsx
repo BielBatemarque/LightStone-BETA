@@ -10,6 +10,7 @@ export const MaisInformacoesEstoque = () => {
     const [estoque, setEstoque] = useState(new Estoque());
     const { id } = useParams(':id');
     const [material, setMaterial] = useState({});
+    const [movimentacoes, setMovimentacoes] = useState([]);
 
     const handleLoadEstoque = async () => {
         const request = await fetch(`http://localhost:8000/estoques/${id}/`);
@@ -24,6 +25,19 @@ export const MaisInformacoesEstoque = () => {
             console.error("Propriedade 'material' não encontrada na resposta da primeira requisição.");
         }
     };
+
+    const handleLoadMovimentacaoDeEstoque = async () => {
+        const request = await fetch('http://localhost:8000/movimentacoes_estoque/');
+        const response = await request.json();
+
+        setMovimentacoes(response);
+    };
+
+    useEffect(() => {
+        handleLoadMovimentacaoDeEstoque();
+    }, []);
+
+
 
 
 
