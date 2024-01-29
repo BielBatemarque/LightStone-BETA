@@ -30,7 +30,10 @@ export const MaisInformacoesEstoque = () => {
         const request = await fetch('http://localhost:8000/movimentacoes_estoque/');
         const response = await request.json();
 
-        setMovimentacoes(response);
+        const movimentacoesFiltradas = response.filter(mov => mov.produto === material.id);
+
+        setMovimentacoes(movimentacoesFiltradas);
+        console.log(response);
     };
 
     useEffect(() => {
