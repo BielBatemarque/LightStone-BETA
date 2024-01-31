@@ -63,6 +63,8 @@ export const MaisInformacoesCliente = () => {
         if(request.ok){
             SucssesNotifications('Cliente excluido com sucesso');
             navigate('/Clientes/');
+        }else{
+            FailNotifications('Erro ao excluir cliente');
         }
         
     };
