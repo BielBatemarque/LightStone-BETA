@@ -1,6 +1,7 @@
 import { Button } from "../../components/Button";
 import { Title } from "../../components/Title";
 import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
+import { FundoForm, FundoTitle } from "../Clientes/styles";
 
 export const RelatoriosPage = () => {
     const fetchData = async () => {
@@ -32,12 +33,16 @@ export const RelatoriosPage = () => {
     
     return(
        <>
-            <Title>Relatório de vendas</Title>
-              <p>Tela da qual poderão ser impressos diversos relatórios no formato PDF</p>
+        <FundoTitle>
+            <Title mt={0}>Relatórios</Title>
+        </FundoTitle>
+        <FundoForm>
+              <p style={{marginTop: '0px'}}>Tela da qual poderão ser impressos diversos relatórios no formato PDF</p>
             <Button action={fetchData}>Baixar PDF</Button>
 
             <Title>Relatórios de entradas e saídas</Title>
             <Button>Gerar Relatório</Button>
+        </FundoForm>
        </> 
     );
 };
