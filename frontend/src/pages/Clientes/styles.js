@@ -51,7 +51,7 @@ export const StyledTextArea = styled.textarea`
 `;
 
 export const FlexDiv = styled.div`
-    margin: 0 auto;
+    margin: ${(props) => (props.margin ? props.margin : '0 auto')};
     display: flex;
     text-align: center;
     width: 30%;
