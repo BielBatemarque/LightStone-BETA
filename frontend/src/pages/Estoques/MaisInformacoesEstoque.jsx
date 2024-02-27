@@ -12,6 +12,8 @@ export const MaisInformacoesEstoque = () => {
     const [material, setMaterial] = useState({});
     const [movimentacoes, setMovimentacoes] = useState([]);
 
+    console.log(movimentacoes);
+
     const handleLoadEstoque = async () => {
         const request = await fetch(`http://localhost:8000/estoques/${id}/`);
         const response = await request.json();
@@ -40,10 +42,6 @@ export const MaisInformacoesEstoque = () => {
         handleLoadMovimentacaoDeEstoque();
     }, []);
 
-
-
-
-
     useEffect(() => {
         handleLoadEstoque();
     }, []);
@@ -59,9 +57,9 @@ export const MaisInformacoesEstoque = () => {
                 <h2 style={{marginTop: '1rem', textAlign: 'center'}}>Historico de Movimentações</h2>
                 <ListagemDeMovimentacoes>
                     <ItemListagemMovEstoque>
-                        <p>a</p>
-                        <p>a</p>
-                        <p>a</p>
+                        {movimentacoes.map((mov, index) => (
+                            <p key={index}>{mov.produto}</p>
+                        ))}
                     </ItemListagemMovEstoque>
                 </ListagemDeMovimentacoes>
 
