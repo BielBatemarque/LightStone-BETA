@@ -26,7 +26,7 @@ export const ClientesPage = () => {
         <>
             <FlexCointainer pontas='true' size={'92%'}>
                 <Title>Clientes</Title>
-                <Filtro />
+                {/* <Filtro /> */}
                 <Button action={() => navegate('/Clientes/cadastrarCliente/')}>Novo Cliente</Button>
            </FlexCointainer>
            <Listing>

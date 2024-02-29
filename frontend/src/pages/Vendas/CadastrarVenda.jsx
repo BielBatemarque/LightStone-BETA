@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Modal } from "../../components/Modal";
+import { ModalComponent } from "../../components/Modal";
 import { Title } from "../../components/Title";
 import { FundoForm, FundoTitle } from "../Clientes/styles";
 import { ScreenContext } from "../../context/screenContext";
@@ -22,7 +22,7 @@ export const CadastrarVenda = () => {
           <Title mt={0}>Nova Venda</Title>
         </FundoTitle>
         <FundoForm modalOpen={screenState.modalOpen}>
-          <Modal isOpen={isOpen} text="Deseja cadastrar um novo orçamento?" />
+          <ModalComponent isOpen={isOpen} text="Deseja cadastrar um novo orçamento?" />
           <button onClick={toggleModal}>Abrir e fechar</button>
         </FundoForm>
       </>
