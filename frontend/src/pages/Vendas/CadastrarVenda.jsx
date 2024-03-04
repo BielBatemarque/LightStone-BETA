@@ -22,8 +22,8 @@ export const CadastrarVenda = () => {
           <Title mt={0}>Nova Venda</Title>
         </FundoTitle>
         <FundoForm modalOpen={screenState.modalOpen}>
-          <ModalComponent isOpen={isOpen} text="Deseja cadastrar um novo orçamento?" />
-          <button onClick={toggleModal}>Abrir e fechar</button>
+          <p>Novo orçamento</p>
+          
         </FundoForm>
       </>
     );
