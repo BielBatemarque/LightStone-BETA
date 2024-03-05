@@ -27,7 +27,7 @@ export const VendasPage = () => {
             <FlexCointainer pontas="true" size={'93%'}>
                 <Title>Vendas</Title>
                 <ContainerBtns>
-                    <Button action={() => navigate('/Orcamentos/')} color={'gray'}>Novo Orçamento</Button>
+                    <Button action={() => navigate('/Orcamentos/')} color={'gray'}>Orçamentos</Button>
                     <Button action={() => navigate('/Vendas/CadastrarVenda/')}>Nova Venda</Button>
                 </ContainerBtns>
             </FlexCointainer>
