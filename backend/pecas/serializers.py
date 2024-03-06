@@ -4,4 +4,4 @@ from .models import Peca
 class PecaSerializers(serializers.ModelSerializer):
     class Meta:
         model = Peca
-        fields = ['id', 'nome', 'dimensoes', 'material']
+        fields = ['id', 'nome', 'descrição', 'material', 'quantidade_metros']
