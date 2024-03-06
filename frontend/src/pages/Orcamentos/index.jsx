@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { FlexCointainer } from "../../components/FlexContainer";
 import { Listing } from "../../components/Listing";
@@ -15,9 +15,15 @@ export const OrcamentosPage = () => {
         setOrcamentos(response);
     }
 
+    useEffect(() => {
+        orcamentosRequest();
+    }, []);
+
+    console.log(orcamentos);
+
     return(
         <>
-            <FlexCointainer pontas={true} size='93%'>
+            <FlexCointainer pontas='true' size='93%'>
                 <Title>Orçamentos</Title>
                 <Button>Novo Orçamento</Button>
             </FlexCointainer>
