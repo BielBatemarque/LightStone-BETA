@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
-import { FundoForm, FundoTitle } from "../Clientes/styles";
+import { FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
 import { Title } from "../../components/Title";
+import { FloatLabel } from '../../components/FloatLabel/index';
 import { useEffect, useState } from "react";
 
 export const MaisInformacoesOrcamento = () => {
@@ -24,7 +25,9 @@ export const MaisInformacoesOrcamento = () => {
                 <Title mt={0}>Orçamento: {orcamento.id}</Title>
             </FundoTitle>
             <FundoForm>
-
+                <StyledForm>
+                    
+                </StyledForm>
             </FundoForm>
 
         </>
