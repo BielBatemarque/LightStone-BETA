@@ -27,7 +27,7 @@ export const OrcamentosPage = () => {
         <>
             <FlexCointainer pontas='true' size='93%'>
                 <Title>Orçamentos</Title>
-                <Button>Novo Orçamento</Button>
+                <Button action={() => navigate('/Orcamentos/NovoOrcamento/') }>Novo Orçamento</Button>
             </FlexCointainer>
             <Listing>
                 {orcamentos.map(((orcamento, index) => (
