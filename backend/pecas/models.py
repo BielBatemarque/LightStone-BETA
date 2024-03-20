@@ -4,7 +4,7 @@ from materiais.models import Material
 # Create your models here.
 
 class Peca(models.Model):
-    material = models.ForeignKey(Material, on_delete=models.CASCADE)
+    material = models.ForeignKey(Material, on_delete=models.DO_NOTHING)
     nome = models.CharField(max_length=100)
     descrição = models.TextField(max_length=100, null=True)
     quantidade_metros = models.FloatField(null=True)
