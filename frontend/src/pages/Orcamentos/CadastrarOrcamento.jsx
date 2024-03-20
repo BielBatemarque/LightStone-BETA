@@ -1,5 +1,6 @@
 import { Title } from "../../components/Title";
-import { FundoForm, FundoTitle } from "../Clientes/styles";
+import { FlexDiv, FundoForm, FundoTitle } from "../Clientes/styles";
+import { Button } from "../../components/Button";
 
 export const CadastrarOrcamento = () => {
     return(
@@ -7,7 +8,16 @@ export const CadastrarOrcamento = () => {
             <FundoTitle>
                 <Title mt={'0px'}>Novo Orçamento</Title>
             </FundoTitle>
-            <FundoForm></FundoForm>
+            <FundoForm>
+                <h2 style={{
+                    margin: '0px',
+                    textAlign: 'center',
+                }}>Lista de Peças:</h2>
+
+                <FlexDiv>
+                    <Button color={'gray'}>Adicionar Peça</Button>
+                </FlexDiv>
+            </FundoForm>
         </>
     );
 }
