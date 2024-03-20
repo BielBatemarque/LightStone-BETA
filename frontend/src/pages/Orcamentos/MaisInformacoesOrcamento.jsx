@@ -47,7 +47,7 @@ export const MaisInformacoesOrcamento = () => {
             <FundoForm>
                 <StyledForm>
                     <FloatLabel name={'cliente'} text="Cliente" onChange={handleChange} value={cliente.nome}/>
-                    
+                    <FloatLabel name={'valor_total'} text="Total do Orçamento" onChange={handleChange} value={orcamento.valor_total} />
                 </StyledForm>
             </FundoForm>
 
