@@ -5,7 +5,7 @@ import { Cliente } from "../../models/Cliente";
 import { globalContext } from "../../context/context";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
-import { FundoForm, FundoTitle, StyledForm } from "./styles";
+import { FlexRow, FundoForm, FundoTitle, StyledForm } from "./styles";
 import { FlexDiv } from './styles'; 
 import { FloatLabel } from '../../components/FloatLabel/index';
 
@@ -50,12 +50,23 @@ export const CadastrarCLientePage = () => {
             </FundoTitle>
             <FundoForm>
                 <StyledForm>
-                    <FloatLabel  type="text" name="nome" onChange={handleChange} text="Nome"/> <br />
+                    <FloatLabel  type="text" name="nome" onChange={handleChange} text="Nome" size={100} /> <br />
                     {/* type="text" name="nome" onChange={handleChange} placeholder="Nome" */}
-                    <FloatLabel type="text" name="cpf" onChange={handleChange} text="CPF"/> <br />
-                    <FloatLabel name="endereco" onChange={handleChange} text="Endereço" /><br />
-                    <FloatLabel type="date" name="data_nascimento" onChange={handleChange} text="Nascimento"/><br />
-                    <FloatLabel type="email" name="email" onChange={handleChange} text="email"/><br />
+                    <FloatLabel type="text" name="cpf" onChange={handleChange} text="CPF" size={100}/> <br />
+                    <FlexRow>
+                        <FloatLabel text="CEP" size={45}/>
+                        <FloatLabel text="Número" size={45}/>
+                    </FlexRow><br />
+
+                    <FlexRow>
+                        <FloatLabel text="Cidade" size={45}/>
+                        <FloatLabel text="UF" size={45}/>
+                    </FlexRow><br />
+
+                    <FloatLabel text={"logradouro"} size={100}/> <br />
+                    {/* <FloatLabel name="endereco" onChange={handleChange} text="Endereço" /><br /> */}
+                    <FloatLabel type="email" name="email" onChange={handleChange} text="email" size={100}/><br />
+                    <FloatLabel type="date" name="data_nascimento" onChange={handleChange} text="Nascimento" size={100}/><br />
 
                     <FlexDiv>
                         <Button action={handleCadastraCliente}>Cadastrar</Button>
