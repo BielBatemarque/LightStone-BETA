@@ -13,6 +13,8 @@ import { FloatLabel } from '../../components/FloatLabel/index';
 export const CadastrarCLientePage = () => {
     const [cliente, setCliente] = useState(new Cliente());
     const { state } = useContext(globalContext);
+    const [cep, SetCep] = useState('');
+    const [endereco, setEndereco] = useState({});
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -42,6 +44,25 @@ export const CadastrarCLientePage = () => {
         }
 
     };
+    
+    const formataCep = (cep) => {
+        let cepFormatado = cep.replace(/\D/g, '');
+        
+        return cepFormatado;
+    }
+
+    const consultaCep = async (cep) => {
+        try{
+            const request = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            const response = await request.json();
+
+            setEndereco(response);
+        }catch(e){
+            console.log(e)
+        }
+    }
+
+    console.log(cep);
 
     return(
         <>
@@ -54,16 +75,24 @@ export const CadastrarCLientePage = () => {
                     {/* type="text" name="nome" onChange={handleChange} placeholder="Nome" */}
                     <FloatLabel type="text" name="cpf" onChange={handleChange} text="CPF" size={100}/> <br />
                     <FlexRow>
-                        <FloatLabel text="CEP" size={45}/>
+                        <FloatLabel 
+                            text="CEP" 
+                            size={45} 
+                            onChange={(e) => SetCep(formataCep(e.target.value))} 
+                            onBlur={() => consultaCep(cep)} 
+                        />
                         <FloatLabel text="Número" size={45}/>
                     </FlexRow><br />
 
                     <FlexRow>
-                        <FloatLabel text="Cidade" size={45}/>
-                        <FloatLabel text="UF" size={45}/>
+                        <FloatLabel text="Cidade" size={45} value={endereco.localidade}/>
+                        <FloatLabel text="UF" size={45} value={endereco.uf}/>
                     </FlexRow><br />
 
-                    <FloatLabel text={"logradouro"} size={100}/> <br />
+                    <FlexRow>
+                        <FloatLabel text={"logradouro"} size={45} value={endereco.logradouro}/> 
+                        <FloatLabel text={"Bairro"} size={45} value={endereco.bairro}/>
+                    </FlexRow> <br />
                     {/* <FloatLabel name="endereco" onChange={handleChange} text="Endereço" /><br /> */}
                     <FloatLabel type="email" name="email" onChange={handleChange} text="email" size={100}/><br />
                     <FloatLabel type="date" name="data_nascimento" onChange={handleChange} text="Nascimento" size={100}/><br />
