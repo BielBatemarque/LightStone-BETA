@@ -27,7 +27,7 @@ export const FundoForm = styled.div`
     margin-top: 0;
     width: 90%;
     margin: 0 auto;
-    height: 80%;
+    height: 85%;
     box-shadow: gray 3px 3px 5px;
     border-radius: 0px 0px 10px 10px;
 `;
