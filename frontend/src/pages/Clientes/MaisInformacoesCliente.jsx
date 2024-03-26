@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '../../components/Button';
 import { useAuth } from '../../hooks/useAuth';
 import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
-import { FlexDiv, FundoTitle, FundoForm, StyledForm } from '../Clientes/styles';
+import { FlexDiv, FundoTitle, FundoForm, StyledForm, FlexRow } from '../Clientes/styles';
 import { FloatLabel } from '../../components/FloatLabel';
 
 export const MaisInformacoesCliente = () => {
@@ -76,11 +76,33 @@ export const MaisInformacoesCliente = () => {
             </FundoTitle>
             <FundoForm>
                 <StyledForm onSubmit={handleUpdateCliente}>
-                    <FloatLabel type="text" name='nome' onChange={handleChange} value={cliente.nome} text='Nome'/><br />
-                    <FloatLabel type="text" name='cpf' onChange={handleChange} value={cliente.cpf} text='CPF'/><br />
-                    <FloatLabel type="text" name='endereco' onChange={handleChange} value={cliente.endereco} text='Endereço'/> <br />
-                    <FloatLabel type="text" name="data_nascimento" onChange={handleChange} value={cliente.data_nascimento} text='Nascimento' /><br />
-                    <FloatLabel type="email" name='email' onChange={handleChange} value={cliente.email} text='Email'/> <br />
+                <FloatLabel  type="text" value={cliente.nome} name="nome" onChange={handleChange} text="Nome" size={100} /> <br />
+                    {/* type="text" name="nome" onChange={handleChange} placeholder="Nome" */}
+                    <FloatLabel type="text" name="cpf" value={cliente.cpf} onChange={handleChange} text="CPF" size={100}/> <br />
+                    <FlexRow>
+                        <FloatLabel 
+                            text="CEP"
+                            name="cep" 
+                            size={45} 
+                            onChange={handleChange} 
+                            value={cliente.cep} 
+                        />
+                        <FloatLabel text="Número" value={cliente.numero} size={45} name='numero' onChange={handleChange}/>
+                    </FlexRow><br />
+
+                    <FlexRow>
+                        <FloatLabel text="Cidade" size={45} value={cliente.cidade} name={"cidade"} on onChange={handleChange}/>
+                        <FloatLabel text="UF" size={45} value={cliente.uf} name="uf" onChange={handleChange}/>
+                    </FlexRow><br />
+
+                    <FlexRow>
+                        <FloatLabel text={"logradouro"} size={45} value={cliente.logradouro} name="logradouro" onChange={handleChange}/> 
+                        <FloatLabel text={"Bairro"} size={45} value={cliente.bairro} name="bairro" onChange={handleChange}/>
+                    </FlexRow> <br />
+                    {/* <FloatLabel name="" onChange={handleChange} text="Endereço" /><br /> */}
+                    <FloatLabel type="email" name="email" value={cliente.email} onChange={handleChange} text="email" size={100}/><br />
+                    <FloatLabel type="date" name="data_nascimento" value={cliente.data_nascimento} onChange={handleChange} text="Nascimento" size={100}/><br />
+
                     <Button>Salvar</Button>
                 </StyledForm>
             <FlexDiv>
