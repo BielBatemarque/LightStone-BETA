@@ -57,12 +57,21 @@ export const CadastrarCLientePage = () => {
             const response = await request.json();
 
             setEndereco(response);
+
+            setCliente({
+                ...cliente,
+                cep: cep,
+                cidade: response.localidade,
+                uf: response.uf,
+                logradouro: response.logradouro,
+                bairro: response.bairro
+            });
         }catch(e){
             console.log(e)
         }
     }
 
-    console.log(cep);
+    console.log(cliente);
 
     return(
         <>
@@ -70,35 +79,36 @@ export const CadastrarCLientePage = () => {
                 <Title mt={0}>Cadastrar Cliente</Title>
             </FundoTitle>
             <FundoForm>
-                <StyledForm>
+                <StyledForm onSubmit={handleCadastraCliente}>
                     <FloatLabel  type="text" name="nome" onChange={handleChange} text="Nome" size={100} /> <br />
                     {/* type="text" name="nome" onChange={handleChange} placeholder="Nome" */}
                     <FloatLabel type="text" name="cpf" onChange={handleChange} text="CPF" size={100}/> <br />
                     <FlexRow>
                         <FloatLabel 
-                            text="CEP" 
+                            text="CEP"
+                            name="cep" 
                             size={45} 
                             onChange={(e) => SetCep(formataCep(e.target.value))} 
                             onBlur={() => consultaCep(cep)} 
                         />
-                        <FloatLabel text="Número" size={45}/>
+                        <FloatLabel text="Número" size={45} name='numero' onChange={handleChange}/>
                     </FlexRow><br />
 
                     <FlexRow>
-                        <FloatLabel text="Cidade" size={45} value={endereco.localidade}/>
-                        <FloatLabel text="UF" size={45} value={endereco.uf}/>
+                        <FloatLabel text="Cidade" size={45} value={endereco.localidade} name={"cidade"} on onChange={handleChange}/>
+                        <FloatLabel text="UF" size={45} value={endereco.uf} name="uf" onChange={handleChange}/>
                     </FlexRow><br />
 
                     <FlexRow>
-                        <FloatLabel text={"logradouro"} size={45} value={endereco.logradouro}/> 
-                        <FloatLabel text={"Bairro"} size={45} value={endereco.bairro}/>
+                        <FloatLabel text={"logradouro"} size={45} value={endereco.logradouro} name="logradouro" onChange={handleChange}/> 
+                        <FloatLabel text={"Bairro"} size={45} value={endereco.bairro} name="bairro" onChange={handleChange}/>
                     </FlexRow> <br />
                     {/* <FloatLabel name="endereco" onChange={handleChange} text="Endereço" /><br /> */}
                     <FloatLabel type="email" name="email" onChange={handleChange} text="email" size={100}/><br />
                     <FloatLabel type="date" name="data_nascimento" onChange={handleChange} text="Nascimento" size={100}/><br />
 
                     <FlexDiv>
-                        <Button action={handleCadastraCliente}>Cadastrar</Button>
+                        <Button>Cadastrar</Button>
                         <Button color={'red'} action={() => navigate('/Clientes/')}>Cancelar</Button>
                     </FlexDiv>
                 </StyledForm>
