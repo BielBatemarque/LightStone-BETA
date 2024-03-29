@@ -5,7 +5,7 @@ from rest_framework import routers, serializers, viewsets
 class FornecedorSerializers(serializers.ModelSerializer):
     class Meta:
         model = Fornecedor
-        fields = ['id', 'nome_empresa', 'cnpj', 'endereco']
+        fields = ['id', 'nome_empresa', 'cnpj', 'cidade', 'bairro', 'numero', 'logradouro', 'uf', 'cep']
 
         def validade_cnpj(self, value):
             #Verifica se o cnpj ja existe
