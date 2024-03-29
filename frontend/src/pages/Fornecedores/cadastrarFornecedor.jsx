@@ -5,7 +5,7 @@ import { Fornecedor } from '../../models/Fornecedor';
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from 'react-router-dom';
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
-import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
+import { FlexDiv, FlexRow, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
 import { FloatLabel } from "../../components/FloatLabel";
 
 export const CadastrarFornecedor = () => {
@@ -50,11 +50,22 @@ export const CadastrarFornecedor = () => {
             </FundoTitle>
             <FundoForm>
                 <StyledForm onSubmit={handleCadastrarFornecedor}>
-                    <FloatLabel type="text" text="Nome da empresa" name="nome_empresa" onChange={handleChange}/> <br />
-                    <FloatLabel type="text" text="CNPJ" name="cnpj" onChange={handleChange}/><br />
+                    <FloatLabel type="text" text="Nome da empresa" name="nome_empresa" onChange={handleChange} size={100}/> <br />
+                    <FloatLabel type="text" text="CNPJ" name="cnpj" onChange={handleChange} size={100}/><br />
                     {/* <FloatLabel type="text" text="Endereço" name="endereco" onChange={handleChange}/> <br /> */}
                     {/* Colocar aqui os inputs de endereço modelo clientes */}
-
+                    <FlexRow>
+                        <FloatLabel  size={45} text='CEP'/>
+                        <FloatLabel  size={45} text="Número"/>
+                    </FlexRow> <br />
+                    <FlexRow>
+                        <FloatLabel  size={45} text={"Cidade"}/>
+                        <FloatLabel  size={45} text="UF"/>
+                    </FlexRow> <br />
+                    <FlexRow>
+                        <FloatLabel  size={45} text="Logradouro"/>
+                        <FloatLabel  size={45} text="Bairro"/>
+                    </FlexRow> <br />
                     
                     <FlexDiv>
                         <Button>Cadastrar</Button>
