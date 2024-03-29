@@ -49,7 +49,7 @@ export const CadastrarCLientePage = () => {
         let cepFormatado = cep.replace(/\D/g, '');
         
         return cepFormatado;
-    }
+    };
 
     const consultaCep = async (cep) => {
         try{
@@ -69,7 +69,7 @@ export const CadastrarCLientePage = () => {
         }catch(e){
             console.log(e)
         }
-    }
+    };
 
     console.log(cliente);
 
