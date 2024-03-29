@@ -52,7 +52,9 @@ export const CadastrarFornecedor = () => {
                 <StyledForm onSubmit={handleCadastrarFornecedor}>
                     <FloatLabel type="text" text="Nome da empresa" name="nome_empresa" onChange={handleChange}/> <br />
                     <FloatLabel type="text" text="CNPJ" name="cnpj" onChange={handleChange}/><br />
-                    <FloatLabel type="text" text="Endereço" name="endereco" onChange={handleChange}/> <br />
+                    {/* <FloatLabel type="text" text="Endereço" name="endereco" onChange={handleChange}/> <br /> */}
+                    {/* Colocar aqui os inputs de endereço modelo clientes */}
+
                     
                     <FlexDiv>
                         <Button>Cadastrar</Button>
