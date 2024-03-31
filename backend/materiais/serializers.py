@@ -8,7 +8,7 @@ class MaterialSerializers(serializers.ModelSerializer):
 
         def validate_name(self, value):
             # Valida se o material com o mesmo nome já está cadastrado
-            nome_existente = Material.objects.filter(nome=value)
+            nome_existente = Material.objects.filter(nome=value).exists()
 
             if nome_existente:
                 raise serializers.ValidationError("Material já cadastrado")
