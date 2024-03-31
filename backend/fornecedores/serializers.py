@@ -1,6 +1,5 @@
-from django.urls import path, include
 from .models import Fornecedor
-from rest_framework import routers, serializers, viewsets
+from rest_framework import serializers
 
 class FornecedorSerializers(serializers.ModelSerializer):
     class Meta:
