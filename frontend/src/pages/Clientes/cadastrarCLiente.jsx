@@ -91,7 +91,7 @@ export const CadastrarCLientePage = () => {
                             onChange={(e) => SetCep(formataCep(e.target.value))} 
                             onBlur={() => consultaCep(cep)} 
                         />
-                        <FloatLabel text="Número" size={45} name='numero' onChange={handleChange}/>
+                            <FloatLabel text={"Bairro"} size={45} value={endereco.bairro} name="bairro" onChange={handleChange}/>
                     </FlexRow><br />
 
                     <FlexRow>
@@ -101,7 +101,7 @@ export const CadastrarCLientePage = () => {
 
                     <FlexRow>
                         <FloatLabel text={"logradouro"} size={45} value={endereco.logradouro} name="logradouro" onChange={handleChange}/> 
-                        <FloatLabel text={"Bairro"} size={45} value={endereco.bairro} name="bairro" onChange={handleChange}/>
+                        <FloatLabel text="Número" size={45} name='numero' onChange={handleChange}/>
                     </FlexRow> <br />
                     {/* <FloatLabel name="endereco" onChange={handleChange} text="Endereço" /><br /> */}
                     <FloatLabel type="email" name="email" onChange={handleChange} text="email" size={100}/><br />
