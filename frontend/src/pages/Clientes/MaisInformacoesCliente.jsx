@@ -87,7 +87,7 @@ export const MaisInformacoesCliente = () => {
                             onChange={handleChange} 
                             value={cliente.cep} 
                         />
-                        <FloatLabel text="Número" value={cliente.numero} size={45} name='numero' onChange={handleChange}/>
+                        <FloatLabel text={"Bairro"} size={45} value={cliente.bairro} name="bairro" onChange={handleChange}/>
                     </FlexRow><br />
 
                     <FlexRow>
@@ -97,7 +97,7 @@ export const MaisInformacoesCliente = () => {
 
                     <FlexRow>
                         <FloatLabel text={"logradouro"} size={45} value={cliente.logradouro} name="logradouro" onChange={handleChange}/> 
-                        <FloatLabel text={"Bairro"} size={45} value={cliente.bairro} name="bairro" onChange={handleChange}/>
+                        <FloatLabel text="Número" value={cliente.numero} size={45} name='numero' onChange={handleChange}/>
                     </FlexRow> <br />
                     {/* <FloatLabel name="" onChange={handleChange} text="Endereço" /><br /> */}
                     <FloatLabel type="email" name="email" value={cliente.email} onChange={handleChange} text="email" size={100}/><br />
