@@ -84,7 +84,7 @@ export const CadastrarFornecedor = () => {
                     {/* Colocar aqui os inputs de endereço modelo clientes */}
                     <FlexRow>
                         <FloatLabel  size={45} text="CEP" onChange={(e) => setCep(formataCep(e.target.value))} onBlur={() => consultaCep(cep)} />
-                        <FloatLabel  size={45} text="Número" onChange={handleChange}/>
+                        <FloatLabel text={"Bairro"} size={45} value={endereco.bairro} name="bairro" onChange={handleChange}/>
                     </FlexRow> <br />
                     <FlexRow>
                         <FloatLabel text="Cidade" size={45} value={endereco.localidade} name={"cidade"} on onChange={handleChange}/>
@@ -93,7 +93,7 @@ export const CadastrarFornecedor = () => {
 
                     <FlexRow>
                         <FloatLabel text={"logradouro"} size={45} value={endereco.logradouro} name="logradouro" onChange={handleChange}/> 
-                        <FloatLabel text={"Bairro"} size={45} value={endereco.bairro} name="bairro" onChange={handleChange}/>
+                        <FloatLabel  size={45} text="Número" onChange={handleChange}/>
                     </FlexRow> <br />
                     
                     <FlexDiv>
