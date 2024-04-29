@@ -57,8 +57,6 @@ import { SucssesNotifications } from "../Notifications";
                     <MenuItem text={'Materiais'} linkTo={'/Materiais/'} icon={<GiStoneWall />} />
                     <MenuItem text={'Estoque'} linkTo={'/Estoque/'} icon={<CgShutterstock />}/>
                     { state.isSuperUser && <MenuItem text={'Usuários'} linkTo={'/Usuarios/'} icon={ <MdPeopleAlt /> }/> }
-                    <MenuItem text={'Vendas'} linkTo={'/Vendas/'} icon={<IoIosCash />}/>
-                    <MenuItem text={'Relatórios'} linkTo={'/Relatorios/'} icon={<TbReportSearch />}/>
                 </StyledCOllum>
 
                 <HelloCard>
