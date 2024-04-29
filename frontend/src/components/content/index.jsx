@@ -7,7 +7,6 @@ import { ColaboradorPages } from '../../pages/Colaboradores';
 import { EstoquesPage } from '../../pages/Estoques';
 import { FornecedoresPage } from '../../pages/Fornecedores';
 import { MateriaisPage } from '../../pages/Materiais/index';
-import { VendasPage } from '../../pages/Vendas';
 import { CadastrarColaboradorPage } from '../../pages/Colaboradores/cadastrarColaborador';
 import { RelatoriosPage } from '../../pages/Relatorios';
 import { CadastrarCLientePage } from '../../pages/Clientes/cadastrarCLiente';
@@ -17,13 +16,11 @@ import { MovimentacaoDeEstoque } from '../../pages/Estoques/MovimentaçãoDeEsto
 import { MaisInformacoesFornecedor } from '../../pages/Fornecedores/MaisInformacoesFornecedor';
 import { MaisInformacoesCliente } from '../../pages/Clientes/MaisInformacoesCliente';
 import { MaisInformacoesColaborador } from '../../pages/Colaboradores/MaisInformacoesColaborador';
-import { MaisInformacoesVenda } from '../../pages/Vendas/MaisInformacoesVendas';
 import { Usuarios } from '../../pages/Usuarios';
 import { MaisInformacoesMaterial } from '../../pages/Materiais/maisInformacoesMateriais';
 import { CadastrarUsuarioPage } from '../../pages/Usuarios/cadastrarUsuario';
 import { MaisInformacoesUsuarios } from '../../pages/Usuarios/MaisInformacoesUsuario';
 import { MaisInformacoesEstoque } from '../../pages/Estoques/MaisInformacoesEstoque';
-import { CadastrarVenda } from '../../pages/Vendas/CadastrarVenda';
 import { OrcamentosPage } from '../../pages/Orcamentos/index';
 import { MaisInformacoesOrcamento } from '../../pages/Orcamentos/MaisInformacoesOrcamento';
 import { CadastrarOrcamento } from '../../pages/Orcamentos/CadastrarOrcamento';
@@ -72,9 +69,6 @@ export const Content = () => {
                 <Route path='/Estoque/maisInformacoesEstoque/:id/' element={<MaisInformacoesEstoque />}/>
 
                 {/* Rotas de Vendas */}
-                <Route path='/Vendas/' element={<VendasPage />} />
-                <Route path='/Vendas/MaisInformacoesVenda/:id/' element={<MaisInformacoesVenda />} />
-                <Route path='/Vendas/CadastrarVenda/' element={<CadastrarVenda />} />
 
                 {/* Rotas de Orçamentos */}
                 <Route path='/Orcamentos/' element={<OrcamentosPage />}/>
