@@ -8,7 +8,6 @@ import { EstoquesPage } from '../../pages/Estoques';
 import { FornecedoresPage } from '../../pages/Fornecedores';
 import { MateriaisPage } from '../../pages/Materiais/index';
 import { CadastrarColaboradorPage } from '../../pages/Colaboradores/cadastrarColaborador';
-import { RelatoriosPage } from '../../pages/Relatorios';
 import { CadastrarCLientePage } from '../../pages/Clientes/cadastrarCLiente';
 import { CadastrarFornecedor } from '../../pages/Fornecedores/cadastrarFornecedor';
 import { CadastrarMaterialPage } from '../../pages/Materiais/cadastrarMaterial';
@@ -32,7 +31,6 @@ export const Content = () => {
                 {/* Rotas Princípais*/}
                 <Route path='/' element={<LoginScreen />}  exact/>
                 <Route path='/Home/' element={<HomePage />} />
-                <Route path='/Relatorios/' element={<RelatoriosPage />} />
 
                 {/* Rotas de Clientes */}
                 <Route path='/Clientes/' element={<ClientesPage />}/>
