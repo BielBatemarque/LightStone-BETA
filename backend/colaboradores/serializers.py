@@ -9,7 +9,7 @@ class ColaboradorSerializer(serializers.ModelSerializer):
 
     def validade_email(self, value):
 
-        if not "@" and not ".com" in value:
+        if not "@" in value and not ".com" in value:
             raise serializers.ValidationError("Email Inválido")
 
         return value
@@ -18,7 +18,7 @@ class ColaboradorSerializer(serializers.ModelSerializer):
         # Valida se ja existe algum colaborador com o cpf
         cpf_existente = Colaborador.objects.filter(cpf=value).exists()
 
-        if len(cpf_existente) != 11:
+        if len(value) != 11:
             raise serializers.ValidationError("CPF inválido")
 
         if cpf_existente:
