@@ -6,9 +6,11 @@ import { useAuth } from '../../hooks/useAuth';
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
 import { FloatLabel } from "../../components/FloatLabel";
+import { StyledOptions, StyledSelect } from "../Materiais/styles";
 
 export const MaisInformacoesColaborador = () => {
     const [colaborador, setColaborador] = useState({});
+    const [cargos, setCargos] = useState([]);
     const { id } = useParams(':id');
     const { state } = useAuth();
     const navigate = useNavigate();
@@ -20,8 +22,16 @@ export const MaisInformacoesColaborador = () => {
         setColaborador(response);
     };
 
+    const handleLoadCargos = async () => {
+        const request = await fetch('http://localhost:8000/cargos/');
+        const respnse = await request.json();
+
+        setCargos(respnse);
+    }
+
     useEffect(() => {
         handleLoadColaborador();
+        handleLoadCargos();
     }, []);
 
     const handleChange = (e) => {
@@ -79,7 +89,15 @@ export const MaisInformacoesColaborador = () => {
                     <FloatLabel type="text" text="telefone" name="telefone" onChange={handleChange} value={colaborador.telefone}/><br />
                     <FloatLabel type="text" text="CPF" name="cpf" onChange={handleChange}  value={colaborador.cpf}/> <br />
                     <FloatLabel type="email" text="email" name="email" onChange={handleChange} value={colaborador.email}/> <br />
-                    <FloatLabel type="text" text="cargo" name="cargo" onChange={handleChange} value={colaborador.cargo}/> <br />
+                    <span>
+                        <label htmlFor="">Cargo: </label>
+                        <StyledSelect value={colaborador.cargo} name="cargo" onChange={handleChange}>
+                            {cargos.map((cargo, index) => (
+                                    <StyledOptions value={cargo.id} key={index}>{cargo.nome}</StyledOptions>
+                                )
+                            )}
+                        </StyledSelect>
+                    </span>
 
                     <Button>Editar Colaborador</Button>
                     <Button action={handleDeleteColaborador} color={'red'}>Deletar Colaborador</Button>

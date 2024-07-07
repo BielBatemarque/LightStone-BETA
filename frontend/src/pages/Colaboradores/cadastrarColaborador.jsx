@@ -1,15 +1,17 @@
 import { Title } from "../../components/Title";
 import { Button } from '../../components/Button/index';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Colaborador } from "../../models/Colaborador";
 import { useAuth } from "../../hooks/useAuth";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
 import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
 import { FloatLabel } from '../../components/FloatLabel/index';
+import { StyledOptions, StyledSelect } from "../Materiais/styles";
 
 export const CadastrarColaboradorPage = () => {
     const [colab, setColab] = useState(new Colaborador());
+    const [cargos, setCargos] = useState([]);
     const { state } = useAuth();
     const navigate = useNavigate();
 
@@ -17,6 +19,17 @@ export const CadastrarColaboradorPage = () => {
         const { name, value } = e.target;
         setColab({...colab, [name]: value});
     };
+
+    const handleLoadCargos = async () => {
+        const request = await fetch('http://localhost:8000/cargos/');
+        const response = await request.json();
+
+        setCargos(response);
+    }
+
+    useEffect(() => {
+        handleLoadCargos();
+    }, []);
     
     const handleCadastrarColab = async (e) => {
         e.preventDefault();
@@ -53,7 +66,14 @@ export const CadastrarColaboradorPage = () => {
                     <FloatLabel type="text" text="telefone" name="telefone" onChange={handleChange}/><br />
                     <FloatLabel type="text" text="CPF" name="cpf" onChange={handleChange} /> <br />
                     <FloatLabel type="email" text="email" name="email" onChange={handleChange}/> <br />
-                    <FloatLabel type="text" id="" text="cargo" name="cargo" onChange={handleChange}/> <br />
+                    <span>
+                        <label htmlFor="">Cargo:  </label>
+                        <StyledSelect>
+                            {cargos.map((cargo, index) => (
+                                <StyledOptions value={cargo.id} key={index}>{cargo.nome}</StyledOptions>
+                            ))}
+                        </StyledSelect>
+                    </span>
 
                     <FlexDiv>
                         <Button children={'Cadastrar'} action={handleCadastrarColab}/>
