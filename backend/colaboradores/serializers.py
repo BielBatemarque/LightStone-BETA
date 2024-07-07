@@ -1,4 +1,4 @@
-from .models import Colaborador
+from .models import Colaborador, Cargos
 from rest_framework import serializers
 from datetime import datetime
 
@@ -24,3 +24,8 @@ class ColaboradorSerializer(serializers.ModelSerializer):
         if cpf_existente:
             raise serializers.ValidationError("CPF já cadastrado")
         return value
+    
+class CargoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cargos
+        fields = ['id', 'nome']
