@@ -8,12 +8,13 @@ export const ContainerBtns = styled.div`
 
 export const ListagemDeMovimentacoes = styled.ul`
     width:70%;
-    background-color: red;
+    background-color: blue;
     margin: 0 auto;
+    
 `;
 
 export const ItemListagemMovEstoque = styled.li`
     color: white;
-    display: flex;
     justify-content: space-around;
+    
 `;
