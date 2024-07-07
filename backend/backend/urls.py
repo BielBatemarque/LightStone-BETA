@@ -3,7 +3,7 @@ from django.urls import path, include
 from rest_framework import routers
 from usuarios.views import UserViewSet
 from clientes.views import ClienteViewSet
-from colaboradores.views import ColaboradorViewsSets
+from colaboradores.views import ColaboradorViewsSets, CargoViewSets
 from fornecedores.views import FornecedorViewSets
 from Estoque.views import EstoqueViewsSets, EntradaDeEstoque, SaidaDeEstoque, MovimentacaoDeEstoqueViewsSets
 from materiais.views import MaterialViewSets
@@ -24,6 +24,7 @@ router.register(r'vendas', VendaViewSet)
 router.register(r'movimentacoes_estoque', MovimentacaoDeEstoqueViewsSets)
 router.register(r'pecas', PecasViewSets)
 router.register(r'orcamentos', OrcamentoViewSets)
+router.register(r'cargos', CargoViewSets)
 
 urlpatterns = [
     path('', include(router.urls)),
