@@ -67,6 +67,7 @@ export const CadastrarColaboradorPage = () => {
                     <FloatLabel type="text" text="CPF" name="cpf" onChange={handleChange} /> <br />
                     <FloatLabel type="email" text="email" name="email" onChange={handleChange}/> <br />
                     <span>
+                        <br />
                         <label htmlFor="">Cargo:  </label>
                         <StyledSelect>
                             {cargos.map((cargo, index) => (
