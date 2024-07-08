@@ -89,7 +89,9 @@ export const MaisInformacoesColaborador = () => {
                     <FloatLabel type="text" text="telefone" name="telefone" onChange={handleChange} value={colaborador.telefone}/><br />
                     <FloatLabel type="text" text="CPF" name="cpf" onChange={handleChange}  value={colaborador.cpf}/> <br />
                     <FloatLabel type="email" text="email" name="email" onChange={handleChange} value={colaborador.email}/> <br />
+                    <br />
                     <span>
+                        <br />
                         <label htmlFor="">Cargo: </label>
                         <StyledSelect value={colaborador.cargo} name="cargo" onChange={handleChange}>
                             {cargos.map((cargo, index) => (
