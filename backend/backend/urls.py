@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from usuarios.views import UserViewSet
-from clientes.views import ClienteViewSet
+from clientes.views import ClienteViewSet, ValidaCPF
 from colaboradores.views import ColaboradorViewsSets, CargoViewSets
 from fornecedores.views import FornecedorViewSets
 from Estoque.views import EstoqueViewsSets, EntradaDeEstoque, SaidaDeEstoque, MovimentacaoDeEstoqueViewsSets
@@ -35,4 +35,5 @@ urlpatterns = [
     path('gerar_pdf/', PDFView.as_view(), name='gerar_pdf'),
     path('entrada_estoque/<int:estoque_id>/', EntradaDeEstoque.as_view(), name='entrada_estoque'),
     path('saida_estoque/<int:estoque_id>/', SaidaDeEstoque.as_view(), name='saida_estoque'),
+    path('valida_cpf', ValidaCPF.as_view(), name="valida_cpf")
 ]
