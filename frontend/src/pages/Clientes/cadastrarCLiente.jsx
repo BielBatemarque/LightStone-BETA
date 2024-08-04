@@ -3,7 +3,7 @@ import { Button } from "../../components/Button";
 import { Title } from "../../components/Title";
 import { Cliente } from "../../models/Cliente";
 import { globalContext } from "../../context/context";
-import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
+import { AtentionNotification, FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
 import { FlexRow, FundoForm, FundoTitle, StyledForm } from "./styles";
 import { FlexDiv } from './styles'; 
@@ -15,6 +15,7 @@ export const CadastrarCLientePage = () => {
     const { state } = useContext(globalContext);
     const [cep, SetCep] = useState('');
     const [endereco, setEndereco] = useState({});
+    const [cpf, setCPF] = useState('');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -44,6 +45,34 @@ export const CadastrarCLientePage = () => {
         }
 
     };
+
+    const validaCPF = async (cpf) => {
+        const request = await fetch('http://localhost:8000/valida_cpf', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+
+            body: JSON.stringify({cpf: cpf})
+        });
+
+        const response = await request.json();
+
+        if (request.status == 200){
+            setCliente({
+                ...cliente,
+                cpf: cpf
+            });
+
+            SucssesNotifications(response.message)
+        }
+
+        if (request.status === 400){
+            AtentionNotification(response.error);
+        }
+
+        console.log(response);
+    } 
     
     const formataCep = (cep) => {
         let cepFormatado = cep.replace(/\D/g, '');
@@ -82,7 +111,13 @@ export const CadastrarCLientePage = () => {
                 <StyledForm onSubmit={handleCadastraCliente}>
                     <FloatLabel  type="text" name="nome" onChange={handleChange} text="Nome" size={100} /> <br />
                     {/* type="text" name="nome" onChange={handleChange} placeholder="Nome" */}
-                    <FloatLabel type="text" name="cpf" onChange={handleChange} text="CPF" size={100}/> <br />
+                    <FloatLabel 
+                        type="text" 
+                        name="cpf" 
+                        onChange={(e) => setCPF(e.target.value)} 
+                        text="CPF" 
+                        onBlur={() => validaCPF(cpf)} 
+                        size={100}/> <br />
                     <FlexRow>
                         <FloatLabel 
                             text="CEP"
