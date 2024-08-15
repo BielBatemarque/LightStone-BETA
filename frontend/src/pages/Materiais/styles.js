@@ -6,6 +6,7 @@ export const StyledSelect = styled.select`
     border: none;
     border-radius: 5px;
     padding: 2px;
+    margin-top: 20px
 `;
 
 export const StyledOptions = styled.option`
