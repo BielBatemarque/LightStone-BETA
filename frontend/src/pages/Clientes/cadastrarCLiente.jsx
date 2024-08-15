@@ -15,6 +15,7 @@ export const CadastrarCLientePage = () => {
     const { state } = useContext(globalContext);
     const [cep, SetCep] = useState('');
     const [endereco, setEndereco] = useState({});
+    const [documentoValido, setDocumentoValido] = useState(true);
     const [cpf, setCPF] = useState('');
     const navigate = useNavigate();
 
@@ -26,6 +27,12 @@ export const CadastrarCLientePage = () => {
     const handleCadastraCliente = async (e) => {
         e.preventDefault();
 
+        // Verifique se o documento é válido antes de enviar o formulário
+        if (!documentoValido) {
+            AtentionNotification('Documento inválido. Verifique o CPF.');
+            return;
+        }
+
         const request = await fetch('http://localhost:8000/clientes/', {
             method: 'POST',
             headers: {
@@ -34,16 +41,16 @@ export const CadastrarCLientePage = () => {
             },
             body:JSON.stringify(cliente),
         });
+
         const response = await request.json();
 
         if (request.ok) {
             SucssesNotifications('Cadastrado com Sucesso');
             navigate('/Clientes/');
 
-        }else{
+        } else {
             FailNotifications('Erro ao cadastrar');
         }
-
     };
 
     const validaCPF = async (cpf) => {
@@ -58,30 +65,26 @@ export const CadastrarCLientePage = () => {
 
         const response = await request.json();
 
-        if (request.status == 200){
+        if (request.status === 200){
             setCliente({
                 ...cliente,
                 cpf: cpf
             });
-
-            SucssesNotifications(response.message)
-        }
-
-        if (request.status === 400){
+            setDocumentoValido(true); // CPF é válido
+            SucssesNotifications(response.message);
+        } else if (request.status === 400){
             AtentionNotification(response.error);
+            setDocumentoValido(false); // CPF é inválido
         }
+    };
 
-        console.log(response);
-    } 
-    
     const formataCep = (cep) => {
         let cepFormatado = cep.replace(/\D/g, '');
-        
         return cepFormatado;
     };
 
     const consultaCep = async (cep) => {
-        try{
+        try {
             const request = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
             const response = await request.json();
 
@@ -95,12 +98,10 @@ export const CadastrarCLientePage = () => {
                 logradouro: response.logradouro,
                 bairro: response.bairro
             });
-        }catch(e){
-            console.log(e)
+        } catch(e) {
+            console.log(e);
         }
     };
-
-    console.log(cliente);
 
     return(
         <>
@@ -109,8 +110,7 @@ export const CadastrarCLientePage = () => {
             </FundoTitle>
             <FundoForm>
                 <StyledForm onSubmit={handleCadastraCliente}>
-                    <FloatLabel  type="text" name="nome" onChange={handleChange} text="Nome" size={100} /> <br />
-                    {/* type="text" name="nome" onChange={handleChange} placeholder="Nome" */}
+                    <FloatLabel type="text" name="nome" onChange={handleChange} text="Nome" size={100} /> <br />
                     <FloatLabel 
                         type="text" 
                         name="cpf" 
@@ -126,7 +126,7 @@ export const CadastrarCLientePage = () => {
                             onChange={(e) => SetCep(formataCep(e.target.value))} 
                             onBlur={() => consultaCep(cep)} 
                         />
-                            <FloatLabel text={"Bairro"} size={45} value={endereco.bairro} name="bairro" onChange={handleChange}/>
+                        <FloatLabel text={"Bairro"} size={45} value={endereco.bairro} name="bairro" onChange={handleChange}/>
                     </FlexRow><br />
 
                     <FlexRow>
@@ -138,7 +138,6 @@ export const CadastrarCLientePage = () => {
                         <FloatLabel text={"logradouro"} size={45} value={endereco.logradouro} name="logradouro" onChange={handleChange}/> 
                         <FloatLabel text="Número" size={45} name='numero' onChange={handleChange}/>
                     </FlexRow> <br />
-                    {/* <FloatLabel name="endereco" onChange={handleChange} text="Endereço" /><br /> */}
                     <FloatLabel type="email" name="email" onChange={handleChange} text="email" size={100}/><br />
                     <FloatLabel type="date" name="data_nascimento" onChange={handleChange} text="Nascimento" size={100}/><br />
 
