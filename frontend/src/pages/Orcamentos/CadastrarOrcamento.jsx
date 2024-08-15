@@ -16,7 +16,7 @@ export const CadastrarOrcamento = () => {
     const { state } = useAuth();
     const [listaPecasOrcamento, setListaPecasOrcamento] = useState([]);
     const [clientes, setClientes] = useState([]);
-    const [total, setTotalOrcamento] = useState(0);
+    const [orcamento, setOrcamento] = useState({});
 
     const handleButtonClick = () => {
         setAddpc(prevState => !prevState);
@@ -26,6 +26,11 @@ export const CadastrarOrcamento = () => {
         const { name, value } = e.target;
         setPeca({...peca,[name]:value});
     };
+
+    const handleChangeOrcamento = (e) => {
+        const {name, value} = e.target;
+        setOrcamento({...orcamento, [name]: value});
+    }
 
     const handleLoadMateriais = async () => {
         const request = await fetch('http://localhost:8000/materiais/');
@@ -42,14 +47,11 @@ export const CadastrarOrcamento = () => {
     } 
 
     const handleCadastraPeca = async () => {
-        let precoMaterial = 0;
 
-        for (let material of materiais){
-            console.log(material, peca)
-            if (material.id  == peca.material){
-                precoMaterial = material.preco;
-            }
-        }
+        const materiais = await fetch('http://localhost:8000/materiais/');
+        const materiaisList = await materiais.json();
+
+        console.log('materiais:', materiaisList,'peca:', peca);
 
         const request = await fetch('http://localhost:8000/pecas/', {
             method: 'POST',
@@ -61,8 +63,6 @@ export const CadastrarOrcamento = () => {
         });
 
         const response = await request.json();
-        // console.log(response);
-        // console.log(precoMaterial);
 
         if (request.ok){
             try{
@@ -83,9 +83,30 @@ export const CadastrarOrcamento = () => {
         handleLoadClientes();
     }, []);
 
-    // console.log(peca);
-    // console.log(materiais);
-    // console.log(listaPecasOrcamento);
+
+    const handleCadastraOrcamento = async () => {
+        const pecasIds = listaPecasOrcamento.map(peca => peca.id);
+        const orcamentoComPecas = {
+            ...orcamento,
+            pecas: pecasIds
+        };
+
+        const request = await fetch('http://localhost:8000/orcamentos/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : `Token ${state.token}`
+            },
+            body: JSON.stringify(orcamentoComPecas),  // Envia o orcamento com a lista de IDs
+        });
+        console.log(orcamentoComPecas);
+
+        if (request.ok) {
+            SucssesNotifications('Orçamento cadastrado com sucesso.');
+        } else {
+            FailNotifications('Não foi possível cadastrar o orçamento.');
+        }
+    }
 
     return(
         <>
@@ -109,9 +130,9 @@ export const CadastrarOrcamento = () => {
 
                 { addPc ?
                 <FormLinePecas>
-                    <FloatLabel text={'Nome'} name={'nome'} onChange={handlChangePc}/> 
-                    <FloatLabel text="Descrição" name={'descrição'} onChange={handlChangePc}/>
-                    <FloatLabel text="Quantidade de m2" name={'quantidade_metros'} onChange={handlChangePc}/>
+                    <FloatLabel size={20} text={'Nome'} name={'nome'} onChange={handlChangePc}/> 
+                    <FloatLabel size={20} text="Descrição" name={'descrição'} onChange={handlChangePc}/>
+                    <FloatLabel size={20} text="Quantidade de m2" name={'quantidade_metros'} onChange={handlChangePc}/>
                     <StyledSelect name="material" onChange={handlChangePc}>
                         {materiais.map((mat, index) => (
                             <option key={index} value={mat.id}>{mat.nome}</option>
@@ -122,20 +143,19 @@ export const CadastrarOrcamento = () => {
                  : null}
                     <br />
                 <FlexDiv>
-                    <StyledSelect>
+                    <StyledSelect name="cliente" onChange={handleChangeOrcamento}>
                         {clientes.map((cliente, index) => (
                             <option key={index} value={cliente.id}>{cliente.nome}</option>
                         ))}
                     </StyledSelect>
                 </FlexDiv>
 
-
-                <FlexDivFooter>
-                    <p>Valor total</p>
-                    <p>Qtd items</p>
-                </FlexDivFooter>
                 <FlexDiv>
-                    <Button>Salvar Orçamento</Button>
+                    <FloatLabel name={'valor_total'} text={'Valor total'}  type={'text'} onChange={handleChangeOrcamento}/>
+                </FlexDiv>
+
+                <FlexDiv>
+                    <Button action={handleCadastraOrcamento}>Salvar Orçamento</Button>
                 </FlexDiv>
             </FundoForm>
         </>

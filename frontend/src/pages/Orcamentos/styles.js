@@ -12,4 +12,5 @@ export const FlexDivFooter = styled.div`
 export const FormLinePecas = styled.div`
     display: flex;
     background-color: red;
+    justify-content: space-evenly;
 `;
