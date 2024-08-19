@@ -2,12 +2,12 @@ import { Title } from "../../components/Title";
 import { FlexDiv, FundoForm, FundoTitle } from "../Clientes/styles";
 import { Button } from "../../components/Button";
 import { useEffect, useState } from "react";
-import { FlexDivFooter } from './styles';
 import { FloatLabel } from '../../components/FloatLabel/index';
 import { FormLinePecas } from './styles';
 import { StyledSelect } from '../../pages/Materiais/styles';
 import { useAuth } from '../../hooks/useAuth';
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
+import { FaTrash } from 'react-icons/fa';
 
 export const CadastrarOrcamento = () => {
     const [addPc, setAddpc] = useState(false);
@@ -83,6 +83,14 @@ export const CadastrarOrcamento = () => {
         handleLoadClientes();
     }, []);
 
+    const removePecaOrcamento = (pecaToRemove) => {
+        setListaPecasOrcamento(prevLista => 
+            prevLista.filter(peca => peca.id !== pecaToRemove.id)
+        );
+
+        SucssesNotifications('Peça removida com sucesso.');
+    }
+
 
     const handleCadastraOrcamento = async () => {
         const pecasIds = listaPecasOrcamento.map(peca => peca.id);
@@ -122,10 +130,24 @@ export const CadastrarOrcamento = () => {
 
                 {/* listagem das peças aqui => quantidade - nome - valor */}
 
+
+                { listaPecasOrcamento.length >= 1 ? 
+                    listaPecasOrcamento.map((peca, index) => (
+                        <p key={index} style={{textAlign: 'center'}}>
+                            {peca.nome} - 
+                            <FaTrash 
+                                onClick={() => removePecaOrcamento(peca)} 
+                                style={{ cursor: 'pointer', color: 'red' }}
+                            />
+                        </p>
+                    )) : null
+                }
+
                 <FlexDiv>
                     <Button color={'gray'} action={handleButtonClick}>Adicionar Peça</Button>
-                </FlexDiv>
+                </FlexDiv>  
 
+                <br />
                 
 
                 { addPc ?
