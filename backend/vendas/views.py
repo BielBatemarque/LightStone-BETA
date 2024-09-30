@@ -6,3 +6,8 @@ from .serializers import VendasSerializers
 class VendaViewSet(viewsets.ModelViewSet):
     queryset = Venda.objects.all()
     serializer_class = VendasSerializers
+
+
+    def retorna_vendas_filtradas(self, request):
+
+        cliente = request.data.get('cliente')
