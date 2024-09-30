@@ -6,6 +6,7 @@ import { Item } from '../../components/ItemListagem';
 import { Button } from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { ContainerBtns } from "../Estoques/styles";
+import { ListFilter } from "../../components/ListFilter";
 
 export const VendasPage = () => {
     const [vendas, setVendas] = useState([]);
@@ -27,6 +28,7 @@ export const VendasPage = () => {
             <FlexCointainer pontas="true" size={'93%'}>
                 <Title>Vendas</Title>
                 <ContainerBtns>
+                    <ListFilter />
                     <Button action={() => navigate('/Orcamentos/')} color={'gray'}>Orçamentos</Button>
                     <Button action={() => navigate('/Vendas/CadastrarVenda/')}>Nova Venda</Button>
                 </ContainerBtns>
