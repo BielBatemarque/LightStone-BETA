@@ -4,7 +4,7 @@ from .models import Material
 class MaterialSerializers(serializers.ModelSerializer):
     class Meta:
         model = Material
-        fields = ['id', 'nome', 'cor_base', 'fornecedor']
+        fields = ['id', 'nome', 'cor_base', 'fornecedor', 'preco_m2']
 
         def validate_name(self, value):
             # Valida se o material com o mesmo nome já está cadastrado
