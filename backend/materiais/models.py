@@ -6,6 +6,7 @@ class Material(models.Model):
     nome = models.CharField(max_length=50, unique=True)
     cor_base = models.CharField(max_length=15)
     fornecedor = models.ManyToManyField(Fornecedor)
+    preco_m2 = models.FloatField(null=True)
     
     def __str__(self):
         return self.nome
