@@ -8,6 +8,7 @@ import { StyledSelect } from '../../pages/Materiais/styles';
 import { useAuth } from '../../hooks/useAuth';
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { FaTrash } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 
 export const CadastrarOrcamento = () => {
     const [addPc, setAddpc] = useState(false);
@@ -16,7 +17,9 @@ export const CadastrarOrcamento = () => {
     const { state } = useAuth();
     const [listaPecasOrcamento, setListaPecasOrcamento] = useState([]);
     const [clientes, setClientes] = useState([]);
+    const [valorOrcamento, setValorOrcamento] = useState(0);
     const [orcamento, setOrcamento] = useState({});
+    const navigate = useNavigate();
 
     const handleButtonClick = () => {
         setAddpc(prevState => !prevState);
@@ -29,7 +32,10 @@ export const CadastrarOrcamento = () => {
 
     const handleChangeOrcamento = (e) => {
         const {name, value} = e.target;
-        setOrcamento({...orcamento, [name]: value});
+        setOrcamento({...orcamento,
+            valor_total: valorOrcamento,
+            [name]: value
+        });
     }
 
     const handleLoadMateriais = async () => {
@@ -63,11 +69,12 @@ export const CadastrarOrcamento = () => {
         });
 
         const response = await request.json();
-
+        console.log(response);
         if (request.ok){
             try{
                 setListaPecasOrcamento(prevLista => [...prevLista, response]);
                 SucssesNotifications('Peça Adicionada com sucesso.')
+                setValorOrcamento(valor => valor + (response.preco_m2 * response.quantidade_metros))
                 
             }catch(erro){
                 FailNotifications('Não foi possivel adicionar a peça.')
@@ -96,7 +103,8 @@ export const CadastrarOrcamento = () => {
         const pecasIds = listaPecasOrcamento.map(peca => peca.id);
         const orcamentoComPecas = {
             ...orcamento,
-            pecas: pecasIds
+            pecas: pecasIds,
+            valor_total: valorOrcamento,
         };
 
         const request = await fetch('http://localhost:8000/orcamentos/', {
@@ -105,16 +113,19 @@ export const CadastrarOrcamento = () => {
                 'Content-Type': 'application/json',
                 'Authorization' : `Token ${state.token}`
             },
-            body: JSON.stringify(orcamentoComPecas),  // Envia o orcamento com a lista de IDs
+            body: JSON.stringify(orcamentoComPecas),
         });
         console.log(orcamentoComPecas);
 
         if (request.ok) {
             SucssesNotifications('Orçamento cadastrado com sucesso.');
+            navigate('/Orcamentos/');
         } else {
             FailNotifications('Não foi possível cadastrar o orçamento.');
         }
     }
+
+    console.log(peca, orcamento);
 
     return(
         <>
@@ -173,7 +184,7 @@ export const CadastrarOrcamento = () => {
                 </FlexDiv>
 
                 <FlexDiv>
-                    <FloatLabel name={'valor_total'} text={'Valor total'}  type={'text'} onChange={handleChangeOrcamento}/>
+                    <FloatLabel name={'valor_total'} text={'Valor total'} value={valorOrcamento} type={'text'} onChange={handleChangeOrcamento}/>
                 </FlexDiv>
 
                 <FlexDiv>
