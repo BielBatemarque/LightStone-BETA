@@ -66,7 +66,24 @@ export const MaisInformacoesOrcamento = () => {
                             ))}
                         </StyledSelect>
                     </span>
+
                     <FloatLabel name={'valor_total'} text="Total do Orçamento" onChange={handleChange} value={orcamento.valor_total} />
+                    <h3>Peças </h3>
+                    <FlexDiv>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Nome</td>
+                                    <td>Descrição</td>
+                                    <td>Material</td>
+                                    <td>M²</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </FlexDiv>
                 </StyledForm>
             </FundoForm>
 
