@@ -1,18 +1,19 @@
-    import { useContext } from "react";
-    import { MenuItem } from "../MenuItem";
-    import { HelloCard, LogoutButton, SideBarDiv, StyledCOllum } from "./styles";
-    import { BsPerson } from 'react-icons/bs'
-    import { globalContext } from "../../context/context";
-    import { useNavigate } from "react-router-dom";
-    import { LuLayoutDashboard } from 'react-icons/lu';
-    import { IoIosCash } from 'react-icons/io';
-    import { GiStoneWall } from 'react-icons/gi'
-    import { BsPersonWorkspace } from 'react-icons/bs';
-    import { IoPersonAddSharp } from 'react-icons/io5';
-    import { CgShutterstock } from 'react-icons/cg';
-    import { TbReportSearch } from 'react-icons/tb';
-    import { RiLogoutBoxLine } from 'react-icons/ri';
-    import { MdPeopleAlt } from 'react-icons/md';
+import { useContext } from "react";
+import { MenuItem } from "../MenuItem";
+import { HelloCard, LogoutButton, SideBarDiv, StyledCOllum } from "./styles";
+import { BsPerson } from 'react-icons/bs'
+import { globalContext } from "../../context/context";
+import { useNavigate } from "react-router-dom";
+import { LuLayoutDashboard } from 'react-icons/lu';
+import { IoIosCash } from 'react-icons/io';
+import { GiStoneWall } from 'react-icons/gi'
+import { BsPersonWorkspace } from 'react-icons/bs';
+import { IoPersonAddSharp } from 'react-icons/io5';
+import { CgShutterstock } from 'react-icons/cg';
+import { TbReportSearch } from 'react-icons/tb';
+import { RiLogoutBoxLine } from 'react-icons/ri';
+import { MdPeopleAlt } from 'react-icons/md';
+import { FaFileInvoiceDollar } from "react-icons/fa";
 import { SucssesNotifications } from "../Notifications";
 
     export const SideBar = () => {
@@ -58,6 +59,7 @@ import { SucssesNotifications } from "../Notifications";
                     <MenuItem text={'Estoque'} linkTo={'/Estoque/'} icon={<CgShutterstock />}/>
                     { state.isSuperUser && <MenuItem text={'Usuários'} linkTo={'/Usuarios/'} icon={ <MdPeopleAlt /> }/> }
                     <MenuItem text={'Vendas'} linkTo={'/Vendas/'} icon={<IoIosCash />}/>
+                    <MenuItem text={'Orçamentos'} linkTo={'/Orcamentos/'} icon={ <FaFileInvoiceDollar />} />
                     <MenuItem text={'Relatórios'} linkTo={'/Relatorios/'} icon={<TbReportSearch />}/>
                 </StyledCOllum>
 
