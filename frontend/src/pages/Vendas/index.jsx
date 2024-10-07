@@ -23,12 +23,22 @@ export const VendasPage = () => {
         handleLoadVendas();
     }, []);
 
+    const handleFilter = async (nomeCliente) => {
+        const request = await fetch(`http://localhost:8000/vendas/retorna_vendas_filtradas/?cliente=${nomeCliente}`);
+        const response = await request.json();
+
+        console.log(response);
+        setVendas(response);
+    }
+
+
+
     return(
         <>
             <FlexCointainer pontas="true" size={'93%'}>
                 <Title>Vendas</Title>
-                <ContainerBtns>
-                    <ListFilter />
+                <ContainerBtns size="35rem">
+                    <ListFilter action={handleFilter}/>
                     <Button action={() => navigate('/Orcamentos/')} color={'gray'}>Orçamentos</Button>
                     <Button action={() => navigate('/Vendas/CadastrarVenda/')}>Nova Venda</Button>
                 </ContainerBtns>
