@@ -1,14 +1,15 @@
 import { useParams } from "react-router-dom";
-import { FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
+import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
 import { Title } from "../../components/Title";
 import { FloatLabel } from '../../components/FloatLabel/index';
 import { useEffect, useState } from "react";
 import { Cliente } from '../../models/Cliente';
+import { StyledOptions, StyledSelect } from "../Materiais/styles";
 
 export const MaisInformacoesOrcamento = () => {
     const { id } = useParams(':id');
     const [orcamento, setOrcamento] = useState({});
-    const [cliente, setCliente] = useState(new Cliente);
+    const [clientes, setClientes] = useState([]);
 
     const orcamentoRequest = async () => {
         const request = await fetch(`http://localhost:8000/orcamentos/${id}/`);
@@ -17,18 +18,21 @@ export const MaisInformacoesOrcamento = () => {
         setOrcamento(response);
     }
 
-    const clienteRequest = async () => {
-        const request = await fetch(`http://localhost:8000/clientes/${orcamento.cliente}`);
+    const clientesRequest = async () => {
+        const request = await fetch(`http://localhost:8000/clientes`);
         const response = await request.json();
 
-        setCliente(response);
+        setClientes(response);
     }
 
-    
+    const handleClienteChange = (e) => {
+        const { value } = e.target;
+        setOrcamento({ ...orcamento, cliente: value });
+    }
 
     useEffect(() => {
         orcamentoRequest();
-        clienteRequest();
+        clientesRequest();
     }, []);
 
     const handleChange = (e) => {
@@ -46,7 +50,22 @@ export const MaisInformacoesOrcamento = () => {
             </FundoTitle>
             <FundoForm>
                 <StyledForm>
-                    <FloatLabel name={'cliente'} text="Cliente" onChange={handleChange} value={cliente.nome}/>
+                    <span>
+                        <br />
+                        <label htmlFor="">Cliente:  </label>
+                        <StyledSelect
+                            name="cliente"
+                            value={orcamento.cliente || ''} // Define o valor do select com o cliente do orçamento
+                            onChange={handleClienteChange} // Atualiza o cliente selecionado
+                        >
+                            <StyledOptions value="" disabled>Selecione um cliente</StyledOptions>
+                            {clientes.map((cliente, index) => (
+                                <StyledOptions value={cliente.id} key={index}>
+                                    {cliente.nome}
+                                </StyledOptions>
+                            ))}
+                        </StyledSelect>
+                    </span>
                     <FloatLabel name={'valor_total'} text="Total do Orçamento" onChange={handleChange} value={orcamento.valor_total} />
                 </StyledForm>
             </FundoForm>
