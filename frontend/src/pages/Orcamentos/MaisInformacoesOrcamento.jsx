@@ -12,7 +12,13 @@ export const MaisInformacoesOrcamento = () => {
     const [clientes, setClientes] = useState([]);
 
     const orcamentoRequest = async () => {
-        const request = await fetch(`http://localhost:8000/orcamentos/${id}/`);
+        const request = await fetch(`http://localhost:8000/orcamentos/retorna_orcamento_com_pecas/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id: id}),
+        });
         const response = await request.json();
 
         setOrcamento(response);
@@ -55,8 +61,8 @@ export const MaisInformacoesOrcamento = () => {
                         <label htmlFor="">Cliente:  </label>
                         <StyledSelect
                             name="cliente"
-                            value={orcamento.cliente || ''} // Define o valor do select com o cliente do orçamento
-                            onChange={handleClienteChange} // Atualiza o cliente selecionado
+                            value={orcamento.cliente || ''} 
+                            onChange={handleClienteChange}
                         >
                             <StyledOptions value="" disabled>Selecione um cliente</StyledOptions>
                             {clientes.map((cliente, index) => (
@@ -80,7 +86,14 @@ export const MaisInformacoesOrcamento = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                {orcamento.pecas.map((peca, index) => (
+                                    <tr key={index}>
+                                        <td>{peca.nome}</td>
+                                        <td>{peca.descrição}</td>
+                                        <td>{peca.quantidade_metros}</td>
+                                        <td>{peca.material}</td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </FlexDiv>
