@@ -8,7 +8,7 @@ import { StyledOptions, StyledSelect } from "../Materiais/styles";
 
 export const MaisInformacoesOrcamento = () => {
     const { id } = useParams(':id');
-    const [orcamento, setOrcamento] = useState({});
+    const [orcamento, setOrcamento] = useState({ pecas: [] });
     const [clientes, setClientes] = useState([]);
 
     const orcamentoRequest = async () => {
@@ -76,26 +76,28 @@ export const MaisInformacoesOrcamento = () => {
                     <FloatLabel name={'valor_total'} text="Total do Orçamento" onChange={handleChange} value={orcamento.valor_total} />
                     <h3>Peças </h3>
                     <FlexDiv>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>Nome</td>
-                                    <td>Descrição</td>
-                                    <td>Material</td>
-                                    <td>M²</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {orcamento.pecas.map((peca, index) => (
-                                    <tr key={index}>
-                                        <td>{peca.nome}</td>
-                                        <td>{peca.descrição}</td>
-                                        <td>{peca.quantidade_metros}</td>
-                                        <td>{peca.material}</td>
+                        {orcamento.pecas.length > 0 ? 
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td>Nome</td>
+                                        <td>Descrição</td>
+                                        <td>Material</td>
+                                        <td>M²</td>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {orcamento.pecas.map((peca, index) => (
+                                        <tr key={index}>
+                                            <td>{peca.nome}</td>
+                                            <td>{peca.descrição}</td>
+                                            <td>{peca.quantidade_metros}</td>
+                                            <td>{peca.material}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        : null}
                     </FlexDiv>
                 </StyledForm>
             </FundoForm>
