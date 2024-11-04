@@ -5,11 +5,13 @@ import { FlexCointainer } from "../../components/FlexContainer";
 import { Title } from "../../components/Title";
 import { Button } from "../../components/Button";
 import { useNavigate } from 'react-router-dom';
-import { Filtro } from "../../components/Filtro";
+import { ContainerBtns } from "../Estoques/styles";
+import { CadastrarOrcamentoModal } from '../../components/Modal/CadastrarOrcamentoModal';
 
 export const ClientesPage = () => {
     const[clientes, setClientes] = useState([]);
     const navegate = useNavigate();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         handleCarregaClientes();
@@ -22,18 +24,25 @@ export const ClientesPage = () => {
         setClientes(response);
     };
 
+    const handleOpenModal = () => setIsModalOpen(true);
+    const handleCloseModal = () => setIsModalOpen(false);
+
     return(
         <>
             <FlexCointainer pontas='true' size={'92%'}>
                 <Title>Clientes</Title>
                 {/* <Filtro /> */}
-                <Button action={() => navegate('/Clientes/cadastrarCliente/')}>Novo Cliente</Button>
+                <ContainerBtns>
+                    <Button color='blue' action={handleOpenModal}>Novo Orçamento</Button>
+                    <Button action={() => navegate('/Clientes/cadastrarCliente/')}>Novo Cliente</Button>
+                </ContainerBtns>
            </FlexCointainer>
            <Listing>
                 {clientes.map((cliente, index) => (
                     <Item key={index} action={() => navegate(`/Clientes/maisInformacoesCliente/${cliente.id}/`)}>{cliente.nome}</Item>
                     ))}
             </Listing>
+            <CadastrarOrcamentoModal isOpen={isModalOpen} onClose={handleCloseModal}/>
         </>
     );
 };

@@ -3,7 +3,6 @@ import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
 import { Title } from "../../components/Title";
 import { FloatLabel } from '../../components/FloatLabel/index';
 import { useEffect, useState } from "react";
-import { Cliente } from '../../models/Cliente';
 import { StyledOptions, StyledSelect } from "../Materiais/styles";
 
 export const MaisInformacoesOrcamento = () => {
