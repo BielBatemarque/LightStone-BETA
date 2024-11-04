@@ -24,6 +24,7 @@ export const ModalContainer = styled.div`
 
   h2 {
     margin-bottom: 20px;
+    text-align: center;
   }
 
   form label {
@@ -33,7 +34,7 @@ export const ModalContainer = styled.div`
   }
 
   form input {
-    width: 100%;
+    width: 95%;
     padding: 8px;
     margin-top: 5px;
     margin-bottom: 15px;

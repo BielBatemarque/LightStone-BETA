@@ -1,22 +1,53 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ButtonContainer, ModalContainer, Overlay } from './styles';
+import { globalContext } from '../../context/context';
+import { FailNotifications, SucssesNotifications } from '../Notifications';
 
 export const CadastrarClienteModal = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({
+  const { state } = useContext(globalContext);
+  const [cliente, setCliente] = useState({
     nome: '',
-    descricao: '',
-    preco: '',
-    quantidade: '',
+    cpf: '',
+    cep: '',
+    email: '',
+    data_nascimento: ''
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setCliente((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form data:', formData);
+
+    const request = await fetch('http://localhost:8000/clientes/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${state.token}`,
+      },
+      body: JSON.stringify(cliente)
+    });
+
+
+    const response = await request.json();
+
+    console.log(response);
+    setCliente({
+      nome: '',
+      cpf: '',
+      cep: '',
+      email: '',
+      data_nascimento: ''
+    });
+    
+    if (request.ok){
+      SucssesNotifications('Cliente cadastrado com sucesso.');
+    } else {
+      FailNotifications('Erro ao cadastrar Cliente.')
+    }
+
     onClose();
   };
 
@@ -29,19 +60,24 @@ export const CadastrarClienteModal = ({ isOpen, onClose }) => {
         <form onSubmit={handleSubmit}>
           <label>
             Nome:
-            <input type="text" name="nome" value={formData.nome} onChange={handleChange} required />
+            <input type="text" name="nome" value={cliente.nome} onChange={handleChange} required />
           </label>
           <label>
-            Descrição:
-            <input type="text" name="descricao" value={formData.descricao} onChange={handleChange} required />
+            CPF:
+            <input type="text" name="cpf" value={cliente.cpf} onChange={handleChange} required />
           </label>
           <label>
-            Preço:
-            <input type="number" name="preco" value={formData.preco} onChange={handleChange} required />
+            CEP:
+            <input type="number" name="cep" value={cliente.cep} onChange={handleChange} required />
           </label>
           <label>
-            Quantidade:
-            <input type="number" name="quantidade" value={formData.quantidade} onChange={handleChange} required />
+            Email:
+            <input type="email" name="email" value={cliente.email} onChange={handleChange} required />
+          </label>
+
+          <label>
+            Data de Nascimento:
+            <input type="date" name="data_nascimento" value={cliente.data_nascimento} onChange={handleChange} required />
           </label>
           <ButtonContainer>
             <button type="button" onClick={onClose}>Cancelar</button>
