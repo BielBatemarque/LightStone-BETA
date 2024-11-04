@@ -33,7 +33,7 @@ export const ModalContainer = styled.div`
     font-weight: bold;
   }
 
-  form input {
+  form input, select {
     width: 95%;
     padding: 8px;
     margin-top: 5px;
@@ -45,7 +45,7 @@ export const ModalContainer = styled.div`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 10px;
 
   button {
