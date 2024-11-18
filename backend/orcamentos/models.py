@@ -5,7 +5,7 @@ from pecas.models import Peca
 # Create your models here.
 class Orcamento(models.Model):
     valor_total = models.FloatField()
-    cliente = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     pecas = models.ManyToManyField(Peca)
     
     def __str__(self) -> str:
