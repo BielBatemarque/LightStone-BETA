@@ -60,7 +60,7 @@ export const ClientesPage = () => {
 
     return (
         <>
-            <FlexCointainer pontas="true" size="92%">
+            <FlexCointainer pontas="true" size="98%">
                 <Title>Clientes</Title>
                 <ContainerBtns width="15rem">
                     <Button color="blue" action={handleOpenModal}>Novo Orçamento</Button>
