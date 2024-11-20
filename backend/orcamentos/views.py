@@ -43,3 +43,11 @@ class OrcamentoViewSets(viewsets.ModelViewSet):
         data = orcamento_serializer.data
         data["pecas"] = pecas_serialier.data
         return Response(data, status=status.HTTP_200_OK)
+    
+    @action(detail=False, methods=["get"], url_name="reotorna_listagem_orcamentos_com_cliente", url_path="reotorna_listagem_orcamentos_com_cliente")
+    def reotorna_listagem_orcamentos_com_cliente(self, request):
+        orcamentos = self.queryset.all()
+
+        serializer = self.get_serializer(orcamentos, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
