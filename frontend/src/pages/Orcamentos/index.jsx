@@ -23,10 +23,14 @@ export const OrcamentosPage = () => {
         orcamentosRequest();
     }, []);
 
-    console.log(orcamentos[0].pecas.lenght);
+    console.log(orcamentos);
 
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => setIsModalOpen(false);
+
+    const handleFormataValorMonetário = (valor) => {
+
+    }
 
     return(
         <>
@@ -51,8 +55,11 @@ export const OrcamentosPage = () => {
                         <tr key={index}>
                             <td>{orcamento.cliente.nome}</td>
                             <td>{orcamento.valor_total}</td>
-                            <td>{orcamento.pecas.lenght}</td>
-                            <td></td>
+                            <td>{orcamento.pecas.length}</td>
+                            <td className="actions">
+                                <button className="edit" onClick={() => navigate(`/Orcamentos/MaisInformacoesOrcamento/${orcamento.id}`)}>Editar</button>
+                                <button className="delete" onClick={() => handleFormataValorMonetário()}>Excluir</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
