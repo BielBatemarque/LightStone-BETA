@@ -29,12 +29,13 @@ export const OrcamentosPage = () => {
     const handleCloseModal = () => setIsModalOpen(false);
 
     const handleFormataValorMonetário = (valor) => {
-
+        const valorFormatado = `R$ ${Number(valor).toFixed(2).replace('.', ',')}`;
+        return valorFormatado;
     }
 
     return(
         <>
-            <FlexCointainer pontas='true' size='93%'>
+            <FlexCointainer pontas='true' size='98%'>
                 <Title>Orçamentos</Title>
                 <ContainerBtns>
                     <Button color={'blue'} action={handleOpenModal}>Novo Cliente</Button>
@@ -44,17 +45,17 @@ export const OrcamentosPage = () => {
             <DataGrid>
                 <thead>
                     <tr>
-                        <td>Cliente</td>
-                        <td>Valor total</td>
-                        <td>Qtnd. Peças</td>
-                        <td>Ações</td>
+                        <th>Cliente</th>
+                        <th>Valor total</th>
+                        <th>Qtnd. Peças</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     {orcamentos.map((orcamento, index) => (
                         <tr key={index}>
                             <td>{orcamento.cliente.nome}</td>
-                            <td>{orcamento.valor_total}</td>
+                            <td>{handleFormataValorMonetário(orcamento.valor_total)}</td>
                             <td>{orcamento.pecas.length}</td>
                             <td className="actions">
                                 <button className="edit" onClick={() => navigate(`/Orcamentos/MaisInformacoesOrcamento/${orcamento.id}`)}>Editar</button>
