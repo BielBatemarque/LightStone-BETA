@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
 import { FlexCointainer } from '../../components/FlexContainer';
-import { Listing } from '../../components/Listing';
 import { Title } from '../../components/Title/index';
-import { Item } from '../../components/ItemListagem';
 import { useNavigate } from 'react-router-dom';
+import { DataGrid } from '../../components/Datagrid/styled';
 
 export const Usuarios = () => {
     const [users, setUsers] = useState([]);
@@ -26,17 +25,36 @@ export const Usuarios = () => {
         handleLoadUsers();
     }, []);
 
+
     return(
         <>
             <FlexCointainer size={'93%'} pontas='true'>
                 <Title>Usuários</Title>
                 <Button action={() => navigate(`/Usuarios/cadastrarUsuario/`)}>Cadastrar usuário</Button>
             </FlexCointainer>
-            <Listing>
-                {users.map((user, index) => (
-                    <Item key={index} action={() => navigate(`/Usuarios/MaisInformacoesUsuario/${user.id}`)}>{user.username}</Item>
-                ))}
-            </Listing>
+            <DataGrid>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>email</th>
+                        <th>Super-User</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map((user, index) => (
+                        <tr>
+                            <td>{user.username}</td>
+                            <td>{user.email}</td>
+                            <td>{user.is_staff ? 'Sim' : 'Não'}</td>
+                            <td className='actions'>
+                                <button className='edit'>Editar</button>
+                                <button className='delete'>Excluir</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </DataGrid>
         </>
     );
 };
