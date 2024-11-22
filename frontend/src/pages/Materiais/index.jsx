@@ -5,6 +5,8 @@ import { Listing } from "../../components/Listing";
 import { Title } from "../../components/Title";
 import { Item } from "../../components/ItemListagem";
 import { useNavigate } from "react-router-dom";
+import { ListFilter } from "../../components/ListFilter";
+import { DataGrid } from "../../components/Datagrid/styled";
 
 export const MateriaisPage = () => {
     const [materiais, setMateriais] = useState([]);
@@ -24,15 +26,35 @@ export const MateriaisPage = () => {
 
     return(
        <>
-         <FlexCointainer pontas="true" size={'93%'}>
+         <FlexCointainer pontas="true" size={'98%'}>
             <Title>Materiais</Title>
             <Button action={() => navigate('/Materiais/cadastrarMaterial/')}>Novo Material</Button>
         </FlexCointainer>
-            <Listing>
+        <DataGrid>
+            <thead>
+                <tr>
+                    <th>Nome do Material</th>
+                    <th>Cor Base</th>
+                    <th>Ultimo Fornecedor</th>
+                    <th>Preço por M²</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
                 {materiais.map((material, index) => (
-                    <Item key={index} action={() => navigate(`/Materiais/maisInformacoesMaterial/${material.id}`)}>{material.nome}</Item>
-                    ))}
-            </Listing>
+                    <tr>
+                        <td>{material.nome}</td>
+                        <td>{material.cor_base}</td>
+                        <td>{material.fornecedor}</td>
+                        <td>{material.preco_m2}</td>
+                        <td className="actions">
+                            <button className="edit">Editar</button>
+                            <button className="delete">Excluir</button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </DataGrid>
         </>
     );
 };
