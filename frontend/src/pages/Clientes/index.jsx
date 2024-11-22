@@ -9,6 +9,7 @@ import { ConfirmarExclusaoModal } from '../../components/Modal/ConfirmarExclusao
 import { DataGrid } from "../../components/Datagrid/styled"; 
 import { globalContext } from "../../context/context";
 import { SucssesNotifications } from "../../components/Notifications";
+import { ListFilter } from "../../components/ListFilter";
 
 export const ClientesPage = () => {
     const [clientes, setClientes] = useState([]);
@@ -67,6 +68,9 @@ export const ClientesPage = () => {
                     <Button action={() => navigate('/Clientes/cadastrarCliente/')}>Novo Cliente</Button>
                 </ContainerBtns>
             </FlexCointainer>
+
+            <ListFilter />
+
             <DataGrid>
                 <thead>
                     <tr>
