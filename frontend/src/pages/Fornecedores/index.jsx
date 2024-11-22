@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { FlexCointainer } from "../../components/FlexContainer";
-import { Listing } from "../../components/Listing";
 import { Title } from "../../components/Title";
-import { Item } from "../../components/ItemListagem";
 import { useNavigate } from "react-router-dom";
+import { DataGrid } from "../../components/Datagrid/styled";
+import { ListFilter } from "../../components/ListFilter";
 
 export const FornecedoresPage = () => {
     const [fornecedores, setFornecedores] = useState([]);
@@ -23,15 +23,35 @@ export const FornecedoresPage = () => {
 
     return(
         <div className="Fornecedores">
-            <FlexCointainer pontas="true" size={'93%'}>
+            <FlexCointainer pontas="true" size={'98%'}>
                 <Title>Fornecedores</Title>
                 <Button children={'Novo Fornecedor'} action={() => navigate('/Fornecedores/cadastrarFornecedor/')}/>
             </FlexCointainer>
-            <Listing>
-                {fornecedores.map((fornecedor, index) => (
-                    <Item key={index} action={() => navigate(`/Fornecedor/maisInformacoesFornecedor/${fornecedor.id}`)}>{fornecedor.nome_empresa}</Item>
-                ))}
-            </Listing>
+            <ListFilter />
+            <DataGrid>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CNPJ</th>
+                        <th>Endereço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {fornecedores.map((fornecedor, index) => (
+                        <tr key={index}>
+                            <td>{fornecedor.nome_empresa}</td>
+                            <td>{fornecedor.cnpj}</td>
+                            <td>{fornecedor.logradouro}</td>
+                            <td className="actions">
+                                <button className="edit">Editar</button>
+                                <button className="delete">Excluir</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+
+            </DataGrid>
         </div>
     );
 }
