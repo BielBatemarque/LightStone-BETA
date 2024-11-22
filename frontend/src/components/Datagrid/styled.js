@@ -13,9 +13,11 @@ export const DataGrid = styled.table`
   }
 
   th {
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: rgb(42, 42, 42);
+    color: rgb(159, 158, 158);
     font-weight: bold;
+    font-size: 1.1rem;
+    border: none
   }
 
   th.actions {
