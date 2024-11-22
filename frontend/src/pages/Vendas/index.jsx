@@ -7,6 +7,7 @@ import { Button } from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { ContainerBtns } from "../Estoques/styles";
 import { ListFilter } from "../../components/ListFilter";
+import { DataGrid } from '../../components/Datagrid/styled';
 
 export const VendasPage = () => {
     const [vendas, setVendas] = useState([]);
@@ -35,19 +36,26 @@ export const VendasPage = () => {
 
     return(
         <>
-            <FlexCointainer pontas="true" size={'93%'}>
+            <FlexCointainer pontas="true" size={'98%'}>
                 <Title>Vendas</Title>
-                <ContainerBtns size="35rem">
-                    <ListFilter action={handleFilter}/>
+                <ContainerBtns>
                     <Button action={() => navigate('/Orcamentos/')} color={'gray'}>Orçamentos</Button>
                     <Button action={() => navigate('/Vendas/CadastrarVenda/')}>Nova Venda</Button>
                 </ContainerBtns>
             </FlexCointainer>
-            <Listing>
-                {vendas.map((venda, index) => (
-                    <Item key={index} action={() => navigate(`/Vendas/MaisInformacoesVenda/${venda.id}`)}>{venda.valor_total}</Item>
-                    ))}
-            </Listing>
+            <ListFilter action={handleFilter}/>
+            <DataGrid>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </DataGrid>
         </>
     );
 }
