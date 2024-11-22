@@ -3,9 +3,10 @@ from rest_framework import serializers
 from datetime import datetime
 
 class ColaboradorSerializer(serializers.ModelSerializer):
+    cargo_nome = serializers.ReadOnlyField(source="cargo.nome")
     class Meta:
         model = Colaborador
-        fields = ['id', 'nome', 'nascimento', 'telefone', 'cpf', 'email', 'cargo']
+        fields = ['id', 'nome', 'nascimento', 'telefone', 'cpf', 'email', 'cargo', 'cargo_nome']
 
     def validade_email(self, value):
 
