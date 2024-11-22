@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { FlexCointainer } from "../../components/FlexContainer";
-import { Listing } from "../../components/Listing";
 import { Title } from "../../components/Title";
 import { useNavigate } from "react-router-dom";
-import { Item } from "../../components/ItemListagem";
+import { DataGrid  } from '../../components/Datagrid/styled';
+import { ListFilter } from "../../components/ListFilter";
 
 export const ColaboradorPages = () => {
     const [colabs, setColabs] = useState([]);
@@ -25,15 +25,38 @@ export const ColaboradorPages = () => {
 
     return(
         <>
-            <FlexCointainer size={'93%'} pontas='true'>
+            <FlexCointainer size={'98%'} pontas='true'>
                 <Title>Colaboradores</Title>
                 <Button action={() => navigate('/Colaboradores/CadastrarColaborador/')}>Novo Colaborador</Button>
             </FlexCointainer>
-            <Listing>
-                {colabs.map((colab,index) => (
-                    <Item key={index} action={() => navigate(`/Colaborador/maisInformacoesColaborador/${colab.id}`)}>{colab.nome}</Item>
+
+            <ListFilter />
+            <DataGrid>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Email</th>
+                        <th>Cargo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {colabs.map((colab, index) => (
+                        <tr key={index}>
+                            <td>{colab.nome}</td>
+                            <td>{colab.cpf}</td>
+                            <td>{colab.email}</td>
+                            <td>{colab.cargo_nome}</td>
+                            <td className="actions">
+                                <button className="edit">Editar</button>
+                                <button className="delete">Excluir</button>
+                            </td>
+                        </tr>
                     ))}
-            </Listing>
+
+                </tbody>
+            </DataGrid>
          </>
     );
 };
