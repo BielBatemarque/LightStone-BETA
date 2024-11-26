@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
 import { FlexCointainer } from '../../components/FlexContainer';
-import { Listing } from '../../components/Listing';
 import { Title } from '../../components/Title/index';
-import { Item } from '../../components/ItemListagem';
 import { ContainerBtns } from './styles';
 import { useNavigate } from 'react-router-dom';
+import { DataGrid } from '../../components/Datagrid/styled';
 
 export const EstoquesPage = () => {
     const [estoques, setEstoques] = useState([]);
@@ -13,33 +12,16 @@ export const EstoquesPage = () => {
     const navigate = useNavigate();
 
     const handleLoadingEstoques = async () => {
-        const request = await fetch('http://localhost:8000/estoques/');
+        const request = await fetch('http://localhost:8000/estoques/listagem_estoque_material/');
         const response = await request.json();
 
-        const estoquesComNomesDeMateriais = response.map(async (estoque) => {
-            const materialRequest = await fetch(`http://localhost:8000/materiais/${estoque.material}`);
-            const materialResponse = await materialRequest.json();
-            return { ...estoque, materialNome: materialResponse.nome };
-        });
-
-        const estoquesAtualizados = await Promise.all(estoquesComNomesDeMateriais);
-
-        setEstoques(estoquesAtualizados);
+        setEstoques(response);
     };
 
     console.log(estoques);
 
-
-    const handleLoadingMateriais = async () => {
-        const request = await fetch('http://localhost:8000/materiais/');
-        const response = await request.json()
-
-        setMateriais(response);
-    };
-
     useEffect(() => {
         handleLoadingEstoques();
-        handleLoadingMateriais();
     }, []);
 
     return(
@@ -51,11 +33,27 @@ export const EstoquesPage = () => {
                     <Button action={() => navigate('/Estoque/movimentacaoDeEstoque/entrada')}>Registrar Entrada</Button>
                 </ContainerBtns>
            </FlexCointainer>
-           <Listing>
-                {estoques.map((estoque, index) => (
-                    <Item key={index} action={() => navigate(`/Estoque/maisInformacoesEstoque/${estoque.id}/`)}>{estoque.materialNome}</Item>
-                ))}
-           </Listing>
+           <DataGrid>
+                <thead>
+                   <tr>
+                    <th>Material</th>
+                    <th>Qntd. M²</th>
+                    <th>Ações</th>
+                   </tr> 
+                </thead>
+                <tbody>
+                    {estoques.map((estoque, index) => (
+                        <tr key={index}>
+                            <td>{estoque.material.nome}</td>
+                            <td>{estoque.quantidade_metros}</td>
+                            <td className='actions'>
+                                <button className='edit'>Editar</button>
+                                <button className='delete'>Excluir</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+           </DataGrid>
         </>  
     );
 };
