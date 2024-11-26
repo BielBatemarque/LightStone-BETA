@@ -12,7 +12,6 @@ class VendaViewSet(viewsets.ModelViewSet):
     queryset = Venda.objects.all()
     serializer_class = VendasSerializers
 
-
     @action(detail=False, methods=["get"])
     def retorna_vendas_filtradas(self, request):
 
@@ -27,3 +26,21 @@ class VendaViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
         
         return Response({"datail": "Cliente não encontrado"}, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=False, methods=["get"], url_name="listagem_vendas_cliente", url_path="listagem_vendas_cliente")
+    def listagem_vendas_cliente(self, request):
+        vendas = self.queryset.select_related("cliente")
+
+        data = [
+            {
+                "id": venda.id,
+                "valor_total": venda.valor_total,
+                "cliente": {
+                    "id": venda.cliente.id,
+                    "nome": venda.cliente.nome
+                }
+            }
+            for venda in vendas
+        ]
+
+        return Response(data, status=status.HTTP_200_OK)
