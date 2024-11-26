@@ -59,6 +59,15 @@ export const ClientesPage = () => {
         setClienteSelecionado(null);
     };
 
+
+    //Ajustar depois a url e conferir a requisição
+    const handleFiltrarClientes = async (nomeCliente) => {
+        const request = await fetch('');
+        const responseFiltrado = await request.json();
+
+        setClientes(responseFiltrado);
+    }
+
     return (
         <>
             <FlexCointainer pontas="true" size="98%">
@@ -69,7 +78,7 @@ export const ClientesPage = () => {
                 </ContainerBtns>
             </FlexCointainer>
 
-            <ListFilter />
+            <ListFilter action={handleFiltrarClientes}/>
 
             <DataGrid>
                 <thead>
