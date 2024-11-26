@@ -4,7 +4,9 @@ from rest_framework import viewsets
 from .models import Estoque, MovimentacaoDeEstoque
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from django.shortcuts import get_object_or_404
+from rest_framework.decorators import action
 
 
 # Create your views here.
@@ -12,6 +14,24 @@ from django.shortcuts import get_object_or_404
 class EstoqueViewsSets(viewsets.ModelViewSet):
     queryset = Estoque.objects.all()
     serializer_class = EstoqueSerializer
+
+    @action(detail=False, methods=['get'], url_name="listagem_estoque_material", url_path="listagem_estoque_material")
+    def listagem_estoque_material(self, request):
+        estoques = self.queryset.select_related("material")
+        data = [
+            {
+                "id": estoque.id,
+                "quantidade_metros": estoque.quantidade_metros,
+                "material": {
+                    "id": estoque.material.id,
+                    "nome": estoque.material.nome,
+                }
+            }
+            for estoque in estoques
+        ]
+
+        return Response(data, status=status.HTTP_200_OK)
+
 
 class MovimentacaoDeEstoqueViewsSets(viewsets.ModelViewSet):
     queryset = MovimentacaoDeEstoque.objects.all()
