@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { FlexCointainer } from "../../components/FlexContainer";
-import { Listing } from "../../components/Listing";
 import { Title } from "../../components/Title";
-import { Item } from '../../components/ItemListagem';
 import { Button } from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { ContainerBtns } from "../Estoques/styles";
