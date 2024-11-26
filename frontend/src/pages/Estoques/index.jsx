@@ -5,6 +5,7 @@ import { Title } from '../../components/Title/index';
 import { ContainerBtns } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { DataGrid } from '../../components/Datagrid/styled';
+import { ListFilter } from '../../components/ListFilter';
 
 export const EstoquesPage = () => {
     const [estoques, setEstoques] = useState([]);
@@ -33,6 +34,7 @@ export const EstoquesPage = () => {
                     <Button action={() => navigate('/Estoque/movimentacaoDeEstoque/entrada')}>Registrar Entrada</Button>
                 </ContainerBtns>
            </FlexCointainer>
+           < ListFilter />
            <DataGrid>
                 <thead>
                    <tr>
