@@ -12,7 +12,7 @@ export const VendasPage = () => {
     const navigate = useNavigate();
 
     const handleLoadVendas = async () => {
-        const request = await fetch('http://localhost:8000/vendas/');
+        const request = await fetch('http://localhost:8000/vendas/listagem_vendas_cliente/');
         const response = await request.json();
 
         setVendas(response);
@@ -30,6 +30,11 @@ export const VendasPage = () => {
         setVendas(response);
     }
 
+    const handleFormataValorNumero = (valor) => {
+        let valorNumero = Number(valor).toFixed(2);
+        
+        return `R$ ${valorNumero.replace('.', ',')}`;
+    }
 
 
     return(
@@ -51,7 +56,16 @@ export const VendasPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    {vendas.map((venda, index) => (
+                        <tr key={index}>
+                            <td>{venda.cliente.nome}</td>
+                            <td>{handleFormataValorNumero(venda.valor_total)}</td>
+                            <td className="actions">
+                                <button className="edit">Editar</button>
+                                <button className="delete">Excluir</button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </DataGrid>
         </>
