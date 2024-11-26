@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { FlexCointainer } from "../../components/FlexContainer";
-import { Listing } from "../../components/Listing";
 import { Title } from "../../components/Title";
-import { Item } from "../../components/ItemListagem";
 import { useNavigate } from "react-router-dom";
 import { ListFilter } from "../../components/ListFilter";
 import { DataGrid } from "../../components/Datagrid/styled";
@@ -30,6 +28,7 @@ export const MateriaisPage = () => {
             <Title>Materiais</Title>
             <Button action={() => navigate('/Materiais/cadastrarMaterial/')}>Novo Material</Button>
         </FlexCointainer>
+        <ListFilter />
         <DataGrid>
             <thead>
                 <tr>
