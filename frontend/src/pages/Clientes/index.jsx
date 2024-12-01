@@ -5,7 +5,7 @@ import { Button } from "../../components/Button";
 import { useNavigate } from 'react-router-dom';
 import { ContainerBtns } from "../Estoques/styles";
 import { CadastrarOrcamentoModal } from '../../components/Modal/CadastrarOrcamentoModal';
-import { ConfirmarExclusaoModal } from '../../components/Modal/ConfirmarExclusaoModal'; // Importação do modal
+import { ConfirmarExclusaoModal } from '../../components/Modal/ConfirmarExclusaoModal';
 import { DataGrid } from "../../components/Datagrid/styled"; 
 import { globalContext } from "../../context/context";
 import { SucssesNotifications } from "../../components/Notifications";
@@ -34,12 +34,12 @@ export const ClientesPage = () => {
 
     const handleDeleteConfirm = () => {
         fetch(`http://localhost:8000/clientes/${clienteSelecionado}/`, {
-             method: "DELETE",
-             headers: {
+            method: "DELETE",
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${state.token}`,
-             } 
-            })
+            }
+        })
             .then(() => {
                 handleCarregaClientes();
                 setIsDeleteModalOpen(false);
@@ -59,33 +59,34 @@ export const ClientesPage = () => {
         setClienteSelecionado(null);
     };
 
-
-    //Ajustar depois a url e conferir a requisição
     const handleFiltrarClientes = async (nomeCliente) => {
-        const request = await fetch('');
-        const responseFiltrado = await request.json();
-
-        setClientes(responseFiltrado);
-    }
+        try {
+            const request = await fetch(`http://localhost:8000/clientes/?nome=${nomeCliente}`);
+            const responseFiltrado = await request.json();
+            setClientes(responseFiltrado);
+        } catch (error) {
+            console.error("Erro ao filtrar clientes:", error);
+        }
+    };
 
     return (
         <>
             <FlexCointainer pontas="true" size="98%">
                 <Title>Clientes</Title>
-                <ContainerBtns width="15rem">
+                <ContainerBtns width="15rem" className="btn-container">
                     <Button color="blue" action={handleOpenModal}>Novo Orçamento</Button>
                     <Button action={() => navigate('/Clientes/cadastrarCliente/')}>Novo Cliente</Button>
                 </ContainerBtns>
             </FlexCointainer>
 
-            <ListFilter action={handleFiltrarClientes}/>
+            <ListFilter action={handleFiltrarClientes} />
 
             <DataGrid>
                 <thead>
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
-                        <th>Telefone</th>
+                        <th>CPF</th>
                         <th className="actions">Ações</th>
                     </tr>
                 </thead>
@@ -94,7 +95,7 @@ export const ClientesPage = () => {
                         <tr key={cliente.id}>
                             <td>{cliente.nome}</td>
                             <td>{cliente.email}</td>
-                            <td>{cliente.telefone}</td>
+                            <td>{cliente.cpf}</td>
                             <td className="actions">
                                 <button className="edit" onClick={() => navigate(`/Clientes/maisInformacoesCliente/${cliente.id}/`)}>Editar</button>
                                 <button className="delete" onClick={() => handleOpenDeleteModal(cliente.id)}>Excluir</button>
