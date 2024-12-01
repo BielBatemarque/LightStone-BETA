@@ -86,6 +86,8 @@ export const MaisInformacoesCliente = () => {
   // Atualizar cliente
   const handleUpdateCliente = async (e) => {
     e.preventDefault();
+    
+    console.log(cliente)
     try {
       const response = await fetch(`http://localhost:8000/clientes/${id}/`, {
         method: 'PUT',
@@ -175,7 +177,7 @@ export const MaisInformacoesCliente = () => {
           <InputMask
             mask="99999-999"
             value={cliente.cep || ''}
-            onChange={(e) => setCliente({ ...cliente, cep: e.target.value })}
+            onChange={(e) => setCliente({ ...cliente, cep: e.target.value.replace('-','') })}
           >
             {(inputProps) => <input {...inputProps} id="cep" name="cep" />}
           </InputMask>
