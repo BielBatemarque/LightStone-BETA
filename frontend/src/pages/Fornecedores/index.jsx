@@ -44,7 +44,7 @@ export const FornecedoresPage = () => {
                             <td>{fornecedor.cnpj}</td>
                             <td>{fornecedor.logradouro}</td>
                             <td className="actions">
-                                <button className="edit">Editar</button>
+                                <button className="edit" onClick={() => navigate(`/Fornecedor/maisInformacoesFornecedor/${fornecedor.id}/`)}>Editar</button>
                                 <button className="delete">Excluir</button>
                             </td>
                         </tr>

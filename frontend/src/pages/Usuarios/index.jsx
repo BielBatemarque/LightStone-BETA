@@ -48,7 +48,7 @@ export const Usuarios = () => {
                             <td>{user.email}</td>
                             <td>{user.is_staff ? 'Sim' : 'Não'}</td>
                             <td className='actions'>
-                                <button className='edit'>Editar</button>
+                                <button className='edit' onClick={() => navigate(`/Usuarios/MaisInformacoesUsuario/${user.id}/`)}>Editar</button>
                                 <button className='delete'>Excluir</button>
                             </td>
                         </tr>
