@@ -1,5 +1,62 @@
 import styled from "styled-components";
 
+export const FormContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+export const FormTitle = styled.div`
+  margin-bottom: 2rem;
+  text-align: center;
+
+  h1 {
+    font-size: 1.75rem;
+    color: #333;
+  }
+`;
+
+export const FormGrid = styled.form`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; /* Em telas menores, usa uma única coluna */
+  }
+`;
+
+export const FieldContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+`;
+
 export const FundoTitle = styled.div`
     background-color: #f5f5f5;
     padding: 20px;

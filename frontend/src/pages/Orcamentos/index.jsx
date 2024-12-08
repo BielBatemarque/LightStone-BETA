@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ContainerBtns } from "../Estoques/styles";
 import { CadastrarClienteModal } from "../../components/Modal/CadastrarClienteModal";
 import { DataGrid } from "../../components/Datagrid/styled";
+import { ListFilter } from '../../components/ListFilter/index';
 
 export const OrcamentosPage = () => {
     const [orcamentos, setOrcamentos] = useState([]);
@@ -33,6 +34,15 @@ export const OrcamentosPage = () => {
         return valorFormatado;
     }
 
+    const handleFilter = async (nomeCliente) => {
+        const request = await fetch(`http://localhost:8000/orcamentos/retorna_orcamentos_cliente/?cliente=${nomeCliente}`);
+        const response = await request.json();
+
+        console.log(response);
+
+        setOrcamentos(response);
+    }
+
     return(
         <>
             <FlexCointainer pontas='true' size='98%'>
@@ -42,6 +52,7 @@ export const OrcamentosPage = () => {
                     <Button action={() => navigate('/Orcamentos/NovoOrcamento/') }>Novo Orçamento</Button>
                 </ContainerBtns>
             </FlexCointainer>
+            <ListFilter action={handleFilter}/>
             <DataGrid>
                 <thead>
                     <tr>

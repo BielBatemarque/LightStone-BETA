@@ -7,63 +7,7 @@ import { Button } from '../../components/Button';
 import { useAuth } from '../../hooks/useAuth';
 import { FailNotifications, SucssesNotifications } from '../../components/Notifications';
 import { FloatLabel } from '../../components/FloatLabel';
-
-const FormContainer = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
-
-const FormTitle = styled.div`
-  margin-bottom: 2rem;
-  text-align: center;
-
-  h1 {
-    font-size: 1.75rem;
-    color: #333;
-  }
-`;
-
-const FormGrid = styled.form`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* Em telas menores, usa uma única coluna */
-  }
-`;
-
-const FieldContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  label {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 0.5rem;
-  }
-
-  input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    box-sizing: border-box;
-  }
-`;
-
-const ButtonContainer = styled.div`
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
-`;
+import { ButtonContainer, FieldContainer, FormContainer, FormGrid, FormTitle } from './styles';
 
 export const MaisInformacoesCliente = () => {
   const { id } = useParams(':id');
