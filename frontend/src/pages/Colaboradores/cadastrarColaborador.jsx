@@ -1,13 +1,20 @@
 import { Title } from "../../components/Title";
-import { Button } from '../../components/Button/index';
 import { useEffect, useState } from "react";
 import { Colaborador } from "../../models/Colaborador";
 import { useAuth } from "../../hooks/useAuth";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
-import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
-import { FloatLabel } from '../../components/FloatLabel/index';
-import { StyledOptions, StyledSelect } from "../Materiais/styles";
+import { 
+    FormContainer, 
+    StyledForm, 
+    StyledField, 
+    StyledButton, 
+    StyledButtonContainer, 
+    TitleStyled, 
+    StyledSelect, 
+    StyledOptions 
+} from "./styles"; // Certifique-se de usar os estilos atualizados
+import { FloatLabel } from "../../components/FloatLabel";
 
 export const CadastrarColaboradorPage = () => {
     const [colab, setColab] = useState(new Colaborador());
@@ -17,71 +24,78 @@ export const CadastrarColaboradorPage = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setColab({...colab, [name]: value});
+        setColab({ ...colab, [name]: value });
     };
 
     const handleLoadCargos = async () => {
         const request = await fetch('http://localhost:8000/cargos/');
         const response = await request.json();
-
         setCargos(response);
-    }
+    };
 
     useEffect(() => {
         handleLoadCargos();
     }, []);
-    
+
     const handleCadastrarColab = async (e) => {
         e.preventDefault();
 
         const request = await fetch('http://localhost:8000/colaboradores/', {
             method: 'POST',
-            headers : {
+            headers: {
                 'Content-Type': 'application/json',
-                'Authorization' : `Token ${state.token}`
+                'Authorization': `Token ${state.token}`
             },
             body: JSON.stringify(colab),
         });
 
-        if(request.ok){
+        if (request.ok) {
             SucssesNotifications('Cadastrado com sucesso');
             navigate('/Colaboradores/');
-        }else{
+        } else {
             FailNotifications('Erro ao cadastrar Colaborador');
         }
-    
     };
 
-    console.log(colab);
-
-    return(
-        <>
-            <FundoTitle>
-                <Title mt={0}>Cadastrar Colaborador</Title>
-            </FundoTitle>
-            <FundoForm>
-                <StyledForm>
-                    <FloatLabel type="text" text="nome" name="nome" onChange={handleChange}/> <br />
-                    <FloatLabel type="date" text="nascimento" name="nascimento" onChange={handleChange} /> <br />
-                    <FloatLabel type="text" text="telefone" name="telefone" onChange={handleChange}/><br />
-                    <FloatLabel type="text" text="CPF" name="cpf" onChange={handleChange} /> <br />
-                    <FloatLabel type="email" text="email" name="email" onChange={handleChange}/> <br />
-                    <span>
-                        <br />
-                        <label htmlFor="">Cargo:  </label>
-                        <StyledSelect>
-                            {cargos.map((cargo, index) => (
-                                <StyledOptions value={cargo.id} key={index}>{cargo.nome}</StyledOptions>
-                            ))}
-                        </StyledSelect>
-                    </span>
-
-                    <FlexDiv>
-                        <Button children={'Cadastrar'} action={handleCadastrarColab}/>
-                        <Button children={'Cancelar'} color={'red'} action={() => navigate('/Colaboradores/')}/>
-                    </FlexDiv>
-                </StyledForm>
-            </FundoForm>
-        </>
+    return (
+        <FormContainer>
+            <TitleStyled>Cadastrar Colaborador</TitleStyled>
+            <StyledForm onSubmit={handleCadastrarColab}>
+                <StyledField>
+                    <FloatLabel type="text" text="Nome" name="nome" onChange={handleChange} />
+                </StyledField>
+                <StyledField>
+                    <FloatLabel type="date" text="Nascimento" name="nascimento" onChange={handleChange} />
+                </StyledField>
+                <StyledField>
+                    <FloatLabel type="text" text="Telefone" name="telefone" onChange={handleChange} />
+                </StyledField>
+                <StyledField>
+                    <FloatLabel type="text" text="CPF" name="cpf" onChange={handleChange} />
+                </StyledField>
+                <StyledField>
+                    <FloatLabel type="email" text="E-mail" name="email" onChange={handleChange} />
+                </StyledField>
+                <StyledField>
+                    <label>Cargo:</label>
+                    <StyledSelect name="cargo" onChange={handleChange}>
+                        <StyledOptions value="">Selecione um cargo</StyledOptions>
+                        {cargos.map((cargo, index) => (
+                            <StyledOptions value={cargo.id} key={index}>{cargo.nome}</StyledOptions>
+                        ))}
+                    </StyledSelect>
+                </StyledField>
+                <StyledButtonContainer>
+                    <StyledButton type="submit">Cadastrar</StyledButton>
+                    <StyledButton 
+                        color="red" 
+                        hoverColor="#d9534f" 
+                        onClick={() => navigate('/Colaboradores/')}
+                    >
+                        Cancelar
+                    </StyledButton>
+                </StyledButtonContainer>
+            </StyledForm>
+        </FormContainer>
     );
 };

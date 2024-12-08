@@ -61,7 +61,7 @@ export const VendasPage = () => {
                             <td>{venda.cliente.nome}</td>
                             <td>{handleFormataValorNumero(venda.valor_total)}</td>
                             <td className="actions">
-                                <button className="edit">Editar</button>
+                                <button className="edit" onClick={() => navigate(`/Vendas/MaisInformacoesVenda/${venda.id}/`)}>Editar</button>
                                 <button className="delete">Excluir</button>
                             </td>
                         </tr>

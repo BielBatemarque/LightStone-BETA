@@ -1,12 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
-import { Button } from "../../components/Button";
+import { 
+    FormContainer, 
+    StyledForm, 
+    StyledField, 
+    StyledButton, 
+    StyledButtonContainer, 
+    TitleStyled, 
+    StyledSelect, 
+    StyledOptions 
+} from "./styles";
 import { useAuth } from '../../hooks/useAuth';
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
-import { FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
 import { FloatLabel } from "../../components/FloatLabel";
-import { StyledOptions, StyledSelect } from "../Materiais/styles";
 
 export const MaisInformacoesColaborador = () => {
     const [colaborador, setColaborador] = useState({});
@@ -16,18 +22,26 @@ export const MaisInformacoesColaborador = () => {
     const navigate = useNavigate();
 
     const handleLoadColaborador = async () => {
-        const request = await fetch(`http://localhost:8000/colaboradores/${id}`);
-        const response = await request.json();
-
-        setColaborador(response);
+        try {
+            const request = await fetch(`http://localhost:8000/colaboradores/${id}`);
+            const response = await request.json();
+            console.log("Dados carregados do colaborador:", response);
+            setColaborador(response);
+        } catch (error) {
+            console.error("Erro ao carregar colaborador:", error);
+        }
     };
 
     const handleLoadCargos = async () => {
-        const request = await fetch('http://localhost:8000/cargos/');
-        const respnse = await request.json();
-
-        setCargos(respnse);
-    }
+        try {
+            const request = await fetch('http://localhost:8000/cargos/');
+            const response = await request.json();
+            console.log("Cargos carregados:", response);
+            setCargos(response);
+        } catch (error) {
+            console.error("Erro ao carregar cargos:", error);
+        }
+    };
 
     useEffect(() => {
         handleLoadColaborador();
@@ -36,76 +50,102 @@ export const MaisInformacoesColaborador = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
-        setColaborador({...colaborador, [name]: value});
+        console.log(`Campo alterado: ${name}, Valor: ${value}`);
+        setColaborador({ ...colaborador, [name]: value });
     };
 
     const handleUpdateColaborador = async (e) => {
         e.preventDefault();
+        console.log("Dados enviados para atualização:", colaborador);
+        console.log("Token utilizado:", state.token);
 
-        const request = await fetch(`http://localhost:8000/colaboradores/${id}/`, {
-            method: 'PUT',
-            headers:{
-                'Content-Type': 'application/json',
-                'Authorization' : `Token ${state.token}`
-            },
-            body:JSON.stringify(colaborador),
-        });
+        try {
+            const request = await fetch(`http://localhost:8000/colaboradores/${id}/`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${state.token}`
+                },
+                body: JSON.stringify(colaborador),
+            });
 
-        if (request.ok){
-            SucssesNotifications('Colaborador editado com sucesso');
-            navigate('/Colaboradores/');
-        }else{
-            FailNotifications('Não foi possivel editar Colaborador');
+            const response = await request.json();
+            console.log("Resposta da API ao atualizar:", response);
+
+            if (request.ok) {
+                SucssesNotifications('Colaborador editado com sucesso');
+                navigate('/Colaboradores/');
+            } else {
+                console.error("Erro na requisição (status):", request.status);
+                FailNotifications('Não foi possível editar Colaborador');
+            }
+        } catch (error) {
+            console.error("Erro ao enviar requisição de atualização:", error);
+            FailNotifications('Erro inesperado ao editar Colaborador');
         }
     };
 
-    const handleDeleteColaborador = async (e) => {
-        const request = await fetch(`http://localhost:8000/colaboradores/${id}/`,{
-            method: 'DELETE',
-            headers:{
-                'Content-Type': 'application/json',
-                'Authorization' : `Token ${state.token}`,
-            },
-        });
+    const handleDeleteColaborador = async () => {
+        try {
+            const request = await fetch(`http://localhost:8000/colaboradores/${id}/`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${state.token}`,
+                },
+            });
 
-        if (request.ok){
-            SucssesNotifications('Colaborador deltado com sucesso');
-            navigate('/Colaboradores/');
-        }else{
-            FailNotifications('Não foi possivel deletar Colaborador');
+            if (request.ok) {
+                console.log("Colaborador deletado com sucesso");
+                SucssesNotifications('Colaborador deletado com sucesso');
+                navigate('/Colaboradores/');
+            } else {
+                console.error("Erro na requisição (status):", request.status);
+                FailNotifications('Não foi possível deletar Colaborador');
+            }
+        } catch (error) {
+            console.error("Erro ao enviar requisição de deleção:", error);
         }
     };
-    return(
-        <>
-            <FundoTitle>
-                <Title mt={0}>Colaborador: {colaborador.nome}</Title>
-            </FundoTitle>
-            <FundoForm>
 
-                <StyledForm onSubmit={handleUpdateColaborador}>
-                    <FloatLabel type="text" text="nome" name="nome" onChange={handleChange} value={colaborador.nome}/> <br />
-                    <FloatLabel type="date" name="nascimento" id="" onChange={handleChange} value={colaborador.nascimento}/> <br />
-                    <FloatLabel type="text" text="telefone" name="telefone" onChange={handleChange} value={colaborador.telefone}/><br />
-                    <FloatLabel type="text" text="CPF" name="cpf" onChange={handleChange}  value={colaborador.cpf}/> <br />
-                    <FloatLabel type="email" text="email" name="email" onChange={handleChange} value={colaborador.email}/> <br />
-                    <br />
-                    <span>
-                        <br />
-                        <label htmlFor="">Cargo: </label>
-                        <StyledSelect value={colaborador.cargo} name="cargo" onChange={handleChange}>
-                            {cargos.map((cargo, index) => (
-                                    <StyledOptions value={cargo.id} key={index}>{cargo.nome}</StyledOptions>
-                                )
-                            )}
-                        </StyledSelect>
-                    </span>
-
-                    <Button>Editar Colaborador</Button>
-                    <Button action={handleDeleteColaborador} color={'red'}>Deletar Colaborador</Button>
-                </StyledForm>
-
-            </FundoForm>
-        </>
+    return (
+        <FormContainer>
+            <TitleStyled>Colaborador: {colaborador.nome}</TitleStyled>
+            <StyledForm onSubmit={(e) => {
+                console.log("Formulário enviado para atualização");
+                handleUpdateColaborador(e);
+            }}>
+                <StyledField>
+                    <FloatLabel type="text" text="Nome" name="nome" onChange={handleChange} value={colaborador.nome} />
+                </StyledField>
+                <StyledField>
+                    <FloatLabel type="date" name="nascimento" onChange={handleChange} value={colaborador.nascimento} />
+                </StyledField>
+                <StyledField>
+                    <FloatLabel type="text" text="Telefone" name="telefone" onChange={handleChange} value={colaborador.telefone} />
+                </StyledField>
+                <StyledField>
+                    <FloatLabel type="text" text="CPF" name="cpf" onChange={handleChange} value={colaborador.cpf} />
+                </StyledField>
+                <StyledField>
+                    <FloatLabel type="email" text="E-mail" name="email" onChange={handleChange} value={colaborador.email} />
+                </StyledField>
+                <StyledField>
+                    <label>Cargo:</label>
+                    <StyledSelect value={colaborador.cargo} name="cargo" onChange={handleChange}>
+                        <StyledOptions value="">Selecione um cargo</StyledOptions>
+                        {cargos.map((cargo, index) => (
+                            <StyledOptions value={cargo.id} key={index}>{cargo.nome}</StyledOptions>
+                        ))}
+                    </StyledSelect>
+                </StyledField>
+                <StyledButtonContainer>
+                    <StyledButton type="submit">Editar Colaborador</StyledButton>
+                    <StyledButton color="red" hoverColor="#d9534f" onClick={handleDeleteColaborador}>
+                        Deletar Colaborador
+                    </StyledButton>
+                </StyledButtonContainer>
+            </StyledForm>
+        </FormContainer>
     );
 };

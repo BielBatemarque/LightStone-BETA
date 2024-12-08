@@ -49,7 +49,7 @@ export const EstoquesPage = () => {
                             <td>{estoque.material.nome}</td>
                             <td>{estoque.quantidade_metros}</td>
                             <td className='actions'>
-                                <button className='edit'>Editar</button>
+                                <button className='edit' onClick={() => navigate(`/Estoque/maisInformacoesEstoque/${estoque.id}/`)}>Editar</button>
                                 <button className='delete'>Excluir</button>
                             </td>
                         </tr>

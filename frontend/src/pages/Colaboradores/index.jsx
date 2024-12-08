@@ -77,7 +77,7 @@ export const ColaboradorPages = () => {
                             <td>{colab.email}</td>
                             <td>{colab.cargo_nome}</td>
                             <td className="actions">
-                                <button className="edit" onClick={() => navigate(`/colaboradores/${colab.id}`)}>Editar</button>
+                                <button className="edit" onClick={() => navigate(`/Colaborador/maisInformacoesColaborador/${colab.id}/`)}>Editar</button>
                                 <button className="delete">Excluir</button>
                             </td>
                         </tr>

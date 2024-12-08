@@ -11,7 +11,7 @@ export const HomePage = () => {
     return(
        <>
             <FundoTitle>
-                <Title mt={0}>Dados Gerais</Title>
+                {/* <Title mt={0}>Dados Gerais</Title> */}
             </FundoTitle>
             <FundoDashBoard>
             </FundoDashBoard>
