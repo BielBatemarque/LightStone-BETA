@@ -25,7 +25,7 @@ class ColaboradorViewsSets(viewsets.ModelViewSet):
         
         if nome_colaborador:
             colaborador_filtrado = self.queryset.filter(nome__icontains=nome_colaborador)
-            serializer = self.get_serializer(colaborador_filtrado)
+            serializer = self.get_serializer(colaborador_filtrado, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response({"detail": "Nenhum colaborador com este nome foi encontrado"}, status=status.HTTP_400_BAD_REQUEST)

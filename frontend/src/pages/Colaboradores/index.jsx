@@ -31,6 +31,8 @@ export const ColaboradorPages = () => {
         const request = await fetch(`http://localhost:8000/colaboradores/filtrar_colaborador/?nome=${nomeColaborador}`);
         const responseFiltrado = await request.json();
 
+
+        console.log(responseFiltrado);
         setColabs(responseFiltrado);
     }
 
@@ -58,7 +60,7 @@ export const ColaboradorPages = () => {
                 <Button action={() => navigate('/Colaboradores/CadastrarColaborador/')}>Novo Colaborador</Button>
             </FlexCointainer>
 
-            <ListFilter />
+            <ListFilter action={handleFiltrarColaborador}/>
             <DataGrid>
                 <thead>
                     <tr>
