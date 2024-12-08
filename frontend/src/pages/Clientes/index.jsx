@@ -61,7 +61,8 @@ export const ClientesPage = () => {
 
     const handleFiltrarClientes = async (nomeCliente) => {
         try {
-            const request = await fetch(`http://localhost:8000/clientes/?nome=${nomeCliente}`);
+            console.log('entrou')
+            const request = await fetch(`http://localhost:8000/clientes/filtrar_clientes/?nome=${nomeCliente}`);
             const responseFiltrado = await request.json();
             setClientes(responseFiltrado);
         } catch (error) {
