@@ -31,6 +31,30 @@ class EstoqueViewsSets(viewsets.ModelViewSet):
         ]
 
         return Response(data, status=status.HTTP_200_OK)
+    
+    @action(detail=False, methods=["get"], url_name="filtrar_estoque", url_path="filtrar_estoque")
+    def filtrar_estoque(self, request):
+        estoques = self.queryset.select_related("material")
+        nome_material = request.query_params.get("material", None)
+
+        if nome_material:
+            estoques = estoques.filter(material__nome__icontains=nome_material)
+
+            data = [
+                {
+                    "id": estoque.id,
+                    "quantidade_metros": estoque.quantidade_metros,
+                    "material": {
+                        "id": estoque.material.id,
+                        "nome": estoque.material.nome,                  
+                    }
+                }
+                for estoque in estoques
+            ]
+
+            return Response(data, status=status.HTTP_200_OK)
+        
+        return Response({"detail": "Material não encontrado"})
 
 
 class MovimentacaoDeEstoqueViewsSets(viewsets.ModelViewSet):

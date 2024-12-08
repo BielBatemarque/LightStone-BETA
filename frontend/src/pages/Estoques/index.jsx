@@ -21,6 +21,13 @@ export const EstoquesPage = () => {
 
     console.log(estoques);
 
+    const handleFilter = async (nomeMaterial) => {
+        const request = await fetch(`http://localhost:8000/estoques/filtrar_estoque/?material=${nomeMaterial}`);
+        const response = await request.json();
+
+        setEstoques(response);
+    }
+
     useEffect(() => {
         handleLoadingEstoques();
     }, []);
@@ -34,7 +41,7 @@ export const EstoquesPage = () => {
                     <Button action={() => navigate('/Estoque/movimentacaoDeEstoque/entrada')}>Registrar Entrada</Button>
                 </ContainerBtns>
            </FlexCointainer>
-           < ListFilter />
+           < ListFilter action={handleFilter}/>
            <DataGrid>
                 <thead>
                    <tr>
