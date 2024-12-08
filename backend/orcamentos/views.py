@@ -18,7 +18,15 @@ class OrcamentoViewSets(viewsets.ModelViewSet):
 
         if cliente_nome:
             orcamentos_filtrados = self.queryset.filter(cliente__nome__icontains=cliente_nome)
-            serializer = self.get_serializer(orcamentos_filtrados, many=True)
+
+            if len(orcamentos_filtrados) > 0:
+                orcamentos = []
+
+                for orcamento in orcamentos_filtrados:
+                    orcamento.nome_cliente = orcamento.cliente.nome
+                    orcamentos.append(orcamento)
+
+            serializer = self.get_serializer(orcamentos, many=True)
 
             return Response(serializer.data, status=status.HTTP_200_OK)
         
