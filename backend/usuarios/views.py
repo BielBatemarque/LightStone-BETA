@@ -10,6 +10,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password
+from rest_framework.decorators import action
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -38,7 +40,19 @@ class UserViewSet(viewsets.ModelViewSet):
         self.perform_update(serializer)
 
         return Response(serializer.data)
-    
+
+    @action(detail=False, methods=["get"], url_name="filtrar_usuarios", url_path="filtrar_usuarios")
+    def filtrar_usuarios(self, request):
+        nome_usuario = request.query_params.get("nome", None)
+
+        if nome_usuario:
+            usuarios = self.queryset.filter(username__icontains=nome_usuario)
+            serializer = self.get_serializer(usuarios, many=True)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        return Response("Não econtrou nenhum usuário com este nome.")
+
 class UserLoginView(APIView):
     def post(self, request):
         try:

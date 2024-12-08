@@ -4,6 +4,7 @@ import { FlexCointainer } from '../../components/FlexContainer';
 import { Title } from '../../components/Title/index';
 import { useNavigate } from 'react-router-dom';
 import { DataGrid } from '../../components/Datagrid/styled';
+import { ListFilter } from '../../components/ListFilter';
 
 export const Usuarios = () => {
     const [users, setUsers] = useState([]);
@@ -25,13 +26,22 @@ export const Usuarios = () => {
         handleLoadUsers();
     }, []);
 
+    const handleFilter = async (nomeUsuario) => {
+        const request = await fetch(`http://localhost:8000/users/filtrar_usuarios/?nome=${nomeUsuario}`);
+        const response = await request.json();
+
+        setUsers(response);
+    }
+
 
     return(
         <>
-            <FlexCointainer size={'93%'} pontas='true'>
+            <FlexCointainer size={'98%'} pontas='true'>
                 <Title>Usuários</Title>
                 <Button action={() => navigate(`/Usuarios/cadastrarUsuario/`)}>Cadastrar usuário</Button>
             </FlexCointainer>
+
+            <ListFilter action={handleFilter}/>
             <DataGrid>
                 <thead>
                     <tr>
