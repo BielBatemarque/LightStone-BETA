@@ -17,6 +17,12 @@ export const FornecedoresPage = () => {
         setFornecedores(request);
     }
 
+    const handleFilter = async (nomeFornecedor) => {
+        const request = await fetch(`http://localhost:8000/fornecedores/filtrar_fornecedores/?nome=${nomeFornecedor}`);
+        const response = await request.json();
+
+        setFornecedores(response);
+    }
     useEffect(() => {
         handleLoadFornecedores();
     }, []);
@@ -27,7 +33,7 @@ export const FornecedoresPage = () => {
                 <Title>Fornecedores</Title>
                 <Button children={'Novo Fornecedor'} action={() => navigate('/Fornecedores/cadastrarFornecedor/')}/>
             </FlexCointainer>
-            <ListFilter />
+            <ListFilter action={handleFilter}/>
             <DataGrid>
                 <thead>
                     <tr>

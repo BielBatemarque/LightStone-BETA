@@ -16,7 +16,7 @@ class FornecedorViewSets(viewsets.ModelViewSet):
         nome_fornecedor = request.query_params.get("nome", None)
 
         if nome_fornecedor:
-            fornecedores_filtrados = self.queryset.filter(nome__icontains=nome_fornecedor)
+            fornecedores_filtrados = self.queryset.filter(nome_empresa__icontains=nome_fornecedor)
             serializer = self.get_serializer(fornecedores_filtrados, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
