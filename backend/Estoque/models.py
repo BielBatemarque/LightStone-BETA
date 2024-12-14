@@ -7,7 +7,7 @@ from django.utils import timezone
 # Create your models here.
 
 class Estoque(models.Model):
-    material = models.ForeignKey(Material, on_delete=models.CASCADE)
+    material = models.ForeignKey(Material, on_delete=models.DO_NOTHING)
     quantidade_metros = models.IntegerField()
 
     def __str__(self):
@@ -15,7 +15,7 @@ class Estoque(models.Model):
     
 class MovimentacaoDeEstoque(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    produto = models.ForeignKey(Material, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Material, on_delete=models.DO_NOTHING)
     data = models.DateTimeField(default=timezone.now)
     quantidade = models.IntegerField()
     tipo = models.CharField(max_length=30)
