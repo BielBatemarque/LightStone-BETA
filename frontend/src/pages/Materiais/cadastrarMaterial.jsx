@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
-import { Button } from "../../components/Button";
+import React, { useEffect, useState } from "react";
 import { Material } from '../../models/Material';
-import { Title } from "../../components/Title";
 import { useAuth } from "../../hooks/useAuth";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
-import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
-import { FloatLabel } from "../../components/FloatLabel";
-import { StyledOptions, StyledSelect } from "./styles";
+import { 
+    PageContainer, 
+    TitleContainer, 
+    StyledForm, 
+    FormGroup, 
+    StyledInput, 
+    StyledSelect, 
+    StyledButton 
+} from "./styles";
 
 export const CadastrarMaterialPage = () => {
     const [material, setMaterial] = useState(new Material());
@@ -15,10 +19,10 @@ export const CadastrarMaterialPage = () => {
     const { state } = useAuth();
     const navigate = useNavigate();
 
+    // Carregar lista de fornecedores
     const handleLoadFornecedores = async () => {
         const request = await fetch('http://localhost:8000/fornecedores/');
         const response = await request.json();
-
         setFornecedores(response);
     };
 
@@ -26,14 +30,22 @@ export const CadastrarMaterialPage = () => {
         handleLoadFornecedores();
     }, []);
 
-    useEffect(() => {
-       setMaterial({...material, fornecedor: parseInt(material.fornecedor)});
-    }, []);
+    // Atualizar fornecedor no estado
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        let fornecedores = [];
+        if (name === 'fornecedor') {
+            fornecedores.push(parseInt(value));
+            setMaterial({ ...material, [name]: fornecedores });
+        } else {
+            setMaterial({ ...material, [name]: value });
+        }
+    };
 
-
+    // Cadastrar material
     const handleCadastrarMaterial = async (e) => {
         e.preventDefault();
-        
+
         const request = await fetch('http://localhost:8000/materiais/', {
             method: 'POST',
             headers: {
@@ -42,55 +54,58 @@ export const CadastrarMaterialPage = () => {
             },
             body: JSON.stringify(material),
         });
-        const response = await request.json();
-        console.log(response);
 
-        if(request.ok){
+        if (request.ok) {
             SucssesNotifications('Cadastrado com Sucesso');
             navigate('/Materiais/');
-        }else{
+        } else {
             FailNotifications('Erro ao cadastrar');
         }
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        let fornecedores = [];
+    return (
+        <PageContainer>
+            <TitleContainer>Cadastrar Material</TitleContainer>
+            <StyledForm onSubmit={handleCadastrarMaterial}>
+                <FormGroup>
+                    <label>Nome do Material</label>
+                    <StyledInput
+                        type="text"
+                        name="nome"
+                        placeholder="Digite o nome do material"
+                        onChange={handleChange}
+                    />
+                </FormGroup>
 
-        if(name === 'fornecedor'){
-            fornecedores.push(parseInt(value));
-            setMaterial({...material, [name]: fornecedores});
-        }else{   
-            setMaterial({...material, [name]: value});
-        }
-    };
+                <FormGroup>
+                    <label>Cor Base</label>
+                    <StyledInput
+                        type="text"
+                        name="cor_base"
+                        placeholder="Digite a cor base"
+                        onChange={handleChange}
+                    />
+                </FormGroup>
 
-    console.log(material.fornecedor);
-    
-    return(
-        <>
-            <FundoTitle>
-                <Title mt={0}>Cadastrar Material</Title>
-            </FundoTitle>
-            <FundoForm>
-
-            <StyledForm>
-                <FloatLabel type="text" text="Nome do material" name="nome" onChange={handleChange}/> <br />
-                <FloatLabel type="text" text="Cor base" name="cor_base" onChange={handleChange}/> <br />
-                <span>
-                    <label>Fornecedor:  </label>
-                <StyledSelect name="fornecedor" id="" onChange={handleChange}>
-                    {fornecedores.map((fornecedor, index) => (
-                        <StyledOptions value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</StyledOptions>
+                <FormGroup>
+                    <label>Fornecedor</label>
+                    <StyledSelect name="fornecedor" onChange={handleChange}>
+                        <option value="" disabled>Selecione um fornecedor</option>
+                        {fornecedores.map((fornecedor, index) => (
+                            <option value={fornecedor.id} key={index}>
+                                {fornecedor.nome_empresa}
+                            </option>
                         ))}
-                </StyledSelect>
-                </span>
-                <FlexDiv>
-                    <Button action={handleCadastrarMaterial}>Cadastrar</Button>
-                    <Button color={'red'} action={() => navigate('/Materiais/')}>Cancelar</Button>
-                </FlexDiv>
+                    </StyledSelect>
+                </FormGroup>
+
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <StyledButton type="submit">Cadastrar</StyledButton>
+                    <StyledButton color="red" type="button" onClick={() => navigate('/Materiais/')}>
+                        Cancelar
+                    </StyledButton>
+                </div>
             </StyledForm>
-            </FundoForm>
-        </>
+        </PageContainer>
     );
 };

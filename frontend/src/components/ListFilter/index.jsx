@@ -5,9 +5,9 @@ import { useState } from "react";
 export const ListFilter = ({ action }) => {
     const [valor, setValue] = useState("");
 
-    const handleKeyPress = (e) => {
+    const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            action(valor);
+            action(valor); // Aciona a ação ao pressionar Enter
         }
     };
 
@@ -17,7 +17,7 @@ export const ListFilter = ({ action }) => {
                 value={valor} 
                 onChange={(e) => setValue(e.target.value)} 
                 placeholder="Digite para filtrar..." 
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyDown} // Substitui onKeyPress por onKeyDown
             />
             <button onClick={() => action(valor)}>
                 <CiFilter size={20} />

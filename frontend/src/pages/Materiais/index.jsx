@@ -19,9 +19,19 @@ export const MateriaisPage = () => {
   const handleLoadingMateriais = async () => {
     const request = await fetch("http://localhost:8000/materiais/");
     const response = await request.json();
-
     setMateriais(response);
   };
+
+  const handleFiltrarMateriais = async (nomeMaterial) => {
+    try {
+      const request = await fetch(`http://localhost:8000/materiais/filtrar_materiais/?nome=${nomeMaterial}`);
+      const responseFiltrado = await request.json();
+      setMateriais(responseFiltrado);
+    } catch (error) {
+      console.error("Erro ao filtrar materiais:", error);
+    }
+  };
+  
 
   useEffect(() => {
     handleLoadingMateriais();
@@ -59,7 +69,7 @@ export const MateriaisPage = () => {
           Novo Material
         </Button>
       </FlexCointainer>
-      <ListFilter />
+      <ListFilter action={handleFiltrarMateriais} />
       <DataGrid>
         <thead>
           <tr>

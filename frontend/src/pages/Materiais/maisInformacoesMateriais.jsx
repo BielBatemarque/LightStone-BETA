@@ -1,70 +1,64 @@
-import { useEffect, useState } from 'react';
-import { Title } from '../../components/Title/index';
-import { Button } from '../../components/Button/index';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { FailNotifications, SucssesNotifications } from '../../components/Notifications/index';
-import { FundoForm, FundoTitle, StyledForm } from '../Clientes/styles';
-import { FloatLabel } from '../../components/FloatLabel/index';
-import { StyledSelect } from './styles';
+import {
+    PageContainer,
+    TitleContainer,
+    StyledForm,
+    StyledInput,
+    StyledSelect,
+    StyledButton,
+    FormGroup,
+} from './styles';
+import { SucssesNotifications, FailNotifications } from '../../components/Notifications/index';
 
 export const MaisInformacoesMaterial = () => {
     const [material, setMaterial] = useState({});
-    const [fornecedores, setFornecedroes] = useState([]);
-    const { id } = useParams(':id');
+    const [fornecedores, setFornecedores] = useState([]);
+    const { id } = useParams();
     const { state } = useAuth();
     const navigate = useNavigate();
 
-    const handleLoadForncedores = async () => {
-        const request = await fetch('http://localhost:8000/fornecedores/');
-        const response = await request.json();
-
-        setFornecedroes(response);
+    // Carregar lista de fornecedores
+    const handleLoadFornecedores = async () => {
+        const response = await fetch('http://localhost:8000/fornecedores/');
+        const data = await response.json();
+        setFornecedores(data);
     };
 
-    useEffect(() => {
-        handleLoadForncedores();
-    }, []);
-
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        if(name === 'fornecedor'){
-            const selectedFornecedorId = parseInt(value);
-            setMaterial({...material, [name]: [selectedFornecedorId]});
-        }else{   
-            setMaterial({...material, [name]: value});
-        }
-    };
-
+    // Carregar informações do material
     const handleLoadMaterial = async () => {
-        const request = await fetch(`http://localhost:8000/materiais/${id}/`);
-        const response = await request.json();
-
-        setMaterial(response);
+        const response = await fetch(`http://localhost:8000/materiais/${id}/`);
+        const data = await response.json();
+        setMaterial(data);
     };
 
     useEffect(() => {
+        handleLoadFornecedores();
         handleLoadMaterial();
     }, []);
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setMaterial({ ...material, [name]: value });
+    };
+
     const handleUpdateMaterial = async (e) => {
         e.preventDefault();
-
-        const request = await fetch(`http://localhost:8000/materiais/${id}/`,{
+        const request = await fetch(`http://localhost:8000/materiais/${id}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${state.token}`,
+                Authorization: `Token ${state.token}`,
             },
             body: JSON.stringify(material),
         });
 
-        if (request.ok){
-            SucssesNotifications('Sucesso ao editar Material');
+        if (request.ok) {
+            SucssesNotifications('Material editado com sucesso!');
             navigate('/Materiais/');
-        }else{
-            FailNotifications('Não foi possivel editar material');
+        } else {
+            FailNotifications('Erro ao editar material.');
         }
     };
 
@@ -73,39 +67,62 @@ export const MaisInformacoesMaterial = () => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${state.token}`,
+                Authorization: `Token ${state.token}`,
             },
         });
 
         if (request.ok) {
-            SucssesNotifications('Sucesso ao deletar Material');
+            SucssesNotifications('Material deletado com sucesso!');
             navigate('/Materiais/');
-        }else{
-            FailNotifications('Não foi possivel deletar material');
+        } else {
+            FailNotifications('Erro ao deletar material.');
         }
     };
 
-    return(
-        <>
-            <FundoTitle>
-                <Title mt={0}>Material: {material.nome}</Title>
-            </FundoTitle>
-            <FundoForm>
-                <StyledForm onSubmit={handleUpdateMaterial}>
-                    <FloatLabel type="text" text="Nome do material" name="nome" onChange={handleChange} value={material.nome}/> <br />
-                    <FloatLabel type="text" text="Cor base" name="cor_base" onChange={handleChange} value={material.cor_base}/> <br />
-                    <span>
-                        <label style={{marginRight: '1rem'}}>Fornecedor:  </label>
-                        <StyledSelect name="fornecedor" id="" onChange={handleChange} value={material.fornecedor}>
-                            {fornecedores.map((fornecedor, index) => (
-                                <option value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</option>
-                                ))}
-                        </StyledSelect>
-                    </span>
-                    <Button>Editar Material</Button>
-                    <Button color={'red'} action={handleDeleteMaterial}>Deletar Material</Button>
-                </StyledForm>
-            </FundoForm>
-        </>
+    return (
+        <PageContainer>
+            <TitleContainer>Editar Material</TitleContainer>
+            <StyledForm onSubmit={handleUpdateMaterial}>
+                <FormGroup>
+                    <label>Nome do Material</label>
+                    <StyledInput
+                        type="text"
+                        name="nome"
+                        value={material.nome || ''}
+                        onChange={handleChange}
+                        placeholder="Digite o nome do material"
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <label>Cor Base</label>
+                    <StyledInput
+                        type="text"
+                        name="cor_base"
+                        value={material.cor_base || ''}
+                        onChange={handleChange}
+                        placeholder="Digite a cor base"
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <label>Fornecedor</label>
+                    <StyledSelect
+                        name="fornecedor"
+                        value={material.fornecedor || ''}
+                        onChange={handleChange}
+                    >
+                        <option value="">Selecione um fornecedor</option>
+                        {fornecedores.map((fornecedor) => (
+                            <option key={fornecedor.id} value={fornecedor.id}>
+                                {fornecedor.nome_empresa}
+                            </option>
+                        ))}
+                    </StyledSelect>
+                </FormGroup>
+                <StyledButton type="submit">Salvar Alterações</StyledButton>
+                <StyledButton type="button" color="red" onClick={handleDeleteMaterial}>
+                    Deletar Material
+                </StyledButton>
+            </StyledForm>
+        </PageContainer>
     );
 };

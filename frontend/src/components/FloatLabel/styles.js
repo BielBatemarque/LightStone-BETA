@@ -57,3 +57,4 @@ export const StyledLabel = styled.label`
   padding: 5px;
   box-sizing: border-box;
 `;
+
