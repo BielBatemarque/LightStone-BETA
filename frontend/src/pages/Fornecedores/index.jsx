@@ -10,48 +10,76 @@ import {
   FailNotifications,
   SucssesNotifications,
 } from "../../components/Notifications";
+import { ConfirmarExclusaoModal } from "../../components/Modal/ConfirmarExclusaoModal";
 
 export const FornecedoresPage = () => {
   const [fornecedores, setFornecedores] = useState([]);
   const navigate = useNavigate();
   const { state } = useContext(globalContext);
 
-  const handleLoadFornecedores = async () => {
-    const response = await fetch("http://localhost:8000/fornecedores/");
-    const request = await response.json();
+  // Estados para controle do modal de exclusão
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [fornecedorSelecionado, setFornecedorSelecionado] = useState(null);
 
-    setFornecedores(request);
+  const handleLoadFornecedores = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/fornecedores/");
+      const request = await response.json();
+      setFornecedores(request);
+    } catch (error) {
+      console.error("Erro ao carregar fornecedores:", error);
+    }
   };
 
   const handleFilter = async (nomeFornecedor) => {
-    const request = await fetch(
-      `http://localhost:8000/fornecedores/filtrar_fornecedores/?nome=${nomeFornecedor}`
-    );
-    const response = await request.json();
-
-    setFornecedores(response);
+    try {
+      const request = await fetch(
+        `http://localhost:8000/fornecedores/filtrar_fornecedores/?nome=${nomeFornecedor}`
+      );
+      const response = await request.json();
+      setFornecedores(response);
+    } catch (error) {
+      console.error("Erro ao filtrar fornecedores:", error);
+    }
   };
+
   useEffect(() => {
     handleLoadFornecedores();
   }, []);
 
-  const handleDeleteFornecedor = async (fornecedorId) => {
-    const request = await fetch(
-      `http://localhost:8000/fornecedores/${fornecedorId}/`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${state.token}`,
-        },
-      }
-    );
+  const handleOpenDeleteModal = (id) => {
+    setFornecedorSelecionado(id);
+    setIsDeleteModalOpen(true);
+  };
 
-    if (request.ok) {
-      SucssesNotifications("Sucesso ao exluir Fornecedor");
-      handleLoadFornecedores();
-    } else {
-      FailNotifications("Erro ao tentar deletar Fornecedor");
+  const handleCloseDeleteModal = () => {
+    setFornecedorSelecionado(null);
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      const request = await fetch(
+        `http://localhost:8000/fornecedores/${fornecedorSelecionado}/`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${state.token}`,
+          },
+        }
+      );
+
+      if (request.ok) {
+        SucssesNotifications("Sucesso ao excluir fornecedor.");
+        handleLoadFornecedores();
+      } else {
+        FailNotifications("Erro ao tentar excluir fornecedor.");
+      }
+    } catch (error) {
+      console.error("Erro ao excluir fornecedor:", error);
+    } finally {
+      handleCloseDeleteModal();
     }
   };
 
@@ -93,7 +121,7 @@ export const FornecedoresPage = () => {
                 </button>
                 <button
                   className="delete"
-                  onClick={() => handleDeleteFornecedor(fornecedor.id)}
+                  onClick={() => handleOpenDeleteModal(fornecedor.id)}
                 >
                   Excluir
                 </button>
@@ -102,6 +130,15 @@ export const FornecedoresPage = () => {
           ))}
         </tbody>
       </DataGrid>
+
+      {/* Modal de confirmação de exclusão */}
+      {isDeleteModalOpen && (
+        <ConfirmarExclusaoModal
+          mensagem="Tem certeza que deseja excluir este fornecedor?"
+          onConfirm={handleDeleteConfirm}
+          onCancel={handleCloseDeleteModal}
+        />
+      )}
     </div>
   );
 };
