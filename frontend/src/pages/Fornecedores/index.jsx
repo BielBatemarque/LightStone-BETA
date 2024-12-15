@@ -10,11 +10,14 @@ import {
   FailNotifications,
   SucssesNotifications,
 } from "../../components/Notifications";
+import { ConfirmarExclusaoModal } from "../../components/Modal/ConfirmarExclusaoModal";
 
 export const FornecedoresPage = () => {
   const [fornecedores, setFornecedores] = useState([]);
   const navigate = useNavigate();
   const { state } = useContext(globalContext);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [fornecedorSelecionado, setFornecedorSelecionado] = useState(null);
 
   const handleLoadFornecedores = async () => {
     const response = await fetch("http://localhost:8000/fornecedores/");
@@ -31,13 +34,14 @@ export const FornecedoresPage = () => {
 
     setFornecedores(response);
   };
+
   useEffect(() => {
     handleLoadFornecedores();
   }, []);
 
-  const handleDeleteFornecedor = async (fornecedorId) => {
+  const handleDeleteFornecedor = async () => {
     const request = await fetch(
-      `http://localhost:8000/fornecedores/${fornecedorId}/`,
+      `http://localhost:8000/fornecedores/${fornecedorSelecionado}/`,
       {
         method: "DELETE",
         headers: {
@@ -48,11 +52,22 @@ export const FornecedoresPage = () => {
     );
 
     if (request.ok) {
-      SucssesNotifications("Sucesso ao exluir Fornecedor");
+      SucssesNotifications("Sucesso ao excluir Fornecedor");
       handleLoadFornecedores();
+      handleCloseDeleteModal();
     } else {
       FailNotifications("Erro ao tentar deletar Fornecedor");
     }
+  };
+
+  const handleOpenDeleteModal = (id) => {
+    setFornecedorSelecionado(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setFornecedorSelecionado(null);
   };
 
   return (
@@ -93,7 +108,7 @@ export const FornecedoresPage = () => {
                 </button>
                 <button
                   className="delete"
-                  onClick={() => handleDeleteFornecedor(fornecedor.id)}
+                  onClick={() => handleOpenDeleteModal(fornecedor.id)}
                 >
                   Excluir
                 </button>
@@ -102,6 +117,13 @@ export const FornecedoresPage = () => {
           ))}
         </tbody>
       </DataGrid>
+      {isDeleteModalOpen && (
+        <ConfirmarExclusaoModal
+          mensagem="Tem certeza que deseja excluir este fornecedor?"
+          onConfirm={handleDeleteFornecedor}
+          onCancel={handleCloseDeleteModal}
+        />
+      )}
     </div>
   );
 };

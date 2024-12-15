@@ -10,11 +10,14 @@ import {
   FailNotifications,
   SucssesNotifications,
 } from "../../components/Notifications";
+import { ConfirmarExclusaoModal } from "../../components/Modal/ConfirmarExclusaoModal";
 
 export const MateriaisPage = () => {
   const [materiais, setMateriais] = useState([]);
   const navigate = useNavigate();
   const { state } = useContext(globalContext);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [materialSelecionado, setMaterialSelecionado] = useState(null);
 
   const handleLoadingMateriais = async () => {
     const request = await fetch("http://localhost:8000/materiais/");
@@ -24,14 +27,15 @@ export const MateriaisPage = () => {
 
   const handleFiltrarMateriais = async (nomeMaterial) => {
     try {
-      const request = await fetch(`http://localhost:8000/materiais/filtrar_materiais/?nome=${nomeMaterial}`);
+      const request = await fetch(
+        `http://localhost:8000/materiais/filtrar_materiais/?nome=${nomeMaterial}`
+      );
       const responseFiltrado = await request.json();
       setMateriais(responseFiltrado);
     } catch (error) {
       console.error("Erro ao filtrar materiais:", error);
     }
   };
-  
 
   useEffect(() => {
     handleLoadingMateriais();
@@ -41,25 +45,45 @@ export const MateriaisPage = () => {
     return `R$ ${Number(valor).toFixed(2).replace(".", ",")}`;
   };
 
-  const handleDeleteMaterial = async (materialId) => {
-    const request = await fetch(
-      `http://localhost:8000/materiais/${materialId}/`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${state.token}`,
-        },
+  const handleDeleteMaterial = async () => {
+    if (!materialSelecionado) return;
+  
+    try {
+      const response = await fetch(
+        `http://localhost:8000/materiais/${materialSelecionado}/`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${state.token}`,
+          },
+        }
+      );
+  
+      if (response.ok) {
+        SucssesNotifications("Sucesso ao deletar material");
+        await handleLoadingMateriais(); // Atualiza os dados da tabela
+        handleCloseDeleteModal();
+      } else {
+        const errorData = await response.json();
+        console.error("Erro ao deletar material:", errorData);
+        FailNotifications("Não foi possível deletar o material");
       }
-    );
-
-    if (request.ok) {
-      SucssesNotifications("Sucesso ao deletar material");
-      handleLoadingMateriais();
-    } else {
-      FailNotifications("Não foi possivel deletar Material");
+    } catch (error) {
+      console.error("Erro na requisição de exclusão:", error);
+      FailNotifications("Erro na comunicação com o servidor");
     }
+  };  
+
+  const handleOpenDeleteModal = (id) => {
+    setMaterialSelecionado(id);
+    setIsDeleteModalOpen(true);
   };
+
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setMaterialSelecionado(null); // Garante limpeza do estado
+  };  
 
   return (
     <>
@@ -75,14 +99,14 @@ export const MateriaisPage = () => {
           <tr>
             <th>Nome do Material</th>
             <th>Cor Base</th>
-            <th>Ultimo Fornecedor</th>
+            <th>Último Fornecedor</th>
             <th>Preço por M²</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
           {materiais.map((material, index) => (
-            <tr>
+            <tr key={index}>
               <td>{material.nome}</td>
               <td>{material.cor_base}</td>
               <td>{material.fornecedor}</td>
@@ -100,7 +124,7 @@ export const MateriaisPage = () => {
                 </button>
                 <button
                   className="delete"
-                  onClick={() => handleDeleteMaterial(material.id)}
+                  onClick={() => handleOpenDeleteModal(material.id)}
                 >
                   Excluir
                 </button>
@@ -109,6 +133,13 @@ export const MateriaisPage = () => {
           ))}
         </tbody>
       </DataGrid>
+      {isDeleteModalOpen && (
+        <ConfirmarExclusaoModal
+          mensagem="Tem certeza que deseja excluir este material?"
+          onConfirm={handleDeleteMaterial}
+          onCancel={handleCloseDeleteModal}
+        />
+      )}
     </>
   );
 };

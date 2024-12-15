@@ -10,11 +10,14 @@ import {
   FailNotifications,
   SucssesNotifications,
 } from "../../components/Notifications";
+import { ConfirmarExclusaoModal } from "../../components/Modal/ConfirmarExclusaoModal";
 
 export const ColaboradorPages = () => {
   const [colabs, setColabs] = useState([]);
   const navigate = useNavigate();
   const { state } = useContext(globalContext);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [colaboradorSelecionado, setColaboradorSelecionado] = useState(null);
 
   const handleLoadingColabs = async () => {
     const request = await fetch("http://localhost:8000/colaboradores/");
@@ -27,23 +30,18 @@ export const ColaboradorPages = () => {
     handleLoadingColabs();
   }, []);
 
-  console.log(colabs);
-
-  //Verificar depois o funcionamento
   const handleFiltrarColaborador = async (nomeColaborador) => {
     const request = await fetch(
       `http://localhost:8000/colaboradores/filtrar_colaborador/?nome=${nomeColaborador}`
     );
     const responseFiltrado = await request.json();
 
-    console.log(responseFiltrado);
     setColabs(responseFiltrado);
   };
 
-  //Verificar depois o funcionamento
-  const handleDeleteColaborador = async (colaboradorId) => {
+  const handleDeleteColaborador = async () => {
     const request = await fetch(
-      `http://localhost:8000/colaboradores/${colaboradorId}`,
+      `http://localhost:8000/colaboradores/${colaboradorSelecionado}`,
       {
         method: "DELETE",
         headers: {
@@ -56,9 +54,20 @@ export const ColaboradorPages = () => {
     if (request.ok) {
       SucssesNotifications("Sucesso ao deletar Colaborador");
       handleLoadingColabs();
+      handleCloseDeleteModal();
     } else {
       FailNotifications("Erro ao deletar colaborador.");
     }
+  };
+
+  const handleOpenDeleteModal = (id) => {
+    setColaboradorSelecionado(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setColaboradorSelecionado(null);
   };
 
   return (
@@ -101,7 +110,7 @@ export const ColaboradorPages = () => {
                 </button>
                 <button
                   className="delete"
-                  onClick={() => handleDeleteColaborador(colab.id)}
+                  onClick={() => handleOpenDeleteModal(colab.id)}
                 >
                   Excluir
                 </button>
@@ -110,6 +119,13 @@ export const ColaboradorPages = () => {
           ))}
         </tbody>
       </DataGrid>
+      {isDeleteModalOpen && (
+        <ConfirmarExclusaoModal
+          mensagem="Tem certeza que deseja excluir este colaborador?"
+          onConfirm={handleDeleteColaborador}
+          onCancel={handleCloseDeleteModal}
+        />
+      )}
     </>
   );
 };
