@@ -10,17 +10,23 @@ import {
   FailNotifications,
   SucssesNotifications,
 } from "../../components/Notifications";
+import { ConfirmarExclusaoModal } from "../../components/Modal/ConfirmarExclusaoModal";
 
 export const MateriaisPage = () => {
   const [materiais, setMateriais] = useState([]);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [materialSelecionado, setMaterialSelecionado] = useState(null);
   const navigate = useNavigate();
   const { state } = useContext(globalContext);
 
   const handleLoadingMateriais = async () => {
-    const request = await fetch("http://localhost:8000/materiais/");
-    const response = await request.json();
-
-    setMateriais(response);
+    try {
+      const request = await fetch("http://localhost:8000/materiais/");
+      const response = await request.json();
+      setMateriais(response);
+    } catch (error) {
+      console.error("Erro ao carregar materiais:", error);
+    }
   };
 
   useEffect(() => {
@@ -31,23 +37,39 @@ export const MateriaisPage = () => {
     return `R$ ${Number(valor).toFixed(2).replace(".", ",")}`;
   };
 
-  const handleDeleteMaterial = async (materialId) => {
-    const request = await fetch(
-      `http://localhost:8000/materiais/${materialId}/`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${state.token}`,
-        },
-      }
-    );
+  const handleOpenDeleteModal = (materialId) => {
+    setMaterialSelecionado(materialId);
+    setIsDeleteModalOpen(true);
+  };
 
-    if (request.ok) {
-      SucssesNotifications("Sucesso ao deletar material");
-      handleLoadingMateriais();
-    } else {
-      FailNotifications("Não foi possivel deletar Material");
+  const handleCloseDeleteModal = () => {
+    setMaterialSelecionado(null);
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      const request = await fetch(
+        `http://localhost:8000/materiais/${materialSelecionado}/`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${state.token}`,
+          },
+        }
+      );
+
+      if (request.ok) {
+        SucssesNotifications("Sucesso ao deletar material");
+        handleLoadingMateriais();
+      } else {
+        FailNotifications("Não foi possível deletar material");
+      }
+    } catch (error) {
+      console.error("Erro ao excluir material:", error);
+    } finally {
+      handleCloseDeleteModal();
     }
   };
 
@@ -72,7 +94,7 @@ export const MateriaisPage = () => {
         </thead>
         <tbody>
           {materiais.map((material, index) => (
-            <tr>
+            <tr key={index}>
               <td>{material.nome}</td>
               <td>{material.cor_base}</td>
               <td>{material.fornecedor}</td>
@@ -90,7 +112,7 @@ export const MateriaisPage = () => {
                 </button>
                 <button
                   className="delete"
-                  onClick={() => handleDeleteMaterial(material.id)}
+                  onClick={() => handleOpenDeleteModal(material.id)}
                 >
                   Excluir
                 </button>
@@ -99,6 +121,15 @@ export const MateriaisPage = () => {
           ))}
         </tbody>
       </DataGrid>
+
+      {/* Modal de confirmação de exclusão */}
+      {isDeleteModalOpen && (
+        <ConfirmarExclusaoModal
+          mensagem="Tem certeza que deseja excluir este material?"
+          onConfirm={handleDeleteConfirm}
+          onCancel={handleCloseDeleteModal}
+        />
+      )}
     </>
   );
 };
