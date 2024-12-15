@@ -9,7 +9,6 @@ import { ListFilter } from "../../components/ListFilter";
 
 export const EstoquesPage = () => {
   const [estoques, setEstoques] = useState([]);
-  const [, setMateriais] = useState([]);
   const navigate = useNavigate();
 
   const handleLoadingEstoques = async () => {
