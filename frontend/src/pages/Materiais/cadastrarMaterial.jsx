@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Material } from '../../models/Material';
 import { useAuth } from "../../hooks/useAuth";
 import { FailNotifications, SucssesNotifications } from "../../components/Notifications";
 import { useNavigate } from "react-router-dom";
@@ -14,16 +13,21 @@ import {
 } from "./styles";
 
 export const CadastrarMaterialPage = () => {
-    const [material, setMaterial] = useState(new Material());
+    const [material, setMaterial] = useState({ nome: "", cor_base: "", fornecedor: [] });
     const [fornecedores, setFornecedores] = useState([]);
+    const [isSaving, setIsSaving] = useState(false); // Estado para desabilitar botão enquanto salva
     const { state } = useAuth();
     const navigate = useNavigate();
 
     // Carregar lista de fornecedores
     const handleLoadFornecedores = async () => {
-        const request = await fetch('http://localhost:8000/fornecedores/');
-        const response = await request.json();
-        setFornecedores(response);
+        try {
+            const request = await fetch('http://localhost:8000/fornecedores/');
+            const response = await request.json();
+            setFornecedores(response);
+        } catch (error) {
+            FailNotifications("Erro ao carregar fornecedores");
+        }
     };
 
     useEffect(() => {
@@ -33,10 +37,8 @@ export const CadastrarMaterialPage = () => {
     // Atualizar fornecedor no estado
     const handleChange = (e) => {
         const { name, value } = e.target;
-        let fornecedores = [];
         if (name === 'fornecedor') {
-            fornecedores.push(parseInt(value));
-            setMaterial({ ...material, [name]: fornecedores });
+            setMaterial({ ...material, fornecedor: [parseInt(value)] });
         } else {
             setMaterial({ ...material, [name]: value });
         }
@@ -45,21 +47,34 @@ export const CadastrarMaterialPage = () => {
     // Cadastrar material
     const handleCadastrarMaterial = async (e) => {
         e.preventDefault();
+        setIsSaving(true);
 
-        const request = await fetch('http://localhost:8000/materiais/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'Application/json',
-                'Authorization': `Token ${state.token}`,
-            },
-            body: JSON.stringify(material),
-        });
+        if (!material.nome || !material.cor_base || material.fornecedor.length === 0) {
+            FailNotifications("Preencha todos os campos obrigatórios");
+            setIsSaving(false);
+            return;
+        }
 
-        if (request.ok) {
-            SucssesNotifications('Cadastrado com Sucesso');
-            navigate('/Materiais/');
-        } else {
-            FailNotifications('Erro ao cadastrar');
+        try {
+            const request = await fetch('http://localhost:8000/materiais/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${state.token}`,
+                },
+                body: JSON.stringify(material),
+            });
+
+            if (request.ok) {
+                SucssesNotifications('Cadastrado com sucesso');
+                navigate('/Materiais/');
+            } else {
+                FailNotifications('Erro ao cadastrar material');
+            }
+        } catch (error) {
+            FailNotifications("Erro na conexão com o servidor");
+        } finally {
+            setIsSaving(false);
         }
     };
 
@@ -73,6 +88,7 @@ export const CadastrarMaterialPage = () => {
                         type="text"
                         name="nome"
                         placeholder="Digite o nome do material"
+                        value={material.nome}
                         onChange={handleChange}
                     />
                 </FormGroup>
@@ -83,16 +99,21 @@ export const CadastrarMaterialPage = () => {
                         type="text"
                         name="cor_base"
                         placeholder="Digite a cor base"
+                        value={material.cor_base}
                         onChange={handleChange}
                     />
                 </FormGroup>
 
                 <FormGroup>
                     <label>Fornecedor</label>
-                    <StyledSelect name="fornecedor" onChange={handleChange}>
+                    <StyledSelect
+                        name="fornecedor"
+                        value={material.fornecedor[0] || ""}
+                        onChange={handleChange}
+                    >
                         <option value="" disabled>Selecione um fornecedor</option>
-                        {fornecedores.map((fornecedor, index) => (
-                            <option value={fornecedor.id} key={index}>
+                        {fornecedores.map((fornecedor) => (
+                            <option value={fornecedor.id} key={fornecedor.id}>
                                 {fornecedor.nome_empresa}
                             </option>
                         ))}
@@ -100,8 +121,15 @@ export const CadastrarMaterialPage = () => {
                 </FormGroup>
 
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <StyledButton type="submit">Cadastrar</StyledButton>
-                    <StyledButton color="red" type="button" onClick={() => navigate('/Materiais/')}>
+                    <StyledButton type="submit" disabled={isSaving}>
+                        {isSaving ? "Salvando..." : "Cadastrar"}
+                    </StyledButton>
+                    <StyledButton
+                        color="red"
+                        type="button"
+                        onClick={() => navigate('/Materiais/')}
+                        disabled={isSaving}
+                    >
                         Cancelar
                     </StyledButton>
                 </div>
