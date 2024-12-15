@@ -10,50 +10,62 @@ export const Usuarios = () => {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
 
+    // Carregar todos os usuários
     const handleLoadUsers = async () => {
-        try{
+        try {
             const request = await fetch('http://localhost:8000/users/');
+            if (!request.ok) throw new Error('Erro ao carregar usuários');
+
             const response = await request.json();
             setUsers(response);
-
-        }catch(e){
-            console.log(`Erro na requisição a API: ${String(e)}`);
+        } catch (e) {
+            console.error(`Erro na requisição à API: ${String(e)}`);
         }
-        
+    };
+
+    // Filtrar usuários pelo nome
+    const handleFilter = async (nomeUsuario) => {
+        try {
+            const url = nomeUsuario
+                ? `http://localhost:8000/users/filtrar_usuarios/?nome=${nomeUsuario}`
+                : 'http://localhost:8000/users/'; // Retorna todos os usuários se o filtro estiver vazio
+            const request = await fetch(url);
+            if (!request.ok) throw new Error('Erro ao filtrar usuários');
+
+            const response = await request.json();
+            setUsers(response);
+        } catch (e) {
+            console.error(`Erro ao filtrar usuários: ${String(e)}`);
+        }
     };
 
     useEffect(() => {
-        handleLoadUsers();
+        handleLoadUsers(); // Carrega todos os usuários ao montar o componente
     }, []);
 
-    const handleFilter = async (nomeUsuario) => {
-        const request = await fetch(`http://localhost:8000/users/filtrar_usuarios/?nome=${nomeUsuario}`);
-        const response = await request.json();
-
-        setUsers(response);
-    }
-
-
-    return(
+    return (
         <>
             <FlexCointainer size={'98%'} pontas='true'>
                 <Title>Usuários</Title>
                 <Button action={() => navigate(`/Usuarios/cadastrarUsuario/`)}>Cadastrar usuário</Button>
             </FlexCointainer>
 
-            <ListFilter action={handleFilter}/>
+            {/* Componente de filtro */}
+            <ListFilter action={handleFilter} />
+
+            {/* Tabela de usuários */}
             <DataGrid>
                 <thead>
                     <tr>
                         <th>Username</th>
-                        <th>email</th>
+                        <th>Email</th>
                         <th>Super-User</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user, index) => (
-                        <tr>
+                    {users.map((user) => (
+                        <tr key={user.id}>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{user.is_staff ? 'Sim' : 'Não'}</td>
