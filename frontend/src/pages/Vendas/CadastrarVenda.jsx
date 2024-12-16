@@ -1,20 +1,23 @@
+// Importações necessárias
 import { useContext, useState } from "react";
 import { Title } from "../../components/Title";
-import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
+import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles"; // Estilos compartilhados
 import { FloatLabel } from "../../components/FloatLabel";
 import { Button } from "../../components/Button";
-import { Linha } from './styles';
+import { Linha } from './styles'; // Estilo local
 import { AtentionNotification, SucssesNotifications } from "../../components/Notifications";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
+// Componente principal
 export const CadastrarVenda = () => {
     const [orcamentosCliente, setOrcamentosClientes] = useState([]);
     const [nomeCliente, setNomeCliente] = useState('');
     const [orcamentoSelecionado, setOrcamentoSelecionado] = useState(null);
-    const {state} = useAuth();
+    const { state } = useAuth();
     const navigate = useNavigate();
 
+    // Função para carregar os orçamentos do cliente
     const handleCarregarOrcamentosCliente = async (event) => {
         event.preventDefault();
 
@@ -33,35 +36,31 @@ export const CadastrarVenda = () => {
         }
     };
 
+    // Função para finalizar a venda
     const handleFinalizarVenda = async () => {
-      const request = await fetch('http://localhost:8000/vendas/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-           'Authorization' : `Token ${state.token}`
-        },
-        body: JSON.stringify({
-          valor_total: orcamentoSelecionado.valor_total,
-          cliente: orcamentoSelecionado.cliente,
-          orcamento: orcamentoSelecionado.id,
-        }),
-      });
-      
-      if (request.ok){
-        SucssesNotifications("Venda finalizada com sucesso.");
-        navigate('/Vendas/');
-      }
-    }
+        const request = await fetch('http://localhost:8000/vendas/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${state.token}`
+            },
+            body: JSON.stringify({
+                valor_total: orcamentoSelecionado.valor_total,
+                cliente: orcamentoSelecionado.cliente,
+                orcamento: orcamentoSelecionado.id,
+            }),
+        });
 
+        if (request.ok) {
+            SucssesNotifications("Venda finalizada com sucesso.");
+            navigate('/Vendas/');
+        }
+    };
 
     // Função para lidar com a seleção do orçamento
     const handleSelectOrcamento = (orcamento) => {
         setOrcamentoSelecionado(orcamentoSelecionado?.id === orcamento.id ? null : orcamento); // Seleciona/deseleciona o orçamento
     };
-
-    console.log("Cliente:", nomeCliente);
-    console.log("Orçamentos:", orcamentosCliente);
-    console.log("Orçamento Selecionado:", orcamentoSelecionado);
 
     return (
         <>
@@ -71,19 +70,23 @@ export const CadastrarVenda = () => {
             <FundoForm>
                 <StyledForm onSubmit={handleCarregarOrcamentosCliente}>
                     <Linha>
-                        <FloatLabel text="Pesquisar por cliente" onChange={(e) => setNomeCliente(e.target.value)} />
-                        <Button color={'gray'}>Pesquisar</Button>
+                        <FloatLabel
+                            text="Pesquisar por cliente"
+                            onChange={(e) => setNomeCliente(e.target.value)}
+                        />
+                        <Button color="gray">Pesquisar</Button>
                     </Linha>
                 </StyledForm>
 
+                {/* Exibição da tabela de orçamentos */}
                 {orcamentosCliente.length > 0 && (
                     <FlexDiv>
                         <table>
                             <thead>
                                 <tr>
-                                    <td>Selecionar</td>
-                                    <td>Quantidade de peças</td>
-                                    <td>Valor</td>
+                                    <th>Selecionar</th>
+                                    <th>Quantidade de peças</th>
+                                    <th>Valor</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,8 +108,9 @@ export const CadastrarVenda = () => {
                     </FlexDiv>
                 )}
 
+                {/* Botão para finalizar a venda */}
                 <FlexDiv>
-                    <Button action={() => handleFinalizarVenda()}>Finalizar Venda</Button>
+                    <Button action={handleFinalizarVenda}>Finalizar Venda</Button>
                 </FlexDiv>
             </FundoForm>
         </>

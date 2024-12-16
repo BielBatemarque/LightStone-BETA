@@ -40,28 +40,44 @@ export const MaisInformacoesMaterial = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setMaterial({ ...material, [name]: value });
+        setMaterial((prevMaterial) => ({
+            ...prevMaterial,
+            [name]: name === 'fornecedor' ? parseInt(value) || '' : value,
+        }));
     };
 
     const handleUpdateMaterial = async (e) => {
         e.preventDefault();
+    
+        // Filtrar e ajustar os campos para o formato esperado pela API
+        const filteredMaterial = {
+            nome: material.nome,
+            cor_base: material.cor_base,
+            fornecedor: [material.fornecedor], // Enviar como uma lista
+        };
+    
+        console.log('Dados enviados:', filteredMaterial); // Para depuração
+    
         const request = await fetch(`http://localhost:8000/materiais/${id}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Token ${state.token}`,
             },
-            body: JSON.stringify(material),
+            body: JSON.stringify(filteredMaterial),
         });
-
+    
         if (request.ok) {
             SucssesNotifications('Material editado com sucesso!');
             navigate('/Materiais/');
         } else {
-            FailNotifications('Erro ao editar material.');
+            const responseData = await request.json();
+            console.error('Erro do backend:', responseData);
+            FailNotifications(responseData.detail || 'Erro ao editar material.');
         }
     };
-
+    
+    
     const handleDeleteMaterial = async () => {
         const request = await fetch(`http://localhost:8000/materiais/${id}/`, {
             method: 'DELETE',

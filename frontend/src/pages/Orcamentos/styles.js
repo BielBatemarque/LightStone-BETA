@@ -70,7 +70,7 @@ export const StyledInput = styled.input`
 export const StyledButton = styled.button`
   width: 100%;
   padding: 10px;
-  background-color:rgb(76, 83, 175);
+  background-color:rgb(19, 32, 211);
   color: white;
   border: none;
   border-radius: 5px;
