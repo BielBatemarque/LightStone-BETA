@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    working_dir: /app/backend
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment: # Certifique-se de passar o ambiente correto para settings
+      DJANGO_SETTINGS_MODULE: backend.settings # Adiciona esta linha
+    depends_on:
+      - db # Garantir que o banco estará pronto antes do Django inicializar
+
+  db:
+    image: postgres:15
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: django
+      POSTGRES_DB: django_db
+
+volumes:
+  postgres_data: # Volume persistente para os dados do PostgreSQL
