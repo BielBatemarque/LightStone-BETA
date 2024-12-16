@@ -4,19 +4,17 @@ import {
   FailNotifications,
   SucssesNotifications,
 } from "../../components/Notifications";
-import { FlexRow, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
+import { FlexDiv, FlexRow, FundoForm, FundoTitle } from "../Clientes/styles";
 import { FloatLabel } from "../../components/FloatLabel";
 import { Button } from "../../components/Button";
 
 export const RelatoriosPage = () => {
-  const [dataInicial, setDataInicial] = useState("");
-  const [dataFinal, setDataFinal] = useState("");
+  const [dataInicial] = useState("");
+  const [dataFinal] = useState("");
 
-  const handleFetchRelatorioVendas = async () => {
+  const fetchData = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/relatorios/vendas/?data_inicial=${dataInicial}&data_final=${dataFinal}`
-      );
+      const response = await fetch("http://localhost:8000/gerar_pdf/");
 
       if (response.ok) {
         const blob = await response.blob();
@@ -25,15 +23,15 @@ export const RelatoriosPage = () => {
         const a = document.createElement("a");
         a.href = url;
         a.target = "_blank";
-        a.download = "relatorio_vendas.pdf";
+        // a.download = 'relatorio.pdf';
         document.body.appendChild(a);
         a.click();
 
         document.body.removeChild(a);
-        SucssesNotifications("Relatório de vendas gerado com sucesso!");
+        SucssesNotifications("Relatório gerado com sucesso");
       } else {
         console.error("Erro na requisição:", response.statusText);
-        FailNotifications("Erro ao gerar relatório de vendas.");
+        FailNotifications("Erro ao gerar Relatório");
       }
     } catch (error) {
       console.error("Erro na requisição:", error);
@@ -74,17 +72,17 @@ export const RelatoriosPage = () => {
         <Title mt={0}>Relatórios</Title>
       </FundoTitle>
       <FundoForm>
-        <StyledForm>
-          <FlexRow>
-            <FloatLabel name="Data Inicial" text="Data Inicial" type="date" />
-            <FloatLabel name="Data Inicial" text="Data Final" type="date" />
-          </FlexRow>
+        <FlexRow>
+          <FloatLabel name="Data Inicial" text="Data Inicial" type="date" />
+          <FloatLabel name="Data Inicial" text="Data Final" type="date" />
+        </FlexRow>
 
-          <FlexRow style={{ margin: "0 auto" }}>
-            <Button>Relatório de vendas</Button>
-            <Button>Relatório de orçamentos</Button>
-          </FlexRow>
-        </StyledForm>
+        <FlexDiv>
+          <Button action={fetchData}>Relatório de vendas</Button>
+          <Button action={() => handleFetchRelatorioOrcamentos()}>
+            Relatório de orçamentos
+          </Button>
+        </FlexDiv>
       </FundoForm>
     </>
   );
