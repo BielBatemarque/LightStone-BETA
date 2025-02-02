@@ -42,7 +42,7 @@ export const CadastrarVenda = () => {
         },
         body: JSON.stringify({
           valor_total: orcamentoSelecionado.valor_total,
-          cliente: orcamentoSelecionado.cliente,
+          cliente: orcamentoSelecionado.cliente.id,
           orcamento: orcamentoSelecionado.id,
         }),
       });
