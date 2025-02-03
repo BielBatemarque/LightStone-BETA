@@ -10,6 +10,7 @@ import { DataGrid } from "../../components/Datagrid/styled";
 import { globalContext } from "../../context/context";
 import { SucssesNotifications } from "../../components/Notifications";
 import { ListFilter } from "../../components/ListFilter";
+import { FaWhatsappSquare } from "react-icons/fa";
 
 export const ClientesPage = () => {
     const [clientes, setClientes] = useState([]);
@@ -100,6 +101,18 @@ export const ClientesPage = () => {
                             <td className="actions">
                                 <button className="edit" onClick={() => navigate(`/Clientes/maisInformacoesCliente/${cliente.id}/`)}>Editar</button>
                                 <button className="delete" onClick={() => handleOpenDeleteModal(cliente.id)}>Excluir</button>
+                                <a
+                                    href={cliente.telefone ? `https://wa.me/${cliente.telefone.replace(/\D/g, '')}` : "#"}
+                                    target={cliente.telefone ? "_blank" : ""}
+                                    rel="noopener noreferrer"
+                                    style={{
+                                        cursor: cliente.telefone ? "pointer" : "not-allowed",
+                                        opacity: cliente.telefone ? 1 : 0.5,
+                                        pointerEvents: cliente.telefone ? "auto" : "none"
+                                    }}
+                                >
+                                    <FaWhatsappSquare size={28} color="green" />
+                                </a>
                             </td>
                         </tr>
                     ))}

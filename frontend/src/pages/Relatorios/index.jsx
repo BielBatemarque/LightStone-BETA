@@ -41,7 +41,7 @@ export const RelatoriosPage = () => {
   const handleFetchRelatorioOrcamentos = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/relatorios/orcamentos/?data_inicial=${dataInicial}&data_final=${dataFinal}`
+        `http://localhost:8000/gerar_pdf_orcamentos/`
       );
 
       if (response.ok) {

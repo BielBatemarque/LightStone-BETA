@@ -187,6 +187,16 @@ export const CadastrarCLientePage = () => {
                             size={45}
                         />
                     </FlexRow>
+
+                    <FlexRow>
+                        <FloatLabel
+                            type="text"
+                            name="telefone"
+                            onChange={handleChange}
+                            text="Nº Telefone"
+                            size={45}
+                        />
+                    </FlexRow>
                     <FlexDiv>
                         <Button>Cadastrar</Button>
                         <Button color="red" action={() => navigate("/Clientes/")}>

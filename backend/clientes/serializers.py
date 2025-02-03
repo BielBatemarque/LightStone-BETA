@@ -4,7 +4,7 @@ from rest_framework import routers, serializers, viewsets
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ['id','nome','cpf','data_nascimento','email', 'cep', 'numero', "cidade", 'uf', 'logradouro', 'bairro']
+        fields = ['id','nome','cpf','data_nascimento','email', 'cep', 'numero', "cidade", 'uf', 'logradouro', 'bairro', 'telefone']
 
     def validate_email(self, value):
         # Adicione sua validação personalizada para o campo 'email' aqui
