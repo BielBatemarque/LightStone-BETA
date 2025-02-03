@@ -1,0 +1,17 @@
+# Usar a imagem oficial do Python 3.12
+FROM python:3.12
+
+# Definir o diretório de trabalho dentro do container
+WORKDIR /app
+
+# Copiar os arquivos para o container
+COPY . /app/
+
+# Instalar as dependências
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expor a porta 8000 para acesso externo
+EXPOSE 8000
+
+# Comando padrão para rodar o servidor Django
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
