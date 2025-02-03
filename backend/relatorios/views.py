@@ -1,13 +1,12 @@
 from django.http import HttpResponse
 from rest_framework.views import APIView
-from reportlab.platypus import Table, TableStyle
-from reportlab.pdfgen import canvas
-from vendas.models import Venda
+from reportlab.platypus import Table, TableStyle, Paragraph, SimpleDocTemplate
 from reportlab.lib.pagesizes import letter
-from datetime import datetime
 from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from datetime import datetime
+from vendas.models import Venda
 
-# Create your views here.
 class PDFView(APIView):
     def get(self, request, *args, **kwargs):
         # Obter parâmetros de data do request
@@ -24,28 +23,36 @@ class PDFView(APIView):
             except ValueError:
                 return HttpResponse("Datas inválidas. Use o formato YYYY-MM-DD.", status=400)
 
-        # Configuração do arquivo PDF
+        # Criar resposta HTTP com conteúdo PDF
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = 'inline; filename="relatorio_vendas.pdf"'
-        pdf = canvas.Canvas(response, pagesize=letter)
-        width, height = letter
+        doc = SimpleDocTemplate(response, pagesize=letter)
+        elements = []
+        styles = getSampleStyleSheet()
 
         # Cabeçalho
-        pdf.setFont("Helvetica-Bold", 14)
-        pdf.drawString(50, height - 50, "Relatório de Vendas")
+        titulo = Paragraph("<b>Marmoraria Porto Bello</b>", styles['Title'])
+        data_emissao = Paragraph(f"Data e hora da emissão: {datetime.now().strftime('%d/%m/%Y %H:%M')}", styles['Normal'])
+        periodo = Paragraph(f"Vendas de {data_inicio.strftime('%d/%m/%Y')} a {data_fim.strftime('%d/%m/%Y')}" if data_inicio and data_fim else "Vendas Registradas", styles['Heading2'])
 
-        # Montar a tabela de vendas
-        data = [["ID", "Cliente", "Valor Total", "Data"]]
+        elements.extend([titulo, data_emissao, periodo])
+
+        # Criar a tabela com os dados das vendas
+        data = [["Código", "Cliente", "Itens", "Valor", "Data"]]
         for venda in vendas:
+            if not venda.orcamento: continue
+
+            itens = "\n".join([f"{item.nome} - {item.quantidade_metros} m²" for item in venda.orcamento.pecas.all()])
             data.append([
                 venda.id,
                 venda.cliente.nome,
+                itens,
                 f"R$ {venda.valor_total:.2f}",
-                venda.created_at.strftime('%d/%m/%Y') if venda.created_at else "-"
+                venda.created_at.strftime("%d/%m/%Y")
             ])
 
-        # Estilo da tabela
-        table = Table(data, colWidths=[50, 200, 100, 100])
+        # Estilizar a tabela
+        table = Table(data, colWidths=[50, 100, 200, 80, 80])
         table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
@@ -56,12 +63,6 @@ class PDFView(APIView):
             ('GRID', (0, 0), (-1, -1), 1, colors.black),
         ]))
 
-        # Adicionar tabela ao PDF
-        table.wrapOn(pdf, width, height)
-        table.drawOn(pdf, 50, height - 200)
-
-        # Finalizar PDF
-        pdf.showPage()
-        pdf.save()
-
+        elements.append(table)
+        doc.build(elements)
         return response
