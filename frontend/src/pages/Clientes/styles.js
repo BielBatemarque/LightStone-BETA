@@ -120,7 +120,7 @@ export const StyledFloatLabel = styled.div`
 
 export const FlexDiv = styled.div`
     display: flex;
-    justify-content: flex-end;
+    justify-content: ${(props) => props.justfy || "flex-end"};
     gap: 10px; /* Espaçamento entre botões */
     margin-top: 20px;
 `;

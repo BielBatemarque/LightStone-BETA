@@ -7,6 +7,7 @@ import { Linha } from './styles';
 import { AtentionNotification, SucssesNotifications } from "../../components/Notifications";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { DataGrid } from "../../components/Datagrid/styled";
 
 export const CadastrarVenda = () => {
     const [orcamentosCliente, setOrcamentosClientes] = useState([]);
@@ -77,35 +78,32 @@ export const CadastrarVenda = () => {
                 </StyledForm>
 
                 {orcamentosCliente.length > 0 && (
-                    <FlexDiv>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>Selecionar</td>
-                                    <td>Quantidade de peças</td>
-                                    <td>Valor</td>
+                    <DataGrid>
+                        <thead>
+                            <th>Selecionar</th>
+                            <th>Quantidade de peças</th>
+                            <th>Valor</th>
+                        </thead>
+                        <tbody>
+                            {orcamentosCliente.map((orcamento, index) => (
+                                <tr key={index}>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            checked={orcamentoSelecionado?.id === orcamento.id}
+                                            onChange={() => handleSelectOrcamento(orcamento)}
+                                        />
+                                    </td>
+                                    <td>{orcamento.pecas.length}</td>
+                                    <td>{orcamento.valor_total}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {orcamentosCliente.map((orcamento, index) => (
-                                    <tr key={index}>
-                                        <td>
-                                            <input
-                                                type="checkbox"
-                                                checked={orcamentoSelecionado?.id === orcamento.id}
-                                                onChange={() => handleSelectOrcamento(orcamento)}
-                                            />
-                                        </td>
-                                        <td>{orcamento.pecas.length}</td>
-                                        <td>{orcamento.valor_total}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </FlexDiv>
+                            ))}
+                        </tbody>
+
+                    </DataGrid>
                 )}
 
-                <FlexDiv>
+                <FlexDiv justfy="center">
                     <Button action={() => handleFinalizarVenda()}>Finalizar Venda</Button>
                 </FlexDiv>
             </FundoForm>
