@@ -55,12 +55,10 @@ export const CadastrarMaterialPage = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        let fornecedores = [];
-
-        if(name === 'fornecedor'){
-            fornecedores.push(parseInt(value));
-            setMaterial({...material, [name]: fornecedores});
-        }else{   
+    
+        if (name === 'fornecedor') {
+            setMaterial({...material, [name]: [parseInt(value)]});
+        } else {   
             setMaterial({...material, [name]: value});
         }
     };
@@ -79,7 +77,7 @@ export const CadastrarMaterialPage = () => {
                 <FloatLabel type="text" text="Cor base" name="cor_base" onChange={handleChange}/> <br />
                 <span>
                     <label>Fornecedor:  </label>
-                <StyledSelect name="fornecedor" id="" onChange={handleChange}>
+                <StyledSelect name="fornecedor" onChange={handleChange}>
                     {fornecedores.map((fornecedor, index) => (
                         <StyledOptions value={fornecedor.id} key={index}>{fornecedor.nome_empresa}</StyledOptions>
                         ))}

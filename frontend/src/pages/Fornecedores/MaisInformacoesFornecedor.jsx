@@ -32,6 +32,8 @@ export const MaisInformacoesFornecedor = () => {
         setFornecedor({...fornecedor, [name]: value});
     };
 
+    console.log(fornecedor);
+
     const handleUpdateFornecedor = async (e) => {
         e.preventDefault();
         
@@ -79,21 +81,21 @@ export const MaisInformacoesFornecedor = () => {
             <FundoForm>
 
                 <StyledForm onSubmit={handleUpdateFornecedor}>
-                    <FloatLabel type="text" text="Nome da empresa" size={100} name="nome_empresa" onChange={handleChange} value={fornecedor.nome_empresa}/> <br />
-                    <FloatLabel type="text" text="CNPJ" name="cnpj" size={100} onChange={handleChange} value={fornecedor.cnpj}/><br />
+                    <FloatLabel type="text" text="Nome da empresa" size={90} name="nome_empresa" onChange={handleChange} value={fornecedor.nome_empresa}/>
+                    <FloatLabel type="text" text="CNPJ" name="cnpj" size={90} onChange={handleChange} value={fornecedor.cnpj}/>
                     <FlexRow>
                         <FloatLabel  size={45} text="CEP" onChange={handleChange} value={fornecedor.cep}  />
                         <FloatLabel text={"Bairro"} size={45} value={fornecedor.bairro} name="bairro" onChange={handleChange}/>
-                    </FlexRow> <br />
+                    </FlexRow> 
                     <FlexRow>
                         <FloatLabel text="Cidade" size={45} value={fornecedor.localidade} name={"cidade"} on onChange={handleChange}/>
                         <FloatLabel text="UF" size={45} value={fornecedor.uf} name="uf" onChange={handleChange}/>
-                    </FlexRow><br />
+                    </FlexRow>
 
                     <FlexRow>
                         <FloatLabel text={"logradouro"} size={45} value={fornecedor.logradouro} name="logradouro" onChange={handleChange}/> 
                         <FloatLabel  size={45} text="Número" onChange={handleChange} value={fornecedor.numero}/>
-                    </FlexRow> <br />
+                    </FlexRow>
                     <Button>Editar Fornecedor</Button>
                     <Button color={'red'} action={handleDeleteFornecedor}>Deletar Fornecedor</Button>
                 </StyledForm>

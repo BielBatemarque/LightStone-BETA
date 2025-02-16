@@ -26,7 +26,13 @@ export const CadastrarFornecedor = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFornecedor({ ...fornecedor, [name]: value });
+  
+    if (name === "cnpj") {
+      const cnpjFormatado = value.replace(/\D/g, "");
+      setFornecedor({ ...fornecedor, [name]: cnpjFormatado });
+    } else {
+      setFornecedor({ ...fornecedor, [name]: value });
+    }
   };
 
   const handleCadastrarFornecedor = async (e) => {
@@ -147,7 +153,7 @@ export const CadastrarFornecedor = () => {
               name="logradouro"
               onChange={handleChange}
             />
-            <FloatLabel size={45} text="Número" onChange={handleChange} />
+            <FloatLabel size={45} text="Número" onChange={handleChange} name="numero" />
           </FlexRow>{" "}
           <br />
           <FlexDiv>
