@@ -77,13 +77,15 @@ export const MovimentacaoDeEstoque = () => {
         }
     }, [metrosInput]);
 
-    console.log(materialSelected);
+    // console.log(materialSelected);
+
+    console.log(estoque);
     
     const handleMovimentaEstoque = async (e) => {
         e.preventDefault(); 
 
         const api = tipoMovimentacao === 'entrada' ? 
-        `http://localhost:8000/entrada_estoque/${estoque.id}/` : `http://localhost:8000/saida_estoque/${estoque.id}/`;
+        `http://localhost:8000/entrada_estoque/${estoque.material}/` : `http://localhost:8000/saida_estoque/${estoque.material}/`;
         
         const request = await fetch(api, {
             method: 'POST',
@@ -111,7 +113,7 @@ export const MovimentacaoDeEstoque = () => {
 
     };
 
-    console.log(materiais, estoque.material);
+    // console.log(materiais, estoque.material);
 
 
     return(

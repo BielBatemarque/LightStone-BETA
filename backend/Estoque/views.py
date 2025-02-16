@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from materiais.models import Material
 from rest_framework.decorators import action
 
 
@@ -61,21 +62,35 @@ class MovimentacaoDeEstoqueViewsSets(viewsets.ModelViewSet):
     queryset = MovimentacaoDeEstoque.objects.all()
     serializer_class = MovimentacaoDeEstoqueSerializer
 
+    @action(detail=False, methods=["get"], url_name="retorna_movimentacoes_por_estoque", url_path="retorna_movimentacoes_por_estoque")
+    def retorna_movimentacoes_por_estoque(self, request):
+        estoque = request.query_params.get("produto", None)
+        movimentacoes_por_estoque = self.queryset.filter(produto__id=estoque)
+        serializer = self.get_serializer(movimentacoes_por_estoque, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 class EntradaDeEstoque(APIView):
     def post(self, request, estoque_id):
-        estoque = get_object_or_404(Estoque, id=estoque_id)
+        estoque = get_object_or_404(Material, id=estoque_id)  # Buscar direto o Material
         serializer = MovimentacaoDeEstoqueSerializer(data=request.data)
-        print(estoque.material)
 
         if serializer.is_valid():
             quantidade = serializer.validated_data['quantidade']
             usuario = request.user
-            print(estoque.material.nome)
 
-            try:  
-                MovimentacaoDeEstoque.objects.create(user=usuario, quantidade=int(quantidade), tipo='entrada', produto=estoque.material)
-                estoque.quantidade_metros = estoque.quantidade_metros + int(quantidade)
-                estoque.save()
+            try:
+                # Criar a movimentação
+                MovimentacaoDeEstoque.objects.create(
+                    user=usuario,
+                    quantidade=int(quantidade),
+                    tipo='entrada',
+                    produto_id=estoque.id
+                )
+
+                # Atualizar o estoque do material
+                estoque_estoque = Estoque.objects.get(material=estoque)
+                estoque_estoque.quantidade_metros += int(quantidade)
+                estoque_estoque.save()
 
                 return Response({'Mensagem': 'Movimentação registrada com sucesso'})
             except Exception as e:
@@ -86,17 +101,26 @@ class EntradaDeEstoque(APIView):
     
 class SaidaDeEstoque(APIView):
     def post(self, request, estoque_id):
-        estoque = get_object_or_404(Estoque, id=estoque_id)
+        estoque = get_object_or_404(Material, id=estoque_id)  # Buscar direto o Material
         serializer = MovimentacaoDeEstoqueSerializer(data=request.data)
 
         if serializer.is_valid():
             quantidade = serializer.validated_data['quantidade']
             usuario = request.user
-            print(estoque.material.nome)
+
             try:
-                MovimentacaoDeEstoque.objects.create(user=usuario, quantidade=int(quantidade), tipo='saida', produto=estoque.material)
-                estoque.quantidade_metros = estoque.quantidade_metros - int(quantidade)
-                estoque.save()
+                # Criar a movimentação
+                MovimentacaoDeEstoque.objects.create(
+                    user=usuario,
+                    quantidade=int(quantidade),
+                    tipo='saida',
+                    produto_id=estoque.id
+                )
+
+                # Atualizar o estoque do material
+                estoque_estoque = Estoque.objects.get(material=estoque)
+                estoque_estoque.quantidade_metros -= int(quantidade)
+                estoque_estoque.save()
 
                 return Response({'Mensagem': 'Movimentação registrada com sucesso'})
             except Exception as e:

@@ -35,6 +35,8 @@ export const EstoquesPage = () => {
     handleLoadingEstoques();
   }, []);
 
+
+  console.log(estoques)
   return (
     <>
       <FlexCointainer pontas="true" size={"93%"}>
@@ -71,7 +73,7 @@ export const EstoquesPage = () => {
                 <button
                   className="edit"
                   onClick={() =>
-                    navigate(`/Estoque/maisInformacoesEstoque/${estoque.id}/`)
+                    navigate(`/Estoque/maisInformacoesEstoque/${estoque.material.id}/`)
                   }
                 >
                   Ver movimentações

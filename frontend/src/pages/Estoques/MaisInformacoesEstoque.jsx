@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import { Title } from "../../components/Title";
 import { useEffect, useState } from "react";
 import { Estoque } from '../../models/Estoque';
-import { FundoForm, FundoTitle } from '../Clientes/styles';
+import { FlexDiv, FundoForm, FundoTitle } from '../Clientes/styles';
 import { ItemListagemMovEstoque, ListagemDeMovimentacoes } from "./styles";
+import { DataGrid } from "../../components/Datagrid/styled";
 
 
 export const MaisInformacoesEstoque = () => {
@@ -11,6 +12,7 @@ export const MaisInformacoesEstoque = () => {
     const { id } = useParams(':id');
     const [material, setMaterial] = useState({});
     const [movimentacoes, setMovimentacoes] = useState([]);
+    
 
     console.log(movimentacoes);
 
@@ -29,13 +31,10 @@ export const MaisInformacoesEstoque = () => {
     };
 
     const handleLoadMovimentacaoDeEstoque = async () => {
-        const request = await fetch('http://localhost:8000/movimentacoes_estoque/');
+        const request = await fetch(`http://localhost:8000/movimentacoes_estoque/retorna_movimentacoes_por_estoque/?produto=${id}`);
         const response = await request.json();
 
-        const movimentacoesFiltradas = response.filter(mov => mov.produto === material.id);
-
-        setMovimentacoes(movimentacoesFiltradas);
-        console.log(response);
+        setMovimentacoes(response);
     };
 
     useEffect(() => {
@@ -46,6 +45,20 @@ export const MaisInformacoesEstoque = () => {
         handleLoadEstoque();
     }, []);
 
+    console.log(movimentacoes);
+
+    const formatarData = (dataISO) => {
+        return new Date(dataISO).toLocaleString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+    };
+    
+
     return(
         <>
             <FundoTitle>
@@ -55,14 +68,22 @@ export const MaisInformacoesEstoque = () => {
                 <h1 style={{margin: '0', textAlign:'center'}}>Quantidade de metros: {estoque.quantidade_metros}</h1>
                 <hr />
                 <h2 style={{marginTop: '1rem', textAlign: 'center'}}>Historico de Movimentações</h2>
-                <ListagemDeMovimentacoes>
-                    <ItemListagemMovEstoque>
-                        {movimentacoes.map((mov, index) => (
-                            <p key={index}>{mov.produto}</p>
+                <DataGrid>
+                    <thead>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>M² movimentados</th>
+                    </thead>
+                    <tbody>
+                        {movimentacoes.map(movimentacao => (
+                            <tr>
+                                <td>{formatarData(movimentacao.data)}</td>
+                                <td>{movimentacao.tipo}</td>
+                                <td>{movimentacao.quantidade}</td>
+                            </tr>
                         ))}
-                    </ItemListagemMovEstoque>
-                </ListagemDeMovimentacoes>
-
+                    </tbody>
+                </DataGrid>
             </FundoForm>
         </>
     );
