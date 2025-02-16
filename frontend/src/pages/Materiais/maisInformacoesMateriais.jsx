@@ -92,8 +92,8 @@ export const MaisInformacoesMaterial = () => {
             </FundoTitle>
             <FundoForm>
                 <StyledForm onSubmit={handleUpdateMaterial}>
-                    <FloatLabel type="text" text="Nome do material" name="nome" onChange={handleChange} value={material.nome}/> <br />
-                    <FloatLabel type="text" text="Cor base" name="cor_base" onChange={handleChange} value={material.cor_base}/> <br />
+                    <FloatLabel type="text" text="Nome do material" name="nome" onChange={handleChange} value={material.nome} size={90}/> <br />
+                    <FloatLabel type="text" text="Cor base" name="cor_base" size={90} onChange={handleChange} value={material.cor_base}/> <br />
                     <span>
                         <label style={{marginRight: '1rem'}}>Fornecedor:  </label>
                         <StyledSelect name="fornecedor" id="" onChange={handleChange} value={material.fornecedor}>

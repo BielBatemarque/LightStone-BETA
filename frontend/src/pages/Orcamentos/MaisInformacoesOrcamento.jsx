@@ -4,6 +4,7 @@ import { Title } from "../../components/Title";
 import { FloatLabel } from '../../components/FloatLabel/index';
 import { useEffect, useState } from "react";
 import { StyledOptions, StyledSelect } from "../Materiais/styles";
+import { DataGrid } from "../../components/Datagrid/styled";
 
 export const MaisInformacoesOrcamento = () => {
     const { id } = useParams(':id');
@@ -76,13 +77,13 @@ export const MaisInformacoesOrcamento = () => {
                     <h3>Peças </h3>
                     <FlexDiv>
                         {orcamento.pecas.length > 0 ? 
-                            <table>
+                            <DataGrid>
                                 <thead>
                                     <tr>
-                                        <td>Nome</td>
-                                        <td>Descrição</td>
-                                        <td>Material</td>
-                                        <td>M²</td>
+                                        <th>Nome</th>
+                                        <th>Descrição</th>
+                                        <th>Material</th>
+                                        <th>M²</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,7 +96,7 @@ export const MaisInformacoesOrcamento = () => {
                                         </tr>
                                     ))}
                                 </tbody>
-                            </table>
+                            </DataGrid>
                         : null}
                     </FlexDiv>
                 </StyledForm>

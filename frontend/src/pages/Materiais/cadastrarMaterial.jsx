@@ -72,7 +72,7 @@ export const CadastrarMaterialPage = () => {
             </FundoTitle>
             <FundoForm>
 
-            <StyledForm>
+            <StyledForm style={{alignItems: 'center'}}>
                 <FloatLabel type="text" text="Nome do material" name="nome" onChange={handleChange}/> <br />
                 <FloatLabel type="text" text="Cor base" name="cor_base" onChange={handleChange}/> <br />
                 <span>
@@ -83,7 +83,7 @@ export const CadastrarMaterialPage = () => {
                         ))}
                 </StyledSelect>
                 </span>
-                <FlexDiv>
+                <FlexDiv justfy="center">
                     <Button action={handleCadastrarMaterial}>Cadastrar</Button>
                     <Button color={'red'} action={() => navigate('/Materiais/')}>Cancelar</Button>
                 </FlexDiv>
