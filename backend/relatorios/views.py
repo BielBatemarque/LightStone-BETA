@@ -7,6 +7,12 @@ from reportlab.lib.styles import getSampleStyleSheet
 from datetime import datetime
 from vendas.models import Venda
 from orcamentos.models import Orcamento
+from clientes.models import Cliente
+from django.utils import timezone
+from rest_framework.response import Response
+from rest_framework import status
+
+
 class PDFView(APIView):
     def get(self, request, *args, **kwargs):
         # Obter parâmetros de data do request
@@ -125,3 +131,20 @@ class PDFOrcamentoView(APIView):
         elements.append(table)
         doc.build(elements)
         return response
+
+
+class DashboardVIew(APIView):
+    def get(self, request, *args, **kwargs):
+        total_vendas_mes = Venda.objects.filter(created_at__year=timezone.now().year, created_at__month=timezone.now().month).count()
+        total_clients = Cliente.objects.all().count()
+        todas_vendas = Venda.objects.all()
+        total_arrecadado = 0
+        for venda in todas_vendas:
+            total_arrecadado += venda.valor_total
+
+        return Response({
+            "total_clientes": total_clients,
+            "total_vendido_mes": total_arrecadado,
+            "total_vendas": total_vendas_mes 
+        }, status=status.HTTP_200_OK)
+

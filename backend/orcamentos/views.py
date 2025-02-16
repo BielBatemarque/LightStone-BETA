@@ -6,6 +6,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import status
 from pecas.serializers import PecaSerializers
+from django.db.models.functions import TruncMonth
+from django.db.models import Count, Sum
+
 
 class OrcamentoViewSets(viewsets.ModelViewSet):
     queryset = Orcamento.objects.all()
@@ -59,3 +62,24 @@ class OrcamentoViewSets(viewsets.ModelViewSet):
         serializer = self.get_serializer(orcamentos, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    @action(detail=False, methods=["get"], url_name="orcamentos_por_mes", url_path="orcamentos_por_mes")
+    def orcamentos_por_mes(self, request):
+        orcamentos_agrupados = (
+            self.queryset
+            .annotate(mes=TruncMonth("created_at"))
+            .values("mes")
+            .annotate(total_orcamentos=Count("id"), total_valor=Sum("valor_total"))
+            .order_by("mes")
+        )
+
+        data = [
+            {
+                "mes": orcamento["mes"].strftime("%Y-%m"),
+                "total_orcamentos": orcamento["total_orcamentos"],
+                "total_valor": orcamento["total_valor"],
+            }
+            for orcamento in orcamentos_agrupados
+        ]
+
+        return Response(data, status=status.HTTP_200_OK)

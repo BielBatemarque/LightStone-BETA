@@ -9,7 +9,7 @@ from Estoque.views import EstoqueViewsSets, EntradaDeEstoque, SaidaDeEstoque, Mo
 from materiais.views import MaterialViewSets
 from usuarios.views import UserLoginView, LogoutView
 from vendas.views import VendaViewSet
-from relatorios.views import PDFView, PDFOrcamentoView
+from relatorios.views import PDFView, PDFOrcamentoView, DashboardVIew
 from pecas.views import PecasViewSets
 from orcamentos.views import OrcamentoViewSets
 
@@ -36,5 +36,6 @@ urlpatterns = [
     path('gerar_pdf_orcamentos/', PDFOrcamentoView.as_view(), name="gerar_pdf_orcamento"),
     path('entrada_estoque/<int:estoque_id>/', EntradaDeEstoque.as_view(), name='entrada_estoque'),
     path('saida_estoque/<int:estoque_id>/', SaidaDeEstoque.as_view(), name='saida_estoque'),
-    path('valida_cpf', ValidaCPF.as_view(), name="valida_cpf")
+    path('valida_cpf', ValidaCPF.as_view(), name="valida_cpf"),
+    path('dashboardView/', DashboardVIew.as_view(), name="dados_dashboard")
 ]
