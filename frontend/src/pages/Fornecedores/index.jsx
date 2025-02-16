@@ -57,6 +57,15 @@ export const FornecedoresPage = () => {
     setIsDeleteModalOpen(false);
   };
 
+  const formatCNPJ = (cnpj) => {
+    cnpj = cnpj.replace(/\D/g, ""); // Remove tudo que não for número
+  
+    return cnpj.replace(
+      /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
+      "$1.$2.$3/$4-$5"
+    );
+  };
+
   const handleDeleteConfirm = async () => {
     try {
       const request = await fetch(
@@ -106,7 +115,7 @@ export const FornecedoresPage = () => {
           {fornecedores.map((fornecedor, index) => (
             <tr key={index}>
               <td>{fornecedor.nome_empresa}</td>
-              <td>{fornecedor.cnpj}</td>
+              <td>{formatCNPJ(String(fornecedor.cnpj))}</td>
               <td>{fornecedor.logradouro}</td>
               <td className="actions">
                 <button

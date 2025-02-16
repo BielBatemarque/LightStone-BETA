@@ -28,9 +28,14 @@ export const MaisInformacoesFornecedor = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
-        setFornecedor({...fornecedor, [name]: value});
-    };
+      
+        if (name === "cnpj") {
+          const cnpjFormatado = value.replace(/\D/g, "");
+          setFornecedor({ ...fornecedor, [name]: cnpjFormatado });
+        } else {
+          setFornecedor({ ...fornecedor, [name]: value });
+        }
+      };
 
     console.log(fornecedor);
 
