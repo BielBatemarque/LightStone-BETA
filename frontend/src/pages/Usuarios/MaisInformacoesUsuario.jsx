@@ -79,16 +79,16 @@ export const MaisInformacoesUsuarios = () => {
             <FundoForm>
 
                 <StyledForm onSubmit={handleUpdateUser}>
-                    <FloatLabel type="text" name="username" text="nome de usuário" onChange={handleChange} value={usuario.username}/><br />
-                    <FloatLabel type="email" name="email" text="Email" onChange={handleChange} value={usuario.email}/><br />
-                    <span>
+                    <FloatLabel  size={90} type="text" name="username" text="nome de usuário" onChange={handleChange} value={usuario.username}/><br />
+                    <FloatLabel size={90} type="email" name="email" text="Email" onChange={handleChange} value={usuario.email}/><br />
+                    <span style={{textAlign: "center"}}>
                         <label style={{marginRight: '1rem'}}>Super-Usuário: </label>
                         <StyledSelect name="is_staff" onChange={handleChange} value={usuario.is_staff}>
                             <option value="true">Sim</option>
                             <option value="false">Não</option>
                         </StyledSelect>
                     </span>
-                    <FloatLabel type="password" name="password" text="Senha" onChange={handleChange} value={usuario.password}/><br />
+                    <FloatLabel type="password"  size={90} name="password" text="Senha" onChange={handleChange} value={usuario.password}/><br />
                     <Button>Editar Usuário</Button>
                     <Button color={'red'} action={handleDeleteUser}>Deletar Usuário</Button>
                 </StyledForm>

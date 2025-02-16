@@ -5,6 +5,8 @@ import { Estoque } from '../../models/Estoque';
 import { FlexDiv, FundoForm, FundoTitle } from '../Clientes/styles';
 import { ItemListagemMovEstoque, ListagemDeMovimentacoes } from "./styles";
 import { DataGrid } from "../../components/Datagrid/styled";
+import { AtentionNotification, FailNotifications } from "../../components/Notifications";
+import { useNavigate } from "react-router-dom";
 
 
 export const MaisInformacoesEstoque = () => {
@@ -12,7 +14,7 @@ export const MaisInformacoesEstoque = () => {
     const { id } = useParams(':id');
     const [material, setMaterial] = useState({});
     const [movimentacoes, setMovimentacoes] = useState([]);
-    
+    const navigate = useNavigate();
 
     console.log(movimentacoes);
 
@@ -34,6 +36,10 @@ export const MaisInformacoesEstoque = () => {
         const request = await fetch(`http://localhost:8000/movimentacoes_estoque/retorna_movimentacoes_por_estoque/?produto=${id}`);
         const response = await request.json();
 
+        if (response.length === 0){
+            AtentionNotification("Este Material não possui movimentações realizadas");
+        }
+
         setMovimentacoes(response);
     };
 
@@ -45,8 +51,6 @@ export const MaisInformacoesEstoque = () => {
         handleLoadEstoque();
     }, []);
 
-    console.log(movimentacoes);
-
     const formatarData = (dataISO) => {
         return new Date(dataISO).toLocaleString('pt-BR', {
             day: '2-digit',
@@ -57,7 +61,6 @@ export const MaisInformacoesEstoque = () => {
             second: '2-digit'
         });
     };
-    
 
     return(
         <>

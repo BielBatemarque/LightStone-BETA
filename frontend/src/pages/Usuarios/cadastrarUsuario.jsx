@@ -6,6 +6,7 @@ import { FailNotifications, SucssesNotifications } from "../../components/Notifi
 import { useNavigate } from "react-router-dom";
 import { FlexDiv, FundoForm, FundoTitle, StyledForm } from "../Clientes/styles";
 import { FloatLabel } from "../../components/FloatLabel";
+import { StyledSelect } from "../Materiais/styles";
 
 export const CadastrarUsuarioPage = () => {
     const [user, setUser] = useState({});
@@ -47,17 +48,17 @@ export const CadastrarUsuarioPage = () => {
             <FundoForm>
 
                 <StyledForm onSubmit={handleCadastrarUser}>
-                    <FloatLabel type="text" name="username" text="nome de usuário" onChange={handleChange}/><br />
-                    <FloatLabel type="email" name="email" text="Email" onChange={handleChange} /><br />
-                    <span>
+                    <FloatLabel size={90} type="text" name="username" text="nome de usuário" onChange={handleChange}/>
+                    <FloatLabel size={90} type="email" name="email" text="Email" onChange={handleChange} />
+                    <span style={{textAlign: "center"}}>
                         <label>Usuário administrador:  </label>
-                        <select name="is_staff" onChange={handleChange}>
+                        <StyledSelect name="is_staff" onChange={handleChange}>
                             <option value="true">Sim</option>
                             <option value="false">Não</option>
-                        </select>   <br />
+                        </StyledSelect>   
                     </span>
-                    <FloatLabel type="password" name="password" text="Senha" onChange={handleChange}/><br />
-                    <FlexDiv>
+                    <FloatLabel size={90} type="password" name="password" text="Senha" onChange={handleChange}/>
+                    <FlexDiv justfy="center">
                         <Button>Cadastrar</Button>
                         <Button color={'red'} action={() => navigate('/Usuarios/')}>Cancelar</Button>
                     </FlexDiv>
