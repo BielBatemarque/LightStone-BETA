@@ -50,12 +50,12 @@ class ClienteViewSet(viewsets.ModelViewSet):
             data = request.data
 
             # Limpar o CPF (remover máscara)
-            if "cpf" in data:
-                data["cpf"] = re.sub(r"\D", "", data["cpf"])
+            # if "cpf" in data:
+            #     data["cpf"] = re.sub(r"\D", "", data["cpf"])
 
                 # Validar CPF
-                if not Validador.valida_cpf_cnpj(data["cpf"]):
-                    return Response({"error": "CPF inválido"}, status=status.HTTP_400_BAD_REQUEST)
+            if not Validador.valida_cpf_cnpj(str(data["cpf"])):
+                return Response({"error": "CPF inválido"}, status=status.HTTP_400_BAD_REQUEST)
 
             # Passar os dados limpos para o serializer
             serializer = self.get_serializer(instance, data=data, partial=partial)

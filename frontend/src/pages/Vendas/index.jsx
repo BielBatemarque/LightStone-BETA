@@ -40,6 +40,7 @@ export const VendasPage = () => {
         `http://localhost:8000/vendas/retorna_vendas_filtradas/?cliente=${nomeCliente}`
       );
       const response = await request.json();
+      console.log(response);
       setVendas(response);
     } catch (e) {
       console.error(`Erro ao filtrar vendas: ${String(e)}`);
