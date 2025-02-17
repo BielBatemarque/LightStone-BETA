@@ -11,7 +11,7 @@ from usuarios.views import UserLoginView, LogoutView
 from vendas.views import VendaViewSet
 from relatorios.views import PDFView, PDFOrcamentoView, DashboardVIew
 from pecas.views import PecasViewSets
-from orcamentos.views import OrcamentoViewSets
+from orcamentos.views import OrcamentoViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
@@ -23,7 +23,7 @@ router.register(r'materiais', MaterialViewSets)
 router.register(r'vendas', VendaViewSet)
 router.register(r'movimentacoes_estoque', MovimentacaoDeEstoqueViewsSets)
 router.register(r'pecas', PecasViewSets)
-router.register(r'orcamentos', OrcamentoViewSets)
+router.register(r'orcamentos', OrcamentoViewSet)
 router.register(r'cargos', CargoViewSets)
 
 urlpatterns = [

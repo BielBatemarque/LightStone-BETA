@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import viewsets
 from .models import Orcamento
-from .serializers import OrcamentoSerializer
+from .serializers import OrcamentoWriteSerializer, OrcamentoReadSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import status
@@ -10,9 +10,13 @@ from django.db.models.functions import TruncMonth
 from django.db.models import Count, Sum
 
 
-class OrcamentoViewSets(viewsets.ModelViewSet):
+class OrcamentoViewSet(viewsets.ModelViewSet):
     queryset = Orcamento.objects.all()
-    serializer_class = OrcamentoSerializer
+
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:  # Para leitura (GET)
+            return OrcamentoReadSerializer
+        return OrcamentoWriteSerializer  # Para escrita (POST, PUT, PATCH)
 
     @action(detail=False, methods=["get"])
     def retorna_orcamentos_cliente(self, request):
@@ -47,7 +51,7 @@ class OrcamentoViewSets(viewsets.ModelViewSet):
         except Orcamento.DoesNotExist:
             return Response({"detail": "Orçamento não encontrado."}, status=status.HTTP_404_NOT_FOUND)
        
-        orcamento_serializer = self.get_serializer(orcamento)
+        orcamento_serializer = OrcamentoReadSerializer(orcamento)
         pecas = orcamento.pecas.all()
         pecas_serialier = PecaSerializers(pecas, many=True)
 
@@ -59,7 +63,7 @@ class OrcamentoViewSets(viewsets.ModelViewSet):
     def reotorna_listagem_orcamentos_com_cliente(self, request):
         orcamentos = self.queryset.all()
 
-        serializer = self.get_serializer(orcamentos, many=True)
+        serializer = OrcamentoReadSerializer(orcamentos, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
     

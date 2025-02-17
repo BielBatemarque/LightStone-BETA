@@ -77,7 +77,7 @@ export const RelatoriosPage = () => {
           <FloatLabel name="Data Inicial" text="Data Final" type="date" />
         </FlexRow>
 
-        <FlexDiv>
+        <FlexDiv justfy="center">
           <Button action={fetchData}>Relatório de vendas</Button>
           <Button action={() => handleFetchRelatorioOrcamentos()}>
             Relatório de orçamentos

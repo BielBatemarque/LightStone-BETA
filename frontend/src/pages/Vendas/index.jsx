@@ -120,7 +120,7 @@ export const VendasPage = () => {
                     navigate(`/Vendas/MaisInformacoesVenda/${venda.id}/`)
                   }
                 >
-                  Editar
+                  Detalhes
                 </button>
                 <button
                   className="delete"

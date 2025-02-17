@@ -6,80 +6,100 @@ import { DataGrid } from "../../components/Datagrid/styled";
 import { Flex } from "../../components/ListFilter/styled";
 
 export const MaisInformacoesVenda = () => {
-    const { id } = useParams(':id');
+  const { id } = useParams(":id");
+  const [venda, setVenda] = useState(null);
+  const [orcamentoVinculado, setOrcamentoVinculado] = useState(null);
+  const [cliente, setCliente] = useState(null);
 
-    const [venda, setVenda] = useState({});
-    const [orcamentoVinculado, setOrcamentoVinculado] = useState({});
-    const [cliente, setCliente] = useState({});
-
+  useEffect(() => {
     const handleLoadVenda = async () => {
+      try {
         const request = await fetch(`http://localhost:8000/vendas/${id}/`);
-        const response = await request.json()
-
+        const response = await request.json();
         setVenda(response);
-    }
+      } catch (error) {
+        console.error("Erro ao buscar venda:", error);
+      }
+    };
 
+    handleLoadVenda();
+  }, [id]);
+
+  useEffect(() => {
     const orcamentoRequest = async () => {
-        const request = await fetch(`http://localhost:8000/orcamentos/retorna_orcamento_com_pecas/`, {
-            method: 'POST',
+      if (!venda?.orcamento) return;
+
+      try {
+        const request = await fetch(
+          `http://localhost:8000/orcamentos/retorna_orcamento_com_pecas/`,
+          {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify({id: await venda.orcamento}),
-        });
+            body: JSON.stringify({ id: venda.orcamento }),
+          }
+        );
         const response = await request.json();
-
         setOrcamentoVinculado(response);
-    }
+      } catch (error) {
+        console.error("Erro ao buscar orçamento:", error);
+      }
+    };
 
-    
-    const handleLoadCLiente = async () => {
-        const request = await fetch(`http://localhost:8000/clientes/${venda.cliente}`);
+    orcamentoRequest();
+  }, [venda]);
+
+  useEffect(() => {
+    const handleLoadCliente = async () => {
+      if (!venda?.cliente) return;
+
+      try {
+        const request = await fetch(
+          `http://localhost:8000/clientes/${venda.cliente}`
+        );
         const response = await request.json();
-        
         setCliente(response);
-    }
+      } catch (error) {
+        console.error("Erro ao buscar cliente:", error);
+      }
+    };
 
-    useEffect(() => {
-        handleLoadVenda();
-        orcamentoRequest();
-        handleLoadCLiente();
-    }, []);
+    handleLoadCliente();
+  }, [venda]);
 
-
-
-    console.log(orcamentoVinculado);
-    return(
-        <>
-            <FundoTitle>
-                <Title mt={0}>Venda: {cliente.nome}</Title>
-            </FundoTitle>
-            <FundoForm>
-                <FlexDiv justfy="center">
-                    <h2>Peças</h2>
-                </FlexDiv>
-                <DataGrid>
-                    <thead>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        <th>Qntd M²</th>
-                    </thead>
-                    <tbody>
-                        {orcamentoVinculado?.pecas?.map(peca => (
-                            <tr>
-                                <td>{peca.nome}</td>
-                                <td>{peca.descrição}</td>
-                                <td>{peca.quantidade_metros}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </DataGrid>
-                <FlexDiv justfy="space-around">
-                    <h2>Cliente: {cliente.nome}</h2>
-                    <h2>Valor da venda: {venda.valor_total}</h2>
-                </FlexDiv>
-         
-            </FundoForm>
-        </>
-    );
-}
+  return (
+    <>
+      <FundoTitle>
+        <Title mt={0}>Venda: {cliente?.nome || "Carregando..."}</Title>
+      </FundoTitle>
+      <FundoForm>
+        <FlexDiv justfy="center">
+          <h2>Peças</h2>
+        </FlexDiv>
+        <DataGrid>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Qntd M²</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orcamentoVinculado?.pecas?.map((peca, index) => (
+              <tr key={index}>
+                <td>{peca?.nome}</td>
+                <td>{peca?.descrição}</td>
+                <td>{peca?.quantidade_metros}</td>
+              </tr>
+            ))}
+          </tbody>
+        </DataGrid>
+        <FlexDiv justfy="space-around">
+          <h2>Cliente: {cliente?.nome || "Carregando..."}</h2>
+          <h2>Valor da venda: {venda?.valor_total || "Carregando..."}</h2>
+        </FlexDiv>
+      </FundoForm>
+    </>
+  );
+};
